@@ -1,3 +1,4 @@
-start:
-	go run Auth/main.go
-	go run main/main.go
+start-auth:
+	cd Auth && go run main.go
+start-main:
+	cd main && go run main.go
