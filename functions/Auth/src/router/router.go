@@ -10,4 +10,6 @@ import (
 func Router(app *gin.Engine) {
 	// Get login information
 	app.GET("/auth/login", controllers.Login)
+	// Register user information from database
+	app.POST("/auth/register")
 }
