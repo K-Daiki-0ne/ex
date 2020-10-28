@@ -9,7 +9,7 @@ import (
 // Router : Auth server routering func
 func Router(app *gin.Engine) {
 	// Get login information
-	app.GET("/auth/login", controllers.Login)
+	app.GET("/auth/login/:name/:pass", controllers.Login)
 
 	// Register user information from database
 	app.POST("/auth/register", controllers.Register)
