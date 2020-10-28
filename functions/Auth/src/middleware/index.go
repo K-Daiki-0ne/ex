@@ -10,8 +10,8 @@ import (
 // AuthMiddleware : JWT Middleware
 func AuthMiddleware(userid uint64) (string, error) {
 	var err error
-	key := os.Getenv("SECRET_KEY")
-	os.Setenv("ACCESS_KEY", key)
+	// key := os.Getenv("SECRET_KEY")
+	os.Setenv("ACCESS_KEY", "key")
 	atClaims := jwt.MapClaims{}
 	atClaims["authorized"] = true
 	atClaims["user_id"] = userid

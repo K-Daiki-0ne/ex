@@ -20,19 +20,20 @@ var user = User{
 
 // Login : get user information from database
 func Login(c *gin.Context) {
-	var u User
-	err := c.ShouldBindJSON(&u)
-	if err != nil {
-		c.JSON(http.StatusUnprocessableEntity, "Invalid json provided")
-		return
-	}
+	name := c.Param("name")
+	pass := c.Param("pass")
 
-	if user.Username != u.Username || user.Password != u.Password {
+	if user.Username != name || user.Password != pass {
 		c.JSON(http.StatusUnauthorized, "Please provide valid login details")
 		return
 	}
 
 	token, err := middleware.AuthMiddleware(1)
+
+	if err != nil {
+		c.JSON(http.StatusUnprocessableEntity, err.Error())
+		return
+	}
 
 	c.JSON(http.StatusOK, token)
 }
