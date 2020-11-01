@@ -1,6 +1,18 @@
 package config
 
-import "os"
+import (
+	"fmt"
+	"os"
+
+	"github.com/jinzhu/gorm"
+)
+
+// User : user type
+type User struct {
+	gorm.Model
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
 
 var (
 	// Dialect Use DataBase name
@@ -20,16 +32,22 @@ var (
 )
 
 // Connect : Database connect function
-func Connect() {
-	/*
-		Databaseに接続する処理を記述する。
-		使用するDBはMySQL
-	*/
+func Connect() *gorm.DB {
+	connect := Path(DBUser, DBPass, DBProt, DBName)
+	db, err := gorm.Open(Dialect, connect)
+
+	if err != nil {
+		fmt.Println("DB connect ...NO")
+	} else {
+		db.AutoMigrate(&User{})
+		fmt.Println("DB connect ...OK")
+	}
+	return db
 }
 
 // Close : Database close function
 func Close() {
-	/*
-		Databaseを切断する処理を記述する。
-	*/
+	db := Connect()
+	db.Close()
+	fmt.Println("DB close ...OK")
 }
