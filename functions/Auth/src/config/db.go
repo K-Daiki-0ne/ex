@@ -2,9 +2,10 @@ package config
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/jinzhu/gorm"
+	// MySQL Driver
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 // User : user type
@@ -14,26 +15,29 @@ type User struct {
 	Password string `json:"password"`
 }
 
-var (
+const (
 	// Dialect Use DataBase name
-	Dialect = os.Getenv("DB")
+	// Dialect = os.Getenv("DB")
+	Dialect = "mysql"
 
 	// DBUser MySQL's user name
-	DBUser = os.Getenv("DB_USER")
+	// DBUser = os.Getenv("DB_USER")
+	DBUser = "user1"
 
 	// DBPass MySQL's user password
-	DBPass = os.Getenv("DB_PASS")
+	DBPass = "Password_01"
 
 	// DBProt MySQL protocol
-	DBProt = os.Getenv("DB_PROT")
+	DBProt = "tcp(localhost:3306)"
 
 	// DBName MySQL table name
-	DBName = os.Getenv("DB_NAME")
+	DBName = "ex"
 )
 
 // Connect : Database connect function
 func Connect() *gorm.DB {
 	connect := Path(DBUser, DBPass, DBProt, DBName)
+	fmt.Println(connect)
 	db, err := gorm.Open(Dialect, connect)
 
 	if err != nil {
