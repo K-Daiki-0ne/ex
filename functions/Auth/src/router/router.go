@@ -12,7 +12,7 @@ func Router(app *gin.Engine) {
 	app.GET("/auth/login/:name/:pass", controllers.Login)
 
 	// Register user information from database
-	app.POST("/auth/register", controllers.Register)
+	app.POST("/auth/register/:name/:pass", controllers.Register)
 
 	// Logout func
 	app.GET("/logout")
