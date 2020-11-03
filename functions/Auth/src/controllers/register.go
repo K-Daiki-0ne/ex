@@ -30,6 +30,8 @@ func Register(c *gin.Context) {
 	err = models.Register(name, hashPass)
 
 	if err != nil {
-		c.JSON(http.StatusOK, "new user success")
+		c.JSON(http.StatusBadRequest, "failed to post user")
 	}
+
+	c.JSON(http.StatusOK, "TRUE")
 }
