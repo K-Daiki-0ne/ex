@@ -35,6 +35,12 @@ func Register(name string, pass []byte) error {
 		return errors.New("required Password")
 	}
 
+	postFlag := db.Find(&newUser, newUser.Username)
+
+	if postFlag != nil {
+		return errors.New("Same user exists")
+	}
+
 	db.Create(&newUser)
 
 	return nil
