@@ -3,6 +3,7 @@ package models
 import (
 	"EX/auth/src/database"
 	"errors"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -35,14 +36,14 @@ func Register(name string, pass []byte) error {
 		return errors.New("required Password")
 	}
 
-	postFlag := db.Find(&newUser, newUser.Username)
-
-	if postFlag != nil {
-		return errors.New("Same user exists")
+	if err := db.Where("username = ?", newUser.Username).First(&newUser).Error; err != nil {
+		// Not user exit
+		db.Create(&newUser)
+		return nil
 	}
 
-	db.Create(&newUser)
-
-	return nil
+	// Already user exit
+	fmt.Println("Already user exit")
+	return errors.New("Already user exit")
 
 }

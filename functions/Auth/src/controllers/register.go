@@ -10,6 +10,7 @@ import (
 
 // Register : post user information from database
 func Register(c *gin.Context) {
+	sucMessage := "TRUE"
 	name := c.Param("name")
 	pass := c.Param("pass")
 	hashPass, err := lib.HashPassword(pass)
@@ -31,7 +32,7 @@ func Register(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
+	} else {
+		c.JSON(http.StatusOK, sucMessage)
 	}
-
-	c.JSON(http.StatusOK, "TRUE")
 }
