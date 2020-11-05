@@ -3,6 +3,7 @@ package models
 import (
 	"EX/auth/src/database"
 	"errors"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -26,6 +27,7 @@ func Login(name string, password string) error {
 	db := database.DBConnect
 
 	var user User
+	// var hashPass error
 
 	user.Username = name
 	user.Password = password
@@ -39,6 +41,7 @@ func Login(name string, password string) error {
 	}
 
 	if err := db.Where("username = ? AND password = ?", user.Username, user.Password).First(&user).Error; err != nil {
+		fmt.Println(&user)
 		return nil
 	}
 
