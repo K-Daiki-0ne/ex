@@ -13,9 +13,10 @@ type User struct {
 	Password string `json:"password"`
 }
 
-var user = User{
-	Username: "username",
-	Password: "password",
+// Response : response user information
+type Response struct {
+	ID       string `json:"id"`
+	Username string `json:"username"`
 }
 
 // Login : get user information from database
@@ -23,19 +24,33 @@ func Login(c *gin.Context) {
 	name := c.Param("name")
 	pass := c.Param("pass")
 
+	var user = User{
+		Username: name,
+		Password: pass,
+	}
+
 	/*
 	 * 取得したユーザーネームとパスワードと一致するかを確認する
 	 * ModelのLoginにnameとpassを引数に入れる
 	 */
 
-	// Databaseに存在するユーザーネームとパスワードがパラメーターのユーザーネームとパスワードと一致するかを判定する
-	// 一致しない場合はvalidate errorをレスポンスする。
-	if user.Username != name || user.Password != pass {
-		c.JSON(http.StatusUnauthorized, "Please provide valid login details")
-		return
+	// Confirm Username is space or not space.
+	if user.Username == "" {
+		c.JSON(http.StatusUnauthorized, "require username")
 	}
 
-	// MySQLのUserIDをAuthMiddlewareの引数に入れる
+	// Confirm Password is space or not space.
+	if user.Password == "" {
+		c.JSON(http.StatusUnauthorized, "requrie password")
+	}
+
+	/*
+		Model's Login inputs username password.
+		Hashed password compares origin password in Model Login.
+		If doesn't exit user information that Login controller response error status.
+	*/
+
+	// Create JWT token
 	token, err := middleware.AuthMiddleware(1)
 
 	if err != nil {
@@ -43,5 +58,11 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, token)
+	var response = Response{
+		ID:       token,
+		Username: user.Username,
+	}
+
+	// If get user information succesfull that Login controller response success status.
+	c.JSON(http.StatusOK, response)
 }
