@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 )
 
-// User store database column
-type User struct {
+// NewUser store database column
+type NewUser struct {
 	gorm.Model
 	Username string `json:"username"`
 	Password []byte `json:"password"`
@@ -24,7 +24,7 @@ func Register(name string, pass []byte) error {
 		とわかるような戻り値にする。
 	*/
 	db := database.DBConnect
-	var newUser User
+	var newUser NewUser
 	newUser.Username = name
 	newUser.Password = pass
 
