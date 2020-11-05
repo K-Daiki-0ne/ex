@@ -2,6 +2,7 @@ package models
 
 import (
 	"EX/auth/src/database"
+	"EX/auth/src/lib"
 	"errors"
 	"fmt"
 
@@ -40,9 +41,19 @@ func Login(name string, password string) error {
 		return errors.New("require Password")
 	}
 
-	if err := db.Where("username = ? AND password = ?", user.Username, user.Password).First(&user).Error; err != nil {
-		fmt.Println(&user)
-		return nil
+	conPass, err := lib.HashPassword(user.Password)
+
+	if err != nil {
+		return errors.New("Failed password hash")
+	}
+
+	hashPass := lib.CompareHashPassword(conPass, user.Password)
+
+	if hashPass == nil {
+		if err := db.Where("username = ? AND password = ?", user.Username, user.Password).First(&user).Error; err != nil {
+			fmt.Println(&user)
+			return nil
+		}
 	}
 
 	return errors.New("Failed login")
