@@ -5,20 +5,20 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Enter from '../views/Enter';
+import RegisterView from '../views/RegisterView';
 
-export default function Home():JSX.Element {
+const Register: React.FC = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>EX</title>
+        <title>EX Register</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <AppBar position="fixed">
         <Toolbar variant="dense" className={styles.title}>
           <Typography variant="h4" color="inherit">
-            EX
+          Register
           </Typography>
         </Toolbar>
       </AppBar>
@@ -28,7 +28,7 @@ export default function Home():JSX.Element {
           fixed
           maxWidth='xs'
         >
-          <Enter />
+          <RegisterView />
         </Container>
       </main>
 
@@ -45,3 +45,5 @@ export default function Home():JSX.Element {
     </div>
   )
 }
+
+export default Register
