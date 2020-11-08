@@ -11,14 +11,14 @@ export default function Home():JSX.Element {
   return (
     <div className={styles.container}>
       <Head>
-        <title>NEWS APP</title>
+        <title>EX</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <AppBar position="fixed">
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" className={styles.title}>
           <Typography variant="h4" color="inherit">
-            NEWS APP
+            EX
           </Typography>
         </Toolbar>
       </AppBar>
