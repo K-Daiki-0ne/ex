@@ -5,7 +5,7 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-// import { HomeCompoent } from '../src/components/HomeComponent';
+import Enter from '../views/Enter';
 
 export default function Home():JSX.Element {
   return (
@@ -28,7 +28,7 @@ export default function Home():JSX.Element {
           fixed
           maxWidth='xs'
         >
-          test
+          <Enter />
         </Container>
       </main>
 
