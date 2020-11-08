@@ -7,7 +7,7 @@ const Enter: React.FC = (): JSX.Element => {
   useEffect(() => {
     setTimeout(() => {
       // 5seconds ago page transition
-      router.push('/home')
+      router.push('/login')
     }, 5000);
   }, [])
   return (
