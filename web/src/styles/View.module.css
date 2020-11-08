@@ -1,0 +1,7 @@
+.view {
+  height: 400px;
+  width: 800px;
+  margin-left: -80%;
+  background-image: url("../../public/img/ex.jpg");
+  background-size: 130%;
+}
