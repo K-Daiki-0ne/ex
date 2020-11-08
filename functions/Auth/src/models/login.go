@@ -9,8 +9,8 @@ import (
 	"gorm.io/gorm"
 )
 
-// User get user information for database
-type User struct {
+// LoginUser get user information for database
+type LoginUser struct {
 	gorm.Model
 	ID       string `json:"id"`
 	Username string `json:"username"`
@@ -27,7 +27,7 @@ func Login(name string, password string) error {
 
 	db := database.DBConnect
 
-	var user User
+	var user LoginUser
 	// var hashPass error
 
 	user.Username = name
