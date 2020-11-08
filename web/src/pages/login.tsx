@@ -5,7 +5,7 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Login from '../views/Login';
+import LoginView from '../views/LoginView';
 
 const Login: React.FC = (): JSX.Element => {
   return (
@@ -28,7 +28,7 @@ const Login: React.FC = (): JSX.Element => {
           fixed
           maxWidth='xs'
         >
-          <Login />
+          <LoginView />
         </Container>
       </main>
 
