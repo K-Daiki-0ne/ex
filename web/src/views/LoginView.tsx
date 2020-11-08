@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login: React.FC = (): JSX.Element => {
+const LoginView: React.FC = (): JSX.Element => {
   return (
     <div>
       Login
@@ -8,4 +8,4 @@ const Login: React.FC = (): JSX.Element => {
   )
 }
 
-export default Login
+export default LoginView
