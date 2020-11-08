@@ -5,6 +5,7 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import RegisterView from '../views/RegisterView';
 
 const Register: React.FC = (): JSX.Element => {
   return (
@@ -27,7 +28,7 @@ const Register: React.FC = (): JSX.Element => {
           fixed
           maxWidth='xs'
         >
-          Register
+          <RegisterView />
         </Container>
       </main>
 
