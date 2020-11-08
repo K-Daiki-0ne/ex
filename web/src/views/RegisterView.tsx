@@ -24,13 +24,17 @@ const RegisterView: React.FC = (): JSX.Element => {
         <TextField 
           id="standard-basic" 
           label="Name"
-          error={false} 
+          error={false}
+          helperText="Register your name"
+          fullWidth
         />
         <br />
         <TextField 
           id="filled-basic" 
           label="Password"
           type="password"
+          helperText="Register your password"
+          fullWidth
         />
       </form>
       </CardContent>
