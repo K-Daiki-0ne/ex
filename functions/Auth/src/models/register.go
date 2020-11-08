@@ -38,6 +38,8 @@ func Register(name string, pass []byte) error {
 
 	if err := db.Where("username = ?", newUser.Username).First(&newUser).Error; err != nil {
 		// Not user exit
+		fmt.Println("Already user exit")
+
 		db.Create(&newUser)
 		return nil
 	}

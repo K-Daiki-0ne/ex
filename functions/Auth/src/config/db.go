@@ -30,7 +30,7 @@ const (
 	// DBProt MySQL protocol
 	DBProt = "tcp(localhost:3306)"
 
-	// DBName MySQL table name
+	// DBName MySQL Database name
 	DBName = "ex"
 )
 
