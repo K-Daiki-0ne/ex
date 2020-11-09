@@ -8,45 +8,47 @@ import {
   Typography,
   TextField
 } from '@material-ui/core'
-
+import styles from '../styles/LoginView.module.css';
 
 
 const LoginView: React.FC = (): JSX.Element => {
   return (
-    <div>
-    <Typography variant="h2" gutterBottom>
-      LOGIN
-    </Typography>
+    <div className={styles.login}>
+      <Typography variant="h2" gutterBottom align="center">
+        LOGIN
+      </Typography>
 
-    <Card>
-      <CardContent>
-      <form noValidate autoComplete="on">
-        <TextField 
-          id="standard-basic" 
-          label="Name"
-          error={false} 
-        />
-        <br />
-        <TextField 
-          id="filled-basic" 
-          label="Password"
-          type="password"
-        />
-      </form>
-      </CardContent>
-      <CardActions>
-        <Button size="small">
-          <Link href='/home'>
-            Login
-          </Link>
-        </Button>
-        <Button size="small">
+      <Card>
+        <CardContent>
+        <form noValidate autoComplete="on">
+          <TextField 
+            id="standard-basic" 
+            label="Name"
+            error={false}
+            helperText="Enter your name"
+            fullWidth
+          />
+          <br />
+          <TextField 
+            id="filled-basic" 
+            label="Password"
+            type="password"
+            helperText="Enter your password"
+            fullWidth
+          />
+        </form>
+        </CardContent>
+        <CardActions>
           <Link href='/register'>
-            Register
+            <a>Register</a>
           </Link>
-        </Button>
-      </CardActions>
-    </Card>
+          <Button variant="contained" color="primary" component="span" size="small">
+            <Link href='/home'>
+              <p className={styles.btn}>Login</p>
+            </Link>
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   )
 }

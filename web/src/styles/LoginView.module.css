@@ -1,0 +1,10 @@
+.login {
+  justify-content: center;
+  width: 100%;
+}
+
+.btn {
+  text-decoration: none;
+  font-size: 10px;
+  color: aliceblue;
+}
