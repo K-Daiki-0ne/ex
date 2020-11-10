@@ -43,7 +43,7 @@ const LoginView: React.FC = (): JSX.Element => {
             <a>Register</a>
           </Link>
           <Button variant="contained" color="primary" component="span" size="small">
-            <Link href='/home'>
+            <Link href='/main'>
               <p className={styles.btn}>Login</p>
             </Link>
           </Button>
