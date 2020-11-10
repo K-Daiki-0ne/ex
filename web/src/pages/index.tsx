@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Enter from '../views/Enter/Enter';
 
-export default function Home():JSX.Element {
+export default function Index():JSX.Element {
   return (
     <div className={styles.container}>
       <Head>
