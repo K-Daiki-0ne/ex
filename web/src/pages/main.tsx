@@ -11,7 +11,7 @@ const Main: React.FC = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>EX Login</title>
+        <title>EX</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
