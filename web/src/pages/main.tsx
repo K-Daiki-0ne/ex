@@ -5,20 +5,19 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Enter from '../views/Enter/Enter';
 
-export default function Home():JSX.Element {
+const Main: React.FC = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>EX</title>
+        <title>EX Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <AppBar position="fixed">
         <Toolbar variant="dense" className={styles.title}>
           <Typography variant="h4" color="inherit">
-            EX
+            Login
           </Typography>
         </Toolbar>
       </AppBar>
@@ -28,7 +27,7 @@ export default function Home():JSX.Element {
           fixed
           maxWidth='xs'
         >
-          <Enter />
+          <p>Main page</p>
         </Container>
       </main>
 
@@ -45,3 +44,5 @@ export default function Home():JSX.Element {
     </div>
   )
 }
+
+export default Main

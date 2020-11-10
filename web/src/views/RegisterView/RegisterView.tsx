@@ -41,7 +41,7 @@ const RegisterView: React.FC = (): JSX.Element => {
         </CardContent>
         <CardActions className={styles.card}>
           <Button variant="contained" color="primary" component="span" size="small" className={styles.btn}>
-            <Link href='/home' >
+            <Link href='/main' >
               <p className={styles.btn}>Register</p>
             </Link>
           </Button>
