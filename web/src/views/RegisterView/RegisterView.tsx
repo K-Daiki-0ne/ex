@@ -7,15 +7,16 @@ import {
   Button,
   Typography,
   TextField
-} from '@material-ui/core'
-import styles from '../styles/LoginView.module.css';
+} from '@material-ui/core';
+import styles from '../../styles/RegisterView.module.css';
 
 
-const LoginView: React.FC = (): JSX.Element => {
+
+const RegisterView: React.FC = (): JSX.Element => {
   return (
-    <div className={styles.login}>
-      <Typography variant="h2" gutterBottom align="center">
-        LOGIN
+    <div className={styles.register}>
+      <Typography variant="h2" gutterBottom>
+        REGISTER
       </Typography>
 
       <Card>
@@ -25,7 +26,7 @@ const LoginView: React.FC = (): JSX.Element => {
             id="standard-basic" 
             label="Name"
             error={false}
-            helperText="Enter your name"
+            helperText="Register your name"
             fullWidth
           />
           <br />
@@ -33,18 +34,15 @@ const LoginView: React.FC = (): JSX.Element => {
             id="filled-basic" 
             label="Password"
             type="password"
-            helperText="Enter your password"
+            helperText="Register your password"
             fullWidth
           />
         </form>
         </CardContent>
-        <CardActions>
-          <Link href='/register'>
-            <a>Register</a>
-          </Link>
-          <Button variant="contained" color="primary" component="span" size="small">
-            <Link href='/home'>
-              <p className={styles.btn}>Login</p>
+        <CardActions className={styles.card}>
+          <Button variant="contained" color="primary" component="span" size="small" className={styles.btn}>
+            <Link href='/home' >
+              <p className={styles.btn}>Register</p>
             </Link>
           </Button>
         </CardActions>
@@ -53,4 +51,4 @@ const LoginView: React.FC = (): JSX.Element => {
   )
 }
 
-export default LoginView
+export default RegisterView

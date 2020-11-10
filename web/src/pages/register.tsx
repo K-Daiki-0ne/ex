@@ -5,7 +5,7 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import RegisterView from '../views/RegisterView';
+import RegisterView from '../views/RegisterView/RegisterView';
 
 const Register: React.FC = (): JSX.Element => {
   return (

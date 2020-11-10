@@ -5,7 +5,7 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Enter from '../views/Enter';
+import Enter from '../views/Enter/Enter';
 
 export default function Home():JSX.Element {
   return (
