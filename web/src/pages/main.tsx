@@ -5,19 +5,20 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import MainView from '../views/MainView/MainView';
 
 const Main: React.FC = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>EX Login</title>
+        <title>EX</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <AppBar position="fixed">
         <Toolbar variant="dense" className={styles.title}>
           <Typography variant="h4" color="inherit">
-            Login
+            EX
           </Typography>
         </Toolbar>
       </AppBar>
@@ -27,7 +28,7 @@ const Main: React.FC = (): JSX.Element => {
           fixed
           maxWidth='xs'
         >
-          <p>Main page</p>
+          <MainView />
         </Container>
       </main>
 
