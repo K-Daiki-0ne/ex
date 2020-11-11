@@ -19,7 +19,7 @@ const Register: React.FC = (): JSX.Element => {
 
       <AppBar position="fixed" className={classes.header}>
         <Toolbar variant="dense" className={styles.title}>
-          <Typography variant="h4" color="inherit">
+          <Typography variant="h4" color="inherit" className={classes.headerText}>
           Register
           </Typography>
         </Toolbar>
