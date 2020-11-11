@@ -6,8 +6,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Enter from '../views/Enter/Enter';
+import useStyle from '../theme/style';
 
 export default function Home():JSX.Element {
+  const classes = useStyle();
   return (
     <div className={styles.container}>
       <Head>
@@ -15,7 +17,7 @@ export default function Home():JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppBar position="fixed">
+      <AppBar position="fixed" className={classes.header}>
         <Toolbar variant="dense" className={styles.title}>
           <Typography variant="h4" color="inherit">
             EX
