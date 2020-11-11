@@ -9,24 +9,36 @@ import {
   TextField
 } from '@material-ui/core'
 import styles from '../../styles/LoginView.module.css';
+import useStyle from './style';
 
 
 const LoginView: React.FC = (): JSX.Element => {
+  const classes = useStyle();
   return (
-    <div className={styles.login}>
-      <Typography variant="h2" gutterBottom align="center">
+    <div className={classes.login}>
+      <Typography 
+        variant="h2" 
+        gutterBottom 
+        align="center" 
+        className={classes.loginTile}
+      >
         LOGIN
       </Typography>
 
-      <Card>
+      <Card className={classes.card}>
         <CardContent>
         <form noValidate autoComplete="on">
           <TextField 
-            id="standard-basic" 
+            // id="standard-basic"
+            id="standard-full-width" 
             label="Name"
             error={false}
             helperText="Enter your name"
             fullWidth
+            className={classes.root}
+            inputProps={{
+              className: classes.root
+            }}
           />
           <br />
           <TextField 
@@ -35,6 +47,10 @@ const LoginView: React.FC = (): JSX.Element => {
             type="password"
             helperText="Enter your password"
             fullWidth
+            className={classes.root}
+            inputProps={{
+              className: classes.root
+            }}
           />
         </form>
         </CardContent>
@@ -44,7 +60,9 @@ const LoginView: React.FC = (): JSX.Element => {
           </Link>
           <Button variant="contained" color="primary" component="span" size="small">
             <Link href='/main'>
-              <p className={styles.btn}>Login</p>
+              <Typography variant="button" gutterBottom align="center">
+                Login
+              </Typography>
             </Link>
           </Button>
         </CardActions>
