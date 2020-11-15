@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router'
-import styles from '../styles/View.module.css';
+import styles from '../../styles/View.module.css';
 
 const Enter: React.FC = (): JSX.Element => {
   const router = useRouter()
