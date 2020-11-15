@@ -22,10 +22,18 @@ const useStyle = makeStyles({
       color: "#E8EAED"
     }
   },
+  cardAction: {
+    justifyContent: "center"
+  },
   btnText: {
+    fontSize: "18px"
+  },
+  registerText: {
+    color: "#E8EAED"
+  },
+  registerLinkText: {
     textDecoration: "none",
-    fontSize: "10px",
-    color: "aliceblue"
+    color: "#e57373"
   }
 });
 

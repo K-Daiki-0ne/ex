@@ -8,7 +8,6 @@ import {
   Typography,
   TextField
 } from '@material-ui/core'
-import styles from '../../styles/LoginView.module.css';
 import useStyle from './style';
 
 
@@ -54,17 +53,33 @@ const LoginView: React.FC = (): JSX.Element => {
           />
         </form>
         </CardContent>
-        <CardActions>
-          <Link href='/register'>
-            <a>Register</a>
-          </Link>
-          <Button variant="contained" color="primary" component="span" size="small">
+        <CardActions
+          className={classes.cardAction}
+        >
+          <Button 
+            variant="contained" 
+            color="primary" 
+            size="small"
+            fullWidth
+          >
             <Link href='/main'>
-              <Typography variant="button" gutterBottom align="center">
+              <Typography 
+                gutterBottom 
+                align="center" 
+                className={classes.btnText}
+              >
                 Login
               </Typography>
             </Link>
           </Button>
+        </CardActions>
+        <CardActions className={classes.cardAction}>
+        <Typography className={classes.registerText}>
+            Don't have account? 
+            <Link href='/register'>
+              <a className={classes.registerLinkText}>  Register</a>
+            </Link>
+          </Typography>
         </CardActions>
       </Card>
     </div>
