@@ -24,17 +24,9 @@ const MainView: React.FC = (): JSX.Element => {
       </div>
       <div>
         <Card className={classes.card}>
-          <CardContent className={classes.cardFileTitleContent}>
+          <CardContent>
             <Typography className={classes.fileTitle}>
               Word of the Day
-            </Typography>
-          </CardContent>
-          <CardContent className={classes.fileContent}>
-            sample.txt
-          </CardContent>
-          <CardContent>
-            <Typography className={classes.messageContent}>
-              aaaaaaaaaaaaaa
             </Typography>
           </CardContent>
         </Card>
