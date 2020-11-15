@@ -8,18 +8,21 @@ import {
   Typography,
   TextField
 } from '@material-ui/core';
-import styles from '../../styles/RegisterView.module.css';
-
-
+import useStyle from './style';
 
 const RegisterView: React.FC = (): JSX.Element => {
+  const classes = useStyle();
   return (
-    <div className={styles.register}>
-      <Typography variant="h2" gutterBottom>
+    <div className={classes.register}>
+      <Typography 
+        variant="h2" 
+        gutterBottom
+        className={classes.registerTile}
+      >
         REGISTER
       </Typography>
 
-      <Card>
+      <Card className={classes.card}>
         <CardContent>
         <form noValidate autoComplete="on">
           <TextField 
@@ -28,6 +31,11 @@ const RegisterView: React.FC = (): JSX.Element => {
             error={false}
             helperText="Register your name"
             fullWidth
+            className={classes.root}
+            inputProps={{
+              className: classes.root
+            }}
+
           />
           <br />
           <TextField 
@@ -36,13 +44,23 @@ const RegisterView: React.FC = (): JSX.Element => {
             type="password"
             helperText="Register your password"
             fullWidth
+            className={classes.root}
+            inputProps={{
+              className: classes.root
+            }}
           />
         </form>
         </CardContent>
-        <CardActions className={styles.card}>
-          <Button variant="contained" color="primary" component="span" size="small" className={styles.btn}>
+        <CardActions>
+          <Button 
+            variant="contained" 
+            // color="primary" 
+            size="small"
+            fullWidth
+            className={classes.btn}
+          >
             <Link href='/main' >
-              <p className={styles.btn}>Register</p>
+              <p>Register</p>
             </Link>
           </Button>
         </CardActions>
