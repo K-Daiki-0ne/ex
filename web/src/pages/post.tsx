@@ -13,14 +13,14 @@ const Main: React.FC = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>EX</title>
+        <title>EX POST</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <AppBar position="fixed" className={classes.header}>
         <Toolbar variant="dense" className={styles.title}>
           <Typography variant="h4" color="inherit" className={classes.headerText}>
-            EX
+            POST
           </Typography>
         </Toolbar>
       </AppBar>
