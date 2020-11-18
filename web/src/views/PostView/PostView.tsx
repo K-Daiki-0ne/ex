@@ -1,9 +1,45 @@
 import React from 'react';
+import {useDropzone} from 'react-dropzone';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextField from '@material-ui/core/TextField';
+
+import useStyle from './style';
 
 const PostView: React.FC = (): JSX.Element => {
+  const classes = useStyle();
+  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
+
   return (
-    <div></div>
-  )
+    <div className={classes.root}>
+      <div className={classes.fileTitle}>
+        <TextField 
+          required 
+          label="Enter file title" 
+          fullWidth
+          className={classes.fileTitleColor}
+          inputProps={{
+            className: classes.fileTitleColor
+          }}
+        />
+      </div>
+      <div className={classes.fileUploadZone}>
+        <div {...getRootProps({className: 'dropzone'})}>
+          <CloudUploadIcon className={classes.uploadIcon} />
+          <input {...getInputProps()} />
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        </div>
+      </div>
+      <div>
+      <TextareaAutosize 
+        aria-label="empty textarea" 
+        placeholder="File comment"
+        rowsMin={3}
+        className={classes.fileCommentContent}
+      />
+      </div>
+    </div>
+  );
 }
 
 export default PostView
