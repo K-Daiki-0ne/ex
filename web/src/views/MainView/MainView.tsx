@@ -14,8 +14,6 @@ import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 
-import Link from 'next/link'
-
 import { Pagination } from '@material-ui/lab';
 import useStyle from './style';
 
@@ -64,11 +62,9 @@ const MainView: React.FC = (): JSX.Element => {
             <Typography className={classes.dairyContent}>
               2020/11/13
             </Typography>
-            <Link href='/editor'>
-              <Typography className={classes.fileTitle}>
-                Word of the Day
-              </Typography>
-            </Link>
+            <Typography className={classes.fileTitle}>
+              Word of the Day
+            </Typography>
             <IconButton aria-label="delete" className={classes.deleteBtn}>
               <DeleteIcon className={classes.deleteIcon} />
             </IconButton>
