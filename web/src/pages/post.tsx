@@ -5,10 +5,10 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import MainView from '../views/MainView/MainView';
+import PostView from '../views/PostView/PostView';
 import useStyle from '../theme/style';
 
-const Main: React.FC = (): JSX.Element => {
+const Post: React.FC = (): JSX.Element => {
   const classes = useStyle();
   return (
     <div className={styles.container}>
@@ -30,7 +30,7 @@ const Main: React.FC = (): JSX.Element => {
           fixed
           maxWidth='xs'
         >
-          <MainView />
+          <PostView />
         </Container>
       </main>
 
@@ -48,4 +48,4 @@ const Main: React.FC = (): JSX.Element => {
   )
 }
 
-export default Main
+export default Post
