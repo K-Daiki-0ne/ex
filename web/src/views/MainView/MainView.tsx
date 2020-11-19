@@ -64,7 +64,7 @@ const MainView: React.FC = (): JSX.Element => {
             <Typography className={classes.dairyContent}>
               2020/11/13
             </Typography>
-            <Link href='/edit'>
+            <Link href='/editor'>
               <Typography className={classes.fileTitle}>
                 Word of the Day
               </Typography>
