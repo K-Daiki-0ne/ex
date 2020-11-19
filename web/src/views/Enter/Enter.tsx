@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router'
-import styles from '../../styles/View.module.css';
 
 const Enter: React.FC = (): JSX.Element => {
   const router = useRouter()
@@ -11,7 +10,7 @@ const Enter: React.FC = (): JSX.Element => {
     }, 5000);
   }, [])
   return (
-    <div className={styles.view}>
+    <div>
       
     </div>
   )
