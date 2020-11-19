@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import style from '../../styles/Enter.module.css'
 
 const Enter: React.FC = (): JSX.Element => {
   const router = useRouter()
@@ -11,7 +12,9 @@ const Enter: React.FC = (): JSX.Element => {
   }, [])
   return (
     <div>
-      
+      <h1 className={style.appTitle}>
+        EX
+      </h1>
     </div>
   )
 }
