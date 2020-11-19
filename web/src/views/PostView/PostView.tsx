@@ -3,6 +3,8 @@ import {useDropzone} from 'react-dropzone';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import PublishIcon from '@material-ui/icons/Publish';
 
 import useStyle from './style';
 
@@ -31,13 +33,18 @@ const PostView: React.FC = (): JSX.Element => {
         </div>
       </div>
       <div>
-      <TextareaAutosize 
-        aria-label="empty textarea" 
-        placeholder="File comment"
-        rowsMin={3}
-        className={classes.fileCommentContent}
-      />
+        <TextareaAutosize 
+          aria-label="empty textarea" 
+          placeholder="File comment"
+          rowsMin={3}
+          className={classes.fileCommentContent}
+        />
       </div>
+      <IconButton className={classes.postBtn}>
+        <PublishIcon 
+          className={classes.postIcon}
+        />
+      </IconButton>
     </div>
   );
 }

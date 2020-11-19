@@ -6,7 +6,7 @@ const useStyle = makeStyles({
     textAlign: "center"
   },
   fileTitle: {
-    height: "80px"
+    height: "65px"
   },
   fileTitleColor: {
     color: "#E8EAED",
@@ -32,6 +32,14 @@ const useStyle = makeStyles({
     border: "none",
     marginTop: "10%",
     backgroundColor: "#292A2D",
+    color: "#E8EAED"
+  },
+  postBtn: {
+    marginTop: "7%",
+    backgroundColor: "#292A2D"
+  },
+  postIcon: {
+    fontSize: "50px",
     color: "#E8EAED"
   }
 });
