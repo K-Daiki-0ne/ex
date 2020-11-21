@@ -6,15 +6,19 @@ const Enter: React.FC = (): JSX.Element => {
   const router = useRouter()
   useEffect(() => {
     setTimeout(() => {
-      // 5seconds ago page transition
+      // 2.8seconds ago page transition
       router.push('/login')
-    }, 5000);
+    }, 2800);
   }, [])
   return (
-    <div>
+    <div className={style.enter}>
       <h1 className={style.appTitle}>
         EX
       </h1>
+      <div className={style.appCatchPhase}>
+        <p>"I will start a job"</p>
+        <p>EX仕事をはじめます</p>
+      </div>
     </div>
   )
 }
