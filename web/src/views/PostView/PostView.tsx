@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link'
 import {useDropzone} from 'react-dropzone';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -41,9 +42,11 @@ const PostView: React.FC = (): JSX.Element => {
         />
       </div>
       <IconButton className={classes.postBtn}>
-        <PublishIcon 
-          className={classes.postIcon}
-        />
+        <Link href='/main'>
+          <PublishIcon 
+            className={classes.postIcon}
+          />
+        </Link>
       </IconButton>
     </div>
   );

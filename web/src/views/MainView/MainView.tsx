@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link'
 import { 
   IconButton,
   Card,
@@ -27,7 +28,9 @@ const MainView: React.FC = (): JSX.Element => {
           aria-label="add"
           size="small"
         >
-          <AddCircleIcon className={classes.iconSize} />
+          <Link href='/post'>
+            <AddCircleIcon className={classes.iconSize} />
+          </Link>
         </IconButton>
       </div>
       <div className={classes.bottomArea}>
