@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Main server listening ...OK")
+	fmt.Println("APP server listening ...OK")
 }
