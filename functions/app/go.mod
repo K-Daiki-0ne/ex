@@ -1,4 +1,4 @@
-module EX/main
+module EX/app
 
 go 1.15
 
