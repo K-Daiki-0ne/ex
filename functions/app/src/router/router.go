@@ -19,7 +19,7 @@ func Router(app *gin.Engine) {
 	 *  Get single query name's user post file
 	 *	example: http://localhost:5500/app/single/file?name={username}
 	 */
-	app.GET("/app/single/file")
+	app.GET("/app/single/file", controllers.Single)
 
 	/*
 	 *  Post query name's user text file
