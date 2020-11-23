@@ -31,7 +31,7 @@ func Router(app *gin.Engine) {
 	 *  Post query name's user image file
 	 *  example: http://localhost:5500/app/image?name={username}
 	 */
-	app.POST("/app/image")
+	app.POST("/app/image", controllers.Image)
 
 	/*
 	 *  Post query name's user image file
