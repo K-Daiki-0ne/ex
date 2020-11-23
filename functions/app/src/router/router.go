@@ -1,6 +1,10 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"EX/app/src/controllers"
+
+	"github.com/gin-gonic/gin"
+)
 
 // Router : App server routing function
 func Router(app *gin.Engine) {
@@ -9,7 +13,7 @@ func Router(app *gin.Engine) {
 	 *  Get all query name's user post files
 	 *	example: http://localhost:5500/app/all/files?name={username}
 	 */
-	app.GET("/app/all/files")
+	app.GET("/app/all/files", controllers.All)
 
 	/*
 	 *  Get single query name's user post file
