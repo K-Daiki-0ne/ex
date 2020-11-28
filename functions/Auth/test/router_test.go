@@ -11,4 +11,6 @@ func TestRouter(t *testing.T) {
 	app := gin.Default()
 
 	router.Router(app)
+
+	t.Log("Test Router ...OK")
 }
