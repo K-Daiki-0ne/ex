@@ -62,7 +62,7 @@ const LoginView: React.FC = (): JSX.Element => {
             size="small"
             fullWidth
           >
-            <Link href='/main'>
+            <Link href={`/main/12345`}>
               <Typography 
                 gutterBottom 
                 align="center" 
