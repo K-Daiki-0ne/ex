@@ -1,2 +1,2 @@
-export * from './LoginHeader/LoginHeader';
-export * from './RegisterHeader/RegisterHeader';
+export { LoginHeader } from './LoginHeader/LoginHeader';
+export { RegisterHeader } from './RegisterHeader/RegisterHeader';

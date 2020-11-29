@@ -7,7 +7,8 @@ import {
   Button,
   Typography,
   TextField
-} from '@material-ui/core'
+} from '@material-ui/core';
+import { LoginHeader } from '../../components/atoms/index';
 import useStyle from './style';
 
 
@@ -15,14 +16,7 @@ const LoginView: React.FC = (): JSX.Element => {
   const classes = useStyle();
   return (
     <div className={classes.login}>
-      <Typography 
-        variant="h2" 
-        gutterBottom 
-        align="center" 
-        className={classes.loginTile}
-      >
-        LOGIN
-      </Typography>
+      <LoginHeader />
 
       <Card className={classes.card}>
         <CardContent>
