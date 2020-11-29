@@ -8,19 +8,14 @@ import {
   Typography,
   TextField
 } from '@material-ui/core';
+import { RegisterHeader } from '../../components/atoms'
 import useStyle from './style';
 
 const RegisterView: React.FC = (): JSX.Element => {
   const classes = useStyle();
   return (
     <div className={classes.register}>
-      <Typography 
-        variant="h2" 
-        gutterBottom
-        className={classes.registerTile}
-      >
-        REGISTER
-      </Typography>
+      <RegisterHeader />
 
       <Card className={classes.card}>
         <CardContent>

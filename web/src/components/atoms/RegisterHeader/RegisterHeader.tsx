@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
 import useStyle from './style';
 
-const RegisterHeader: FC = ():JSX.Element => {
+export const RegisterHeader: FC = ():JSX.Element => {
   const classes = useStyle()
   return (
     <Typography 
@@ -14,5 +14,3 @@ const RegisterHeader: FC = ():JSX.Element => {
     </Typography>
   )
 }
-
-export default RegisterHeader
