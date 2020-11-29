@@ -8,7 +8,10 @@ import {
   Typography,
   TextField
 } from '@material-ui/core';
-import { LoginHeader } from '../../components/atoms/index';
+import { 
+  LoginHeader,
+  LoginButtonText
+} from '../../components/atoms';
 import useStyle from './style';
 
 
@@ -57,13 +60,9 @@ const LoginView: React.FC = (): JSX.Element => {
             fullWidth
           >
             <Link href={`/main/12345`}>
-              <Typography 
-                gutterBottom 
-                align="center" 
-                className={classes.btnText}
-              >
-                Login
-              </Typography>
+              <LoginButtonText 
+                content="LOGIN"
+              />
             </Link>
           </Button>
         </CardActions>

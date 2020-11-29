@@ -2,7 +2,11 @@ import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
 import useStyle from './style';
 
-export const LoginButtonText = (content: string):JSX.Element => {
+type Props = {
+  content: string
+}
+
+export const LoginButtonText: FC<Props> = ({content}):JSX.Element => {
   const classes = useStyle();
   return (
     <Typography 
