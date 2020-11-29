@@ -59,7 +59,7 @@ const RegisterView: React.FC = (): JSX.Element => {
             fullWidth
             className={classes.btn}
           >
-            <Link href='/main' >
+            <Link href='/main/123456' >
               <p>Register</p>
             </Link>
           </Button>
