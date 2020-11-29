@@ -1,2 +1,7 @@
-export * from './LoginHeader/LoginHeader';
-export * from './RegisterHeader/RegisterHeader';
+import LoginHeader from './LoginHeader/LoginHeader';
+import RegisterHeader from './RegisterHeader/RegisterHeader';
+
+export default {
+  LoginHeader,
+  RegisterHeader
+}
