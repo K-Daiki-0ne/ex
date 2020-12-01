@@ -1,0 +1,1 @@
+export { postUserInformation } from './Register';
