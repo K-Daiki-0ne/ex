@@ -8,7 +8,8 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
-import { RegisterHeader } from '../../components/atoms'
+import { RegisterHeader } from '../../components/atoms';
+import { postUserInformation } from '../../api';
 import useStyle from './style';
 
 const RegisterView: FC = (): JSX.Element => {
@@ -17,14 +18,19 @@ const RegisterView: FC = (): JSX.Element => {
   const [registerPass, setRegisterPass] = useState<string>("");
 
   const classes = useStyle();
-
   const router = useRouter();
 
-  const registerUserInformation = () => {
-    setIsValid(false);
+  let nameText: string = 'Register your name';
+  let passText: string = 'Register your password';
 
+  const registerUserInformation = () => {
+    console.log(registerName);
+    console.log(registerPass);
+    setIsValid(false);
     try {
-      setIsValid(true);
+      postUserInformation(registerName, registerPass)
+        .then(() => setIsValid(true))
+        .then((e) => console.log(e));
     } catch (err) {
       setIsValid(false);
     }
@@ -32,7 +38,8 @@ const RegisterView: FC = (): JSX.Element => {
     if (isValid) {
       router.push(`/main/${registerName}`)
     } else {
-      // helperTextにエラーを表示する。
+      nameText = 'Require!';
+      passText = 'Require!';
     }
   }
 
@@ -47,7 +54,7 @@ const RegisterView: FC = (): JSX.Element => {
             id="standard-basic" 
             label="Name"
             error={false}
-            helperText="Register your name"
+            helperText={nameText}
             fullWidth
             className={classes.root}
             inputProps={{
@@ -61,7 +68,7 @@ const RegisterView: FC = (): JSX.Element => {
             id="filled-basic" 
             label="Password"
             type="password"
-            helperText="Register your password"
+            helperText={passText}
             fullWidth
             className={classes.root}
             inputProps={{

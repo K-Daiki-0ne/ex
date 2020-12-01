@@ -13,7 +13,8 @@ type Register = {
  */
 export async function postUserInformation(name: string, password: string):Promise<Register>{
   try {
-    const data: Register = await axios.get(`http://localhost:4000/auth/login/${name}/${password}`);
+    const data: Register = await axios.post(`http://localhost:4000/auth/register/${name}/${password}`);
+    console.log(data)
     return data;
   } catch(err) {
     return err;
