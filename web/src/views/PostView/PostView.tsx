@@ -42,7 +42,7 @@ const PostView: React.FC = (): JSX.Element => {
         />
       </div>
       <IconButton className={classes.postBtn}>
-        <Link href='/main'>
+        <Link href='/main/1223'>
           <PublishIcon 
             className={classes.postIcon}
           />

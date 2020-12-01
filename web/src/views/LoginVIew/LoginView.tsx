@@ -7,7 +7,11 @@ import {
   Button,
   Typography,
   TextField
-} from '@material-ui/core'
+} from '@material-ui/core';
+import { 
+  LoginHeader,
+  LoginButtonText
+} from '../../components/atoms';
 import useStyle from './style';
 
 
@@ -15,14 +19,7 @@ const LoginView: React.FC = (): JSX.Element => {
   const classes = useStyle();
   return (
     <div className={classes.login}>
-      <Typography 
-        variant="h2" 
-        gutterBottom 
-        align="center" 
-        className={classes.loginTile}
-      >
-        LOGIN
-      </Typography>
+      <LoginHeader />
 
       <Card className={classes.card}>
         <CardContent>
@@ -62,14 +59,10 @@ const LoginView: React.FC = (): JSX.Element => {
             size="small"
             fullWidth
           >
-            <Link href='/main'>
-              <Typography 
-                gutterBottom 
-                align="center" 
-                className={classes.btnText}
-              >
-                Login
-              </Typography>
+            <Link href={`/main/12345`}>
+              <LoginButtonText 
+                content="LOGIN"
+              />
             </Link>
           </Button>
         </CardActions>
