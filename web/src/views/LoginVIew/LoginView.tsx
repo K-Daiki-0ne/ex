@@ -53,18 +53,18 @@ const LoginView: React.FC = (): JSX.Element => {
         <CardActions
           className={classes.cardAction}
         >
-          <Button 
-            variant="contained" 
-            color="primary" 
-            size="small"
-            fullWidth
-          >
-            <Link href={`/main/12345`}>
-              <LoginButtonText 
-                content="LOGIN"
-              />
-            </Link>
-          </Button>
+          <Link href={`/main/12345`}>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              size="small"
+              fullWidth
+            >
+                <LoginButtonText 
+                  content="LOGIN"
+                />
+            </Button>
+          </Link>
         </CardActions>
         <CardActions className={classes.cardAction}>
         <Typography className={classes.registerText}>
