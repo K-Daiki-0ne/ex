@@ -88,9 +88,7 @@ const RegisterView: FC = (): JSX.Element => {
             className={classes.btn}
             onClick={registerUserInformation}
           >
-            <Link href='/main/123456' >
               <p>Register</p>
-            </Link>
           </Button>
         </CardActions>
       </Card>
