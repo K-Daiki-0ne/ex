@@ -80,18 +80,16 @@ const RegisterView: FC = (): JSX.Element => {
         </form>
         </CardContent>
         <CardActions>
-          <Link href='/main/123456' >
-            <Button 
-              variant="contained" 
-              // color="primary" 
-              size="small"
-              fullWidth
-              className={classes.btn}
-              onClick={registerUserInformation}
-            >
-                <p>Register</p>
-            </Button>
-          </Link>
+          <Button 
+            variant="contained" 
+            // color="primary" 
+            size="small"
+            fullWidth
+            className={classes.btn}
+            onClick={registerUserInformation}
+          >
+              <p>Register</p>
+          </Button>
         </CardActions>
       </Card>
     </div>
