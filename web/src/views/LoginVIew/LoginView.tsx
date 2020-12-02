@@ -1,5 +1,6 @@
-import React from 'react';
-import Link from 'next/link'
+import React, { FC, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
   Card,
   CardActions,
@@ -12,11 +13,40 @@ import {
   LoginHeader,
   LoginButtonText
 } from '../../components/atoms';
+import { getUserInformation } from '../../api'
 import useStyle from './style';
 
 
-const LoginView: React.FC = (): JSX.Element => {
+const LoginView: FC = (): JSX.Element => {
+  const [loginName, setLoginName] = useState<string>('');
+  const [loginPass, setLoginPass] = useState<string>('');
+  const [isValid, setIsValid] = useState<boolean>(false);
+
   const classes = useStyle();
+  const router = useRouter();
+
+  let nameText: string = 'Enter your name';
+  let passText: string = 'Enter your password';
+
+  const loginUserInformation = () => {
+    setIsValid(false);
+
+    try {
+      getUserInformation(loginName, loginPass)
+        .then(() => setIsValid(true))
+        .then((e) => console.log(e))
+    } catch(err) {
+      setIsValid(false)
+    }
+
+    if (isValid) {
+      router.push(`main/${loginName}`)
+    } else {
+      nameText = 'Require !';
+      passText = 'Require !';
+    }
+  }
+
   return (
     <div className={classes.login}>
       <LoginHeader />
@@ -29,24 +59,28 @@ const LoginView: React.FC = (): JSX.Element => {
             id="standard-full-width" 
             label="Name"
             error={false}
-            helperText="Enter your name"
+            helperText={nameText}
             fullWidth
             className={classes.root}
             inputProps={{
               className: classes.root
             }}
+            value={loginName}
+            onChange={e => setLoginName(e.target.value)}
           />
           <br />
           <TextField 
             id="filled-basic" 
             label="Password"
             type="password"
-            helperText="Enter your password"
+            helperText={passText}
             fullWidth
             className={classes.root}
             inputProps={{
               className: classes.root
             }}
+            value={loginPass}
+            onChange={e => setLoginPass(e.target.value)}
           />
         </form>
         </CardContent>
@@ -58,12 +92,11 @@ const LoginView: React.FC = (): JSX.Element => {
             color="primary" 
             size="small"
             fullWidth
+            onClick={loginUserInformation}
           >
-            <Link href={`/main/12345`}>
-              <LoginButtonText 
-                content="LOGIN"
-              />
-            </Link>
+            <LoginButtonText 
+              content="LOGIN"
+            />
           </Button>
         </CardActions>
         <CardActions className={classes.cardAction}>
