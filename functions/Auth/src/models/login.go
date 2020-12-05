@@ -4,13 +4,12 @@ import (
 	"EX/auth/src/database"
 	"EX/auth/src/lib"
 	"errors"
-	"fmt"
 
 	"gorm.io/gorm"
 )
 
-// LoginUser get user information for database
-type LoginUser struct {
+// USER get user information for database
+type USER struct {
 	gorm.Model
 	ID       string `json:"id"`
 	Username string `json:"username"`
@@ -27,8 +26,9 @@ func Login(name string, password string) error {
 
 	db := database.DBConnect
 
-	var user LoginUser
-	// var hashPass error
+	var user USER
+
+	// var username string
 
 	user.Username = name
 	user.Password = password
@@ -49,12 +49,13 @@ func Login(name string, password string) error {
 
 	hashPass := lib.CompareHashPassword(conPass, user.Password)
 
-	if hashPass == nil {
-		if err := db.Where("username = ? AND password = ?", user.Username, user.Password).First(&user).Error; err != nil {
-			fmt.Println(&user)
-			return nil
-		}
+	if hashPass != nil {
+		return errors.New("Failed compare password")
 	}
 
-	return errors.New("Failed login")
+	if err := db.Debug().Where("username = ?", name).Take(&user).Error; err != nil {
+		return errors.New("Failed Login")
+	}
+
+	return nil
 }
