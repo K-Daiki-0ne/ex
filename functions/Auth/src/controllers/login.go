@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"EX/auth/src/middleware"
+	"EX/auth/src/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -50,19 +51,26 @@ func Login(c *gin.Context) {
 		If doesn't exit user information that Login controller response error status.
 	*/
 
-	// Create JWT token
-	token, err := middleware.AuthMiddleware(1)
+	suc := models.Login(name, pass)
 
-	if err != nil {
-		c.JSON(http.StatusUnprocessableEntity, err.Error())
-		return
+	if suc != nil {
+		c.String(http.StatusBadRequest, "Bad Request")
 	}
 
-	var response = Response{
-		ID:       token,
-		Username: user.Username,
-	}
+	if suc == nil {
+		// Create JWT token
+		token, err := middleware.AuthMiddleware(1)
 
-	// If get user information succesfull that Login controller response success status.
-	c.JSON(http.StatusOK, response)
+		if err != nil {
+			c.JSON(http.StatusUnprocessableEntity, err.Error())
+			return
+		}
+
+		var response = Response{
+			ID:       token,
+			Username: user.Username,
+		}
+		// If get user information succesfull that Login controller response success status.
+		c.JSON(http.StatusOK, response)
+	}
 }
