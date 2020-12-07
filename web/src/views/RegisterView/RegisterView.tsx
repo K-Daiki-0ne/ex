@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   Card,
@@ -13,7 +12,6 @@ import { postUserInformation } from '../../api';
 import useStyle from './style';
 
 const RegisterView: FC = (): JSX.Element => {
-  const [isValid, setIsValid] = useState<boolean>(false);
   const [registerName, setRegisterName] = useState<string>("");
   const [registerPass, setRegisterPass] = useState<string>("");
 
@@ -24,22 +22,12 @@ const RegisterView: FC = (): JSX.Element => {
   let passText: string = 'Register your password';
 
   const registerUserInformation = () => {
-    console.log(registerName);
-    console.log(registerPass);
-    setIsValid(false);
     try {
       postUserInformation(registerName, registerPass)
-        .then(() => setIsValid(true))
-        .then((e) => console.log(e));
-    } catch (err) {
-      setIsValid(false);
-    }
-
-    if (isValid) {
-      router.push(`/main/${registerName}`)
-    } else {
-      nameText = 'Require!';
-      passText = 'Require!';
+        .then(() => router.push(`/main/${registerName}`))
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log("error");
     }
   }
 
