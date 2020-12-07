@@ -53,10 +53,6 @@ func Login(c *gin.Context) {
 
 	suc := models.Login(name, pass)
 
-	if suc != nil {
-		c.String(http.StatusBadRequest, "Bad Request")
-	}
-
 	if suc == nil {
 		// Create JWT token
 		token, err := middleware.AuthMiddleware(1)
@@ -72,5 +68,9 @@ func Login(c *gin.Context) {
 		}
 		// If get user information succesfull that Login controller response success status.
 		c.JSON(http.StatusOK, response)
+	}
+
+	if suc != nil {
+		c.String(http.StatusBadRequest, "Bad Request")
 	}
 }
