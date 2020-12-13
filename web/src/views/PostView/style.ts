@@ -5,6 +5,10 @@ const useStyle = makeStyles({
     justifyContent: "center",
     textAlign: "center"
   },
+  description: {
+    color: '#E8EAED',
+    fontSize: '14px'
+  },
   fileTitle: {
     height: "65px"
   },
@@ -41,7 +45,19 @@ const useStyle = makeStyles({
   postIcon: {
     fontSize: "50px",
     color: "#E8EAED"
-  }
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  paper: {
+    width: '500px',
+    backgroundColor: 'black',
+    color: 'white',
+    textAlign: 'center'
+  },
 });
 
 
