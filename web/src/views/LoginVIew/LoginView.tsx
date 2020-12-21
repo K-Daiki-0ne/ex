@@ -20,7 +20,6 @@ import useStyle from './style';
 const LoginView: FC = (): JSX.Element => {
   const [loginName, setLoginName] = useState<string>('');
   const [loginPass, setLoginPass] = useState<string>('');
-  const [isValid, setIsValid] = useState<boolean>(false);
 
   const classes = useStyle();
   const router = useRouter();
@@ -29,21 +28,20 @@ const LoginView: FC = (): JSX.Element => {
   let passText: string = 'Enter your password';
 
   const loginUserInformation = () => {
-    setIsValid(false);
+
+    if (loginName == '' || loginPass == '') {
+      nameText = 'Require !';
+    } else if (loginPass == ''){
+      passText = 'Repuire!'
+    }
 
     try {
       getUserInformation(loginName, loginPass)
-        .then(() => setIsValid(true))
         .then((e) => console.log(e))
+        .then(() => router.push(`main/${loginName}`));
     } catch(err) {
-      setIsValid(false)
-    }
-
-    if (isValid) {
-      router.push(`main/${loginName}`)
-    } else {
-      nameText = 'Require !';
-      passText = 'Require !';
+      console.error(err);
+      router.push('/login');
     }
   }
 

@@ -3,6 +3,7 @@ package controllers
 import (
 	"EX/auth/src/lib"
 	"EX/auth/src/models"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -28,10 +29,11 @@ func Register(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, errMessage)
 	}
 
-	err = models.Register(name, hashPass)
+	suc := models.Register(name, hashPass)
 
-	if err != nil {
-		c.JSON(http.StatusBadRequest, err)
+	if suc != nil {
+		fmt.Println(suc)
+		c.JSON(http.StatusNotFound, err)
 	} else {
 		c.JSON(http.StatusOK, sucMessage)
 	}
