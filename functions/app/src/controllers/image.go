@@ -7,17 +7,29 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Post fsdafs
+type Post struct {
+	Title       string
+	Author      string
+	Description string
+}
+
 // Image : post image file
 func Image(c *gin.Context) {
-	id := c.Query("userID")
+	file, header, err := c.Request.FormFile("image")
 
-	file, err := c.FormFile("image")
-
-	log.Println(file.Filename)
+	log.Println(file)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, "Not image file")
+		c.String(http.StatusBadRequest, "Bad request")
+		return
 	}
+	fileName := header.Filename
 
-	c.JSON(http.StatusOK, id)
+	log.Println(fileName)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+	})
+
 }

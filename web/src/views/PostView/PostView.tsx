@@ -14,28 +14,52 @@ import {
 } from '@material-ui/core'
 
 import useStyle from './style';
+import axios from 'axios';
 
 const PostView: React.FC = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File>();
   const [fileName, setFileName] = useState<string>('Choose File');
   const [uploadTitle, setUploadTitle] = useState<string>('');
-  const [upploadComment, setUploadComment] = useState<string>('');
+  const [uploadComment, setUploadComment] = useState<string>('');
   const [uploadPercentage, setUploadPercentage] = useState<number>(0);
 
+  
   const classes = useStyle();
+
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
-  const postFile = async (event: React.MouseEvent<HTMLInputElement>) => {
+  const postFile = async () => {
     setOpen(true);
-    event.preventDefault();
+    console.log(file)
     const fileData = new FormData();
-    fileData.append('file', file);
+    console.log(file.name)
+    fileData.append('image', file);
+    console.log(fileData)
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5050/app/image?userID=123456743242432432",
+        fileData, {
+          headers: {
+            'content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: (progressEvent: any) => {
+  
+            const uploadPercent = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            console.log(uploadPercent)
+          },
+        }
+      )  
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const uploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setFile(event.target.files[0]);
+    console.log(file)
     setFileName(event.target.files[0].name);
   }
 
@@ -65,11 +89,13 @@ const PostView: React.FC = (): JSX.Element => {
       <div className={classes.fileUploadZone}>
         <div {...getRootProps({className: 'dropzone'})}>
           <CloudUploadIcon className={classes.uploadIcon} />
+          <form>
           <input 
             {...getInputProps()} 
             onChange={uploadFile}
             type='file'
           />
+          </form>
           <p>{fileName}</p>
         </div>
       </div>
@@ -85,11 +111,11 @@ const PostView: React.FC = (): JSX.Element => {
       </div>
       <div onClick={postFile}>
         <IconButton className={classes.postBtn}>
-          <Link href='/main/1223'>
+          {/* <Link href='/main/1223'> */}
             <PublishIcon 
               className={classes.postIcon}
             />
-          </Link>
+          {/* </Link> */}
         </IconButton>
       </div>
       <Modal
@@ -106,8 +132,9 @@ const PostView: React.FC = (): JSX.Element => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">{fileName}</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            <h2>{fileName}</h2>
+            <p>{uploadTitle}</p>
+            <p>{uploadComment}</p>
           </div>
         </Fade>
       </Modal>
