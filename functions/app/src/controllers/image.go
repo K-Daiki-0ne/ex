@@ -16,7 +16,7 @@ type Post struct {
 
 // Image : post image file
 func Image(c *gin.Context) {
-	file, header, err := c.Request.FormFile("image")
+	file, header, err := c.Request.FormFile("file")
 
 	log.Println(file)
 

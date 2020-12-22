@@ -34,7 +34,7 @@ const PostView: React.FC = (): JSX.Element => {
     console.log(file)
     const fileData = new FormData();
     console.log(file.name)
-    fileData.append('image', file);
+    fileData.append('file', file);
     console.log(fileData)
 
     try {
