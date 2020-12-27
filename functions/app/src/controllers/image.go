@@ -28,6 +28,11 @@ func Image(c *gin.Context) {
 
 	log.Println(fileName)
 
+	// Not exit File
+	if len(fileName) == 0 {
+		c.JSON(http.StatusBadRequest, "File doesn't exit")
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"status": "ok",
 	})
