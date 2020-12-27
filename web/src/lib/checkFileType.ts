@@ -1,9 +1,9 @@
 
 /**
- *  @description ファイルの拡張子を判定しAPIリクエストを実行する。
+ *  @description ファイルの拡張子を判定しAPIリクエストのエンドポイントを判定する関数。
  *  @param { string } fileName - ファイル名を取得します。
  *  @param { string } userID   - ユーザーIDを取得します。
- *  @returns { boolean }
+ *  @returns { string } APIリクエストのエンドポイントを返す
  */
 export const checkFile = async (fileName: string, userID: string): Promise<string> => {
   if (!fileName) {
