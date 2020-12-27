@@ -7,8 +7,8 @@ type Login = {
 
 /**
  * @description Get user information for Backend
- * @param name Username
- * @param pass UserPassword
+ * @param { string } name Username
+ * @param { string } pass UserPassword
  * @returns { object } { id: userID, name: UserName }
  */
 
