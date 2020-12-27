@@ -8,11 +8,11 @@ import (
 
 // Single : get user post single file
 func Single(c *gin.Context) {
+
+	// Get User ID
 	id := c.Query("id")
 
-	/*
-	 *  Get user's post single file from AWS's S3
-	 *  response type object
-	 */
+	// ユーザー名と一致するファイルを取得する。
+
 	c.JSON(http.StatusOK, id)
 }
