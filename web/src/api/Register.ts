@@ -3,8 +3,8 @@ import axios from 'axios';
 
 /**
  * @description post your information for Backend
- * @param name UserName
- * @param password UserPassword
+ * @param { string } name UserName
+ * @param { string } password UserPassword
  * @returns { object }
  */
 export async function postUserInformation(name: string, password: string):Promise<object>{
