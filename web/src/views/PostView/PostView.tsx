@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import {useDropzone} from 'react-dropzone';
 import { checkFile } from '../../lib/checkFileType'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -12,8 +11,8 @@ import {
   Fade,
   Backdrop,
   Typography
-} from '@material-ui/core'
-
+} from '@material-ui/core';
+import ProgressLabel from '../../components/organisms/ProgressLabel/ProgressLabel';
 import useStyle from './style';
 import axios from 'axios';
 
@@ -51,7 +50,7 @@ const PostView: React.FC = (): JSX.Element => {
             'content-Type': 'multipart/form-data'
           },
           onUploadProgress: (progressEvent: any) => { 
-            const uploadPercent = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            setUploadPercentage(Math.round((progressEvent.loaded * 100) / progressEvent.total))
           },
         }
       )  
@@ -139,6 +138,7 @@ const PostView: React.FC = (): JSX.Element => {
             <h2>{fileName}</h2>
             <p>{uploadTitle}</p>
             <p>{uploadComment}</p>
+            <ProgressLabel value={uploadPercentage} />
           </div>
         </Fade>
       </Modal>
