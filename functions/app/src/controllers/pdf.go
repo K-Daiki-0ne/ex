@@ -9,15 +9,24 @@ import (
 
 // Pdf : post pdf file
 func Pdf(c *gin.Context) {
-	id := c.Query("userID")
+	file, header, err := c.Request.FormFile("file")
 
-	file, err := c.FormFile("pdf")
-
-	log.Println(file.Filename)
+	log.Println(file)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, "Not PDF file")
+		c.String(http.StatusBadRequest, "Bad request")
+		return
+	}
+	fileName := header.Filename
+
+	log.Println(fileName)
+
+	// Not exit File
+	if len(fileName) == 0 {
+		c.JSON(http.StatusBadRequest, "File doesn't exit")
 	}
 
-	c.JSON(http.StatusOK, id)
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+	})
 }

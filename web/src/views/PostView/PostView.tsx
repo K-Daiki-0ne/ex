@@ -1,6 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
-import Link from 'next/link'
+import React, { useState } from 'react';
 import {useDropzone} from 'react-dropzone';
+import { useRouter } from 'next/router';
+import { checkFile } from '../../lib/checkFileType'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PublishIcon from '@material-ui/icons/Publish';
 import {
@@ -11,14 +12,15 @@ import {
   Fade,
   Backdrop,
   Typography
-} from '@material-ui/core'
-
+} from '@material-ui/core';
+import ProgressLabel from '../../components/organisms/ProgressLabel/ProgressLabel';
 import useStyle from './style';
 import axios from 'axios';
 
 const PostView: React.FC = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File>();
+  const [url, setUrl] = useState<string>("");
   const [fileName, setFileName] = useState<string>('Choose File');
   const [uploadTitle, setUploadTitle] = useState<string>('');
   const [uploadComment, setUploadComment] = useState<string>('');
@@ -27,30 +29,37 @@ const PostView: React.FC = (): JSX.Element => {
   
   const classes = useStyle();
 
+  const router = useRouter();
+
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
   const postFile = async () => {
     setOpen(true);
-    console.log(file)
     const fileData = new FormData();
-    console.log(file.name)
-    fileData.append('image', file);
-    console.log(fileData)
+    fileData.append('file', file);
+
+    const reqUrl = checkFile(fileName, "12345");
+    reqUrl
+      .then((e) => setUrl(e))
+      .catch((err) => console.log(err))
+ 
+    console.log(url)
 
     try {
       const res = await axios.post(
-        "http://localhost:5050/app/image?userID=123456743242432432",
+        url,
         fileData, {
           headers: {
             'content-Type': 'multipart/form-data'
           },
-          onUploadProgress: (progressEvent: any) => {
-  
-            const uploadPercent = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            console.log(uploadPercent)
+          onUploadProgress: (progressEvent: any) => { 
+            setUploadPercentage(Math.round((progressEvent.loaded * 100) / progressEvent.total))
           },
         }
-      )  
+      )
+      await setTimeout(() => {
+        router.push('/main/user')
+      }, 1800);
     } catch (err) {
       console.log(err)
     }
@@ -59,8 +68,8 @@ const PostView: React.FC = (): JSX.Element => {
   const uploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setFile(event.target.files[0]);
-    console.log(file)
     setFileName(event.target.files[0].name);
+    console.log(fileName)
   }
 
   function closeModal() {
@@ -135,6 +144,7 @@ const PostView: React.FC = (): JSX.Element => {
             <h2>{fileName}</h2>
             <p>{uploadTitle}</p>
             <p>{uploadComment}</p>
+            <ProgressLabel value={uploadPercentage} />
           </div>
         </Fade>
       </Modal>

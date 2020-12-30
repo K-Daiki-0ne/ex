@@ -16,7 +16,7 @@ type Post struct {
 
 // Image : post image file
 func Image(c *gin.Context) {
-	file, header, err := c.Request.FormFile("image")
+	file, header, err := c.Request.FormFile("file")
 
 	log.Println(file)
 
@@ -27,6 +27,11 @@ func Image(c *gin.Context) {
 	fileName := header.Filename
 
 	log.Println(fileName)
+
+	// Not exit File
+	if len(fileName) == 0 {
+		c.JSON(http.StatusBadRequest, "File doesn't exit")
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": "ok",
