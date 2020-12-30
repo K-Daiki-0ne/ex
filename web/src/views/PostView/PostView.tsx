@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useDropzone} from 'react-dropzone';
+import { useRouter } from 'next/router';
 import { checkFile } from '../../lib/checkFileType'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -28,6 +29,8 @@ const PostView: React.FC = (): JSX.Element => {
   
   const classes = useStyle();
 
+  const router = useRouter();
+
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
   const postFile = async () => {
@@ -53,7 +56,11 @@ const PostView: React.FC = (): JSX.Element => {
             setUploadPercentage(Math.round((progressEvent.loaded * 100) / progressEvent.total))
           },
         }
-      )  
+      )
+      await setTimeout(() => {
+        // 2.8seconds ago page transition
+        router.push('/main/user')
+      }, 1800);
     } catch (err) {
       console.log(err)
     }
