@@ -58,7 +58,6 @@ const PostView: React.FC = (): JSX.Element => {
         }
       )
       await setTimeout(() => {
-        // 2.8seconds ago page transition
         router.push('/main/user')
       }, 1800);
     } catch (err) {
