@@ -13,6 +13,8 @@ export const checkFile = async (fileName: string, userID: string): Promise<strin
   const fileLen: number = fileType.length;
   const file: string = fileType[fileLen - 1];
 
+  console.log(file)
+
   try {
     switch (file) {
       case "txt":

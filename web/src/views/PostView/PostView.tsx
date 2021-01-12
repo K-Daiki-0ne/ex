@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useDropzone} from 'react-dropzone';
 import { useRouter } from 'next/router';
 import { checkFile } from '../../lib/checkFileType'
@@ -26,6 +26,12 @@ const PostView: React.FC = (): JSX.Element => {
   const [uploadComment, setUploadComment] = useState<string>('');
   const [uploadPercentage, setUploadPercentage] = useState<number>(0);
 
+  useEffect(() => {
+    const reqUrl = checkFile(fileName, "12345");
+    reqUrl
+    .then((e) => setUrl(e))
+    .catch((err) => console.log(err))
+  }, [fileName])
   
   const classes = useStyle();
 
@@ -37,13 +43,6 @@ const PostView: React.FC = (): JSX.Element => {
     setOpen(true);
     const fileData = new FormData();
     fileData.append('file', file);
-
-    const reqUrl = checkFile(fileName, "12345");
-    reqUrl
-      .then((e) => setUrl(e))
-      .catch((err) => console.log(err))
- 
-    console.log(url)
 
     try {
       const res = await axios.post(
@@ -69,7 +68,6 @@ const PostView: React.FC = (): JSX.Element => {
     event.preventDefault()
     setFile(event.target.files[0]);
     setFileName(event.target.files[0].name);
-    console.log(fileName)
   }
 
   function closeModal() {
