@@ -46,10 +46,10 @@ const PostView: React.FC = (): JSX.Element => {
 
     try {
       const res = await axios.post(
-        url,
+        "http://localhost:5050/app/image?userID=12345",
         fileData, {
           headers: {
-            'content-Type': 'multipart/form-data'
+            'Content-Type': "multipart/form-data",
           },
           onUploadProgress: (progressEvent: any) => { 
             setUploadPercentage(Math.round((progressEvent.loaded * 100) / progressEvent.total))
@@ -60,7 +60,11 @@ const PostView: React.FC = (): JSX.Element => {
         router.push('/main/user')
       }, 1800);
     } catch (err) {
-      console.log(err)
+      console.log(typeof(err));
+      for(let key of Object.keys(err)) {
+        console.log(key);
+        console.log(err[key]);
+      }
     }
   }
 

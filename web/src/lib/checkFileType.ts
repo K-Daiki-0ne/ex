@@ -18,16 +18,16 @@ export const checkFile = async (fileName: string, userID: string): Promise<strin
   try {
     switch (file) {
       case "txt":
-        return `http://localhost:5500/app/text?name=${userID}`;
+        return `http://localhost:5050/app/text?userID=${userID}`;
         break;
       case "png":
-        return `http://localhost:5500/app/image?name=${userID}`;
+        return `http://localhost:5050/app/image?userID=${userID}`;
         break;
       case "jpg":
-        return `http://localhost:5500/app/image?name=${userID}`;
+        return `http://localhost:5050/app/image?userID=${userID}`;
         break;
       case "pdf":
-        return `http://localhost:5500/app/image?name=${userID}`;
+        return `http://localhost:5050/app/image?userID=${userID}`;
         break;
       default:
         throw new Error("Dont't support file");
