@@ -97,8 +97,9 @@ const LoginView: FC = (): JSX.Element => {
             />
           </Button>
         </CardActions>
+        
         <CardActions className={classes.cardAction}>
-        <Typography className={classes.registerText}>
+          <Typography className={classes.registerText}>
             Don't have account? 
             <Link href='/register'>
               <a className={classes.registerLinkText}>  Register</a>
@@ -106,6 +107,16 @@ const LoginView: FC = (): JSX.Element => {
           </Typography>
         </CardActions>
       </Card>
+      <div>
+        <CardActions className={classes.cardAction}>
+            <Typography className={classes.registerText}>
+              If you want to try EX ? 
+              <Link href='/main/guest'>
+                <a className={classes.registerLinkText}> Guest Login</a>
+              </Link>
+            </Typography>
+          </CardActions>
+      </div>
     </div>
   )
 }

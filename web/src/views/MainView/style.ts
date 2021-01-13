@@ -1,9 +1,20 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) =>({
   root: {
     justifyContent: "center",
-    textAlign: "center"
+    textAlign: "center",
+    '& .Mui-selected': {
+      backgroundColor: 'transparent',
+      color:'#90caf9',
+     },
+     '& > *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+  selected: {
+    backgroundColor: 'transparent',
+    color:'#90caf9',
   },
   btn: {
     position: "fixed",
@@ -52,7 +63,7 @@ const useStyle = makeStyles({
     textAlign: "center",
     position: "fixed"
   },
-});
+}));
 
 
 export default useStyle;
