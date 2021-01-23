@@ -42,6 +42,7 @@ const PostView: React.FC = (): JSX.Element => {
   const postFile = async () => {
     setOpen(true);
     const fileData = new FormData();
+    console.log(file)
     fileData.append('file', file);
 
     try {
@@ -61,10 +62,6 @@ const PostView: React.FC = (): JSX.Element => {
       }, 1800);
     } catch (err) {
       console.log(typeof(err));
-      for(let key of Object.keys(err)) {
-        console.log(key);
-        console.log(err[key]);
-      }
     }
   }
 

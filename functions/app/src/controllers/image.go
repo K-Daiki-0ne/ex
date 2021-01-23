@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"io"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,22 +19,22 @@ type Post struct {
 // Image : post image file
 func Image(c *gin.Context) {
 	file, header, err := c.Request.FormFile("file")
-
-	log.Println(file)
-
 	if err != nil {
+		log.Panic(err)
 		c.String(http.StatusBadRequest, "Bad request")
 		return
 	}
 	fileName := header.Filename
-
-	log.Println(fileName)
-
-	// Not exit File
-	if len(fileName) == 0 {
-		c.JSON(http.StatusBadRequest, "File doesn't exit")
+	dir, _ := os.Getwd()
+	out, err := os.Create(dir + "\\images\\" + fileName)
+	if err != nil {
+		log.Fatal(err)
 	}
-
+	defer out.Close()
+	_, err = io.Copy(out, file)
+	if err != nil {
+		log.Fatal(err)
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": "ok",
 	})
