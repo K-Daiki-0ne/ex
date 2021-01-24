@@ -1,26 +1,39 @@
-import React from 'react';
-import Link from 'next/link'
+import React, { FC, useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   Card,
   CardActions,
   CardContent,
   Button,
-  Typography,
   TextField
 } from '@material-ui/core';
+import { RegisterHeader } from '../../components/atoms';
+import { postUserInformation } from '../../api';
 import useStyle from './style';
 
-const RegisterView: React.FC = (): JSX.Element => {
+const RegisterView: FC = (): JSX.Element => {
+  const [registerName, setRegisterName] = useState<string>("");
+  const [registerPass, setRegisterPass] = useState<string>("");
+
   const classes = useStyle();
+  const router = useRouter();
+
+  let nameText: string = 'Register your name';
+  let passText: string = 'Register your password';
+
+  const registerUserInformation = () => {
+    try {
+      postUserInformation(registerName, registerPass)
+        .then(() => router.push(`/main/${registerName}`))
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log("error");
+    }
+  }
+
   return (
     <div className={classes.register}>
-      <Typography 
-        variant="h2" 
-        gutterBottom
-        className={classes.registerTile}
-      >
-        REGISTER
-      </Typography>
+      <RegisterHeader />
 
       <Card className={classes.card}>
         <CardContent>
@@ -29,25 +42,28 @@ const RegisterView: React.FC = (): JSX.Element => {
             id="standard-basic" 
             label="Name"
             error={false}
-            helperText="Register your name"
+            helperText={nameText}
             fullWidth
             className={classes.root}
             inputProps={{
               className: classes.root
             }}
-
+            value={registerName}
+            onChange={e => setRegisterName(e.target.value)}
           />
           <br />
           <TextField 
             id="filled-basic" 
             label="Password"
             type="password"
-            helperText="Register your password"
+            helperText={passText}
             fullWidth
             className={classes.root}
             inputProps={{
               className: classes.root
             }}
+            value={registerPass}
+            onChange={e => setRegisterPass(e.target.value)}
           />
         </form>
         </CardContent>
@@ -58,10 +74,9 @@ const RegisterView: React.FC = (): JSX.Element => {
             size="small"
             fullWidth
             className={classes.btn}
+            onClick={registerUserInformation}
           >
-            <Link href='/main' >
               <p>Register</p>
-            </Link>
           </Button>
         </CardActions>
       </Card>

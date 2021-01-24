@@ -28,7 +28,7 @@ const MainView: React.FC = (): JSX.Element => {
           aria-label="add"
           size="small"
         >
-          <Link href='/post'>
+          <Link href='/post/12345'>
             <AddCircleIcon className={classes.iconSize} />
           </Link>
         </IconButton>
@@ -75,7 +75,7 @@ const MainView: React.FC = (): JSX.Element => {
         </Card>
       </div>
       <div className={classes.page}>
-        <Pagination count={10} variant="outlined" />
+        <Pagination count={10} className={classes.selected} />
       </div>
     </div>
   )

@@ -36,16 +36,15 @@ func Register(name string, pass []byte) error {
 		return errors.New("required Password")
 	}
 
-	if err := db.Where("username = ?", newUser.Username).First(&newUser).Error; err != nil {
+	if err := db.Debug().Where("username = ?", newUser.Username).Take(&newUser).Error; err != nil {
 		// Not user exit
-		fmt.Println("Already user exit")
-
+		fmt.Println("Not Exit")
 		db.Create(&newUser)
+
 		return nil
 	}
 
 	// Already user exit
 	fmt.Println("Already user exit")
-	return errors.New("Already user exit")
-
+	return errors.New("User Exit")
 }
