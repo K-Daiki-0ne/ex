@@ -35,7 +35,7 @@ func Router(app *gin.Engine) {
 
 	/*
 	 *  Post query name's user image file
-	 *  example: http://localhost:5050/app/image?name={username}
+	 *  example: http://localhost:5050/app/pdf?name={username}
 	 */
-	app.POST("/app/pdf", controllers.Image)
+	app.POST("/app/pdf", controllers.Pdf)
 }
