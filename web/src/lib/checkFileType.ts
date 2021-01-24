@@ -27,7 +27,7 @@ export const checkFile = async (fileName: string, userID: string): Promise<strin
         return `http://localhost:5050/app/image?userID=${userID}`;
         break;
       case "pdf":
-        return `http://localhost:5050/app/image?userID=${userID}`;
+        return `http://localhost:5050/app/pdf?userID=${userID}`;
         break;
       default:
         throw new Error("Dont't support file");
