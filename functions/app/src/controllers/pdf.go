@@ -11,6 +11,9 @@ import (
 
 // Pdf : post pdf file
 func Pdf(c *gin.Context) {
+	// Get name query
+	id := c.Query("userID")
+
 	file, header, err := c.Request.FormFile("file")
 	if err != nil {
 		log.Panic(err)
@@ -27,9 +30,12 @@ func Pdf(c *gin.Context) {
 
 	fmt.Printf("MIME Header: %+v\n", header.Header)
 
+	// Upload file name in local enviroment
+	fileName := "*" + "-" + id + "-" + header.Filename
+
 	// Create a temporary file within our temp-images directory that follows
 	// a particular naming pattern
-	tempFile, err := ioutil.TempFile("pdf", "upload-*.pdf")
+	tempFile, err := ioutil.TempFile("pdf", fileName)
 
 	if err != nil {
 		// output error log

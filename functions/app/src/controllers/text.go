@@ -11,6 +11,9 @@ import (
 
 // Text : post text file
 func Text(c *gin.Context) {
+	// Get name query
+	id := c.Query("userID")
+
 	file, header, err := c.Request.FormFile("file")
 	if err != nil {
 		log.Panic(err)
@@ -27,9 +30,12 @@ func Text(c *gin.Context) {
 
 	fmt.Printf("MIME Header: %+v\n", header.Header)
 
+	// Upload file name in local enviroment
+	fileName := "*" + "-" + id + "-" + header.Filename
+
 	// Create a temporary file within our temp-images directory that follows
 	// a particular naming pattern
-	tempFile, err := ioutil.TempFile("text", "upload-*.txt")
+	tempFile, err := ioutil.TempFile("text", fileName)
 
 	if err != nil {
 		// output error log
@@ -47,12 +53,11 @@ func Text(c *gin.Context) {
 		c.String(http.StatusBadRequest, "Fatal upload file")
 	}
 
-	fmt.Println("file:", fileBytes)
-
 	// write this byte array to our temporary file
 	tempFile.Write(fileBytes)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": "Successfully Uploaded File",
 	})
+
 }
