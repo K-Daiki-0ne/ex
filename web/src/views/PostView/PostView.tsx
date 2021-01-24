@@ -47,7 +47,7 @@ const PostView: React.FC = (): JSX.Element => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5050/app/image?userID=12345",
+        url,
         fileData, {
           headers: {
             'Content-Type': "multipart/form-data",
