@@ -29,14 +29,6 @@ func Image(c *gin.Context) {
 
 	defer file.Close()
 
-	// output filename for log
-	fmt.Printf("Uploaded File: %+v\n", header.Filename)
-
-	// output file size for log
-	fmt.Printf("File Size: %+v\n", header.Size)
-
-	fmt.Printf("MIME Header: %+v\n", header.Header)
-
 	// Upload file name in local enviroment
 	fileName := "*" + "-" + id + "-" + header.Filename
 
