@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/base64"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -21,6 +22,14 @@ func Text(c *gin.Context) {
 	}
 
 	defer file.Close()
+
+	data := make([]byte, header.Size)
+
+	file.Read(data)
+
+	filedata := base64.StdEncoding.EncodeToString(data)
+
+	fmt.Println(filedata)
 
 	// Upload file name in local enviroment
 	fileName := "*" + "-" + id + "-" + header.Filename
