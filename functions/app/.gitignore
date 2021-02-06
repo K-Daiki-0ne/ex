@@ -1,3 +1,5 @@
 /image/
 /text/
 /pdf/
+
+src/config/secret.go
