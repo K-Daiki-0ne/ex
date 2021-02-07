@@ -3,10 +3,8 @@ package config
 import (
 	"fmt"
 
-	"github.com/jinzhu/gorm"
-
-	// MySQL Driver
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 // Image dsaf
@@ -37,22 +35,26 @@ type Pdf struct {
 func Connect() *gorm.DB {
 
 	connect := Path(DBUser, DBPass, DBProt, DBName)
-	db, err := gorm.Open(Dialect, connect)
+	db, err := gorm.Open(mysql.Open(connect), &gorm.Config{})
 
 	if err != nil {
 		fmt.Println("DB connect ...NO")
 	} else {
-		db.AutoMigrate(&Image{})
-		db.AutoMigrate(&Text{})
-		db.AutoMigrate(&Pdf{})
+		db.AutoMigrate(&Image{}, &Text{}, &Pdf{})
+
 		fmt.Println("DB connect ...OK")
 	}
+
 	return db
 }
 
 // Close : Database close function
 func Close() {
 	db := Connect()
-	db.Close()
+	close, err := db.DB()
+	if err != nil {
+
+	}
+	close.Close()
 	fmt.Println("DB close ...OK")
 }
