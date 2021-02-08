@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jinzhu/gorm"
+
 	// MySQL Driver
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
@@ -15,29 +16,19 @@ type User struct {
 	Password string `json:"password"`
 }
 
-const (
-	// Dialect Use DataBase name
-	// Dialect = os.Getenv("DB")
-	Dialect = "mysql"
-
-	// DBUser MySQL's user name
-	// DBUser = os.Getenv("DB_USER")
-	DBUser = "user1"
-
-	// DBPass MySQL's user password
-	DBPass = "Password_01"
-
-	// DBProt MySQL protocol
-	DBProt = "tcp(localhost:3306)"
-
-	// DBName MySQL Database name
-	DBName = "ex"
-)
-
 // Connect : Database connect function
 func Connect() *gorm.DB {
+
+	/*
+	 * Dialect	使用するDB
+	 * DBuser		DBのユーザーネーム
+	 * DBPass		DBユーザーのパスワード
+	 * DBProt		DBのプロトコル
+	 * DBName		使用するDBの名前
+	 * 上記設定を /config/secret.go に記述
+	 */
+
 	connect := Path(DBUser, DBPass, DBProt, DBName)
-	fmt.Println(connect)
 	db, err := gorm.Open(Dialect, connect)
 
 	if err != nil {
