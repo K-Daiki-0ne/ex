@@ -1,8 +1,9 @@
 package controllers
 
 import (
+	"EX/app/src/models"
+	"encoding/base64"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -22,34 +23,19 @@ func Pdf(c *gin.Context) {
 
 	defer file.Close()
 
-	// Upload file name in local enviroment
-	fileName := "*" + "-" + id + "-" + header.Filename
+	data := make([]byte, header.Size)
 
-	// Create a temporary file within our temp-images directory that follows
-	// a particular naming pattern
-	tempFile, err := ioutil.TempFile("pdf", fileName)
+	file.Read(data)
 
-	if err != nil {
-		// output error log
-		log.Panic(err)
-	}
+	// Encode file to string
+	filedata := base64.StdEncoding.EncodeToString(data)
 
-	defer tempFile.Close()
+	suc := models.PDF(id, header.Filename, filedata)
 
-	// read all of the contents of our uploaded file into a
-	// byte array
-	fileBytes, err := ioutil.ReadAll(file)
-
-	if err != nil {
+	if suc != nil {
 		fmt.Println(err)
 		c.String(http.StatusBadRequest, "Fatal upload file")
 	}
-
-	fmt.Println("file:", fileBytes)
-
-	// write this byte array to our temporary file
-	tempFile.Write(fileBytes)
-
 	c.JSON(http.StatusOK, gin.H{
 		"status": "Successfully Uploaded File",
 	})
