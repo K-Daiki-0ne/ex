@@ -1,8 +1,9 @@
 package controllers
 
 import (
+	"EX/app/src/models"
+	"encoding/base64"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -22,6 +23,7 @@ func Image(c *gin.Context) {
 	id := c.Query("userID")
 
 	file, header, err := c.Request.FormFile("file")
+
 	if err != nil {
 		log.Panic(err)
 		c.String(http.StatusBadRequest, "Bad request")
@@ -29,30 +31,19 @@ func Image(c *gin.Context) {
 
 	defer file.Close()
 
-	// Upload file name in local enviroment
-	fileName := "*" + "-" + id + "-" + header.Filename
+	data := make([]byte, header.Size)
 
-	// Create a temporary file within our temp-images directory that follows
-	// a particular naming pattern
-	tempFile, err := ioutil.TempFile("image", fileName)
+	file.Read(data)
 
-	if err != nil {
+	// Encode file to string
+	filedata := base64.StdEncoding.EncodeToString(data)
 
-		// output error log
-		log.Panic(err)
-	}
+	suc := models.Image(id, header.Filename, filedata)
 
-	defer tempFile.Close()
-
-	// read all of the contents of our uploaded file into a
-	// byte array
-	fileBytes, err := ioutil.ReadAll(file)
-	if err != nil {
+	if suc != nil {
 		fmt.Println(err)
+		c.String(http.StatusBadRequest, "Fatal upload file")
 	}
-
-	// write this byte array to our temporary file
-	tempFile.Write(fileBytes)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": "Successfully Uploaded File",
