@@ -1,6 +1,7 @@
 package main
 
 import (
+	"EX/app/src/config"
 	"EX/app/src/router"
 	"fmt"
 
@@ -21,6 +22,8 @@ func main() {
 		AllowCredentials: true,
 	}))
 	router.Router(app)
+	config.Connect()
 	fmt.Println("APP server listening ...OK")
+	defer config.Close()
 	app.Run(":5050")
 }
