@@ -17,8 +17,8 @@ type Post struct {
 	Description string
 }
 
-// Image : post image file
-func Image(c *gin.Context) {
+// ImageController : post image file
+func ImageController(c *gin.Context) {
 	// Get name query
 	id := c.Query("userID")
 
@@ -38,7 +38,7 @@ func Image(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.Image(id, header.Filename, filedata)
+	suc := models.ImageModel(id, header.Filename, filedata)
 
 	if suc != nil {
 		fmt.Println(err)

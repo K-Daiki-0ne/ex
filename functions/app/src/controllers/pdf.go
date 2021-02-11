@@ -10,8 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Pdf : post pdf file
-func Pdf(c *gin.Context) {
+// PdfController : post pdf file
+func PdfController(c *gin.Context) {
 	// Get name query
 	id := c.Query("userID")
 
@@ -30,7 +30,7 @@ func Pdf(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.PDF(id, header.Filename, filedata)
+	suc := models.PDFModel(id, header.Filename, filedata)
 
 	if suc != nil {
 		fmt.Println(err)

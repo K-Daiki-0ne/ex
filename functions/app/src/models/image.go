@@ -8,20 +8,20 @@ import (
 	"gorm.io/gorm"
 )
 
-// ImageFileType : image file schema
-type ImageFileType struct {
+// Image : image file schema
+type Image struct {
 	gorm.Model
-	UserID     string `json:"userid"`
-	FileName   string `json:"filename"`
-	FileString string `json:"filestring"`
+	UserID   string `json:"userid"`
+	FileName string `json:"filename"`
+	File     string `json:"file"`
 }
 
-// Image : Image file model
-func Image(id string, filename string, file string) error {
+// ImageModel : Image file model
+func ImageModel(id string, filename string, file string) error {
 
 	db := database.DBConnect
 
-	var Image ImageFileType
+	var Image Image
 
 	err := libs.Validate(id, filename, file)
 
@@ -31,7 +31,7 @@ func Image(id string, filename string, file string) error {
 
 	Image.UserID = id
 	Image.FileName = filename
-	Image.FileString = file
+	Image.File = file
 
 	db.Create(&Image)
 

@@ -8,20 +8,20 @@ import (
 	"gorm.io/gorm"
 )
 
-// PDFFileType : PDF file schema
-type PDFFileType struct {
+// PDF : PDF file schema
+type PDF struct {
 	gorm.Model
 	UserID     string `json:"userid"`
 	FileName   string `json:"filename"`
 	FileString string `json:"filestring"`
 }
 
-// PDF : Image file model
-func PDF(id string, filename string, file string) error {
+// PDFModel : Image file model
+func PDFModel(id string, filename string, file string) error {
 
 	db := database.DBConnect
 
-	var PDF PDFFileType
+	var PDF PDF
 
 	err := libs.Validate(id, filename, file)
 
