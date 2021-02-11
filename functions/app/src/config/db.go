@@ -10,7 +10,7 @@ import (
 // Image dsaf
 type Image struct {
 	gorm.Model
-	ID       string `json:"id"`
+	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
 }
@@ -18,7 +18,7 @@ type Image struct {
 // Text dfasfdsaf
 type Text struct {
 	gorm.Model
-	ID       string `json:"id"`
+	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
 }
@@ -26,7 +26,7 @@ type Text struct {
 // Pdf fdasfdsaf
 type Pdf struct {
 	gorm.Model
-	ID       string `json:"id"`
+	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
 }
