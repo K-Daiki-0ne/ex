@@ -16,8 +16,8 @@ type Image struct {
 	File     string `json:"file"`
 }
 
-// ImageModel : Image file model
-func ImageModel(id string, filename string, file string) error {
+// PostImageModel : Image file model
+func PostImageModel(id string, filename string, file string) error {
 
 	db := database.DBConnect
 
@@ -37,4 +37,12 @@ func ImageModel(id string, filename string, file string) error {
 
 	return nil
 
+}
+
+// GetImageModel : get data from images table
+func GetImageModel(userID string) []Image {
+	db := database.DBConnect
+	var image []Image
+	db.First(&image, "user_id = ?", userID)
+	return image
 }

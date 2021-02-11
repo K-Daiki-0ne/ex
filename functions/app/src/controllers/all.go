@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"EX/app/src/database"
-	"fmt"
+	"EX/app/src/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -40,7 +40,6 @@ func AllController(c *gin.Context) {
 
 	id := c.Query("userID")
 
-	var image []Image
 	var text []Text
 	var pdf []PDF
 
@@ -49,14 +48,12 @@ func AllController(c *gin.Context) {
 	 *  response type Array
 	 */
 
-	db.First(&image, "user_id = ?", id)
+	images := models.GetImageModel(id)
 	db.First(&text, "user_id = ?", id)
 	db.First(&pdf, "user_id = ?", id)
 
-	fmt.Println(image)
-
 	c.JSON(http.StatusOK, gin.H{
-		"image": image,
+		"image": images,
 		"text":  text,
 		"pdf":   pdf,
 	})
