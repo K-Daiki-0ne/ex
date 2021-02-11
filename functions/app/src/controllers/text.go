@@ -30,7 +30,7 @@ func Text(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.Text(id, header.Filename, filedata)
+	suc := models.TextModel(id, header.Filename, filedata)
 
 	if suc != nil {
 		fmt.Println(err)

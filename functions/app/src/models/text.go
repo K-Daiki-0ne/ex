@@ -8,20 +8,20 @@ import (
 	"gorm.io/gorm"
 )
 
-// TextFileType : Text file schema
-type TextFileType struct {
+// Text : Text file schema
+type Text struct {
 	gorm.Model
 	UserID     string `json:"userid"`
 	FileName   string `json:"filename"`
 	FileString string `json:"filestring"`
 }
 
-// Text : Text file model
-func Text(id string, filename string, file string) error {
+// TextModel : Text file model
+func TextModel(id string, filename string, file string) error {
 
 	db := database.DBConnect
 
-	var Text TextFileType
+	var Text Text
 
 	// Check required input
 	err := libs.Validate(id, filename, file)

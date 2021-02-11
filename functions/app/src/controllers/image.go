@@ -38,7 +38,7 @@ func Image(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.Image(id, header.Filename, filedata)
+	suc := models.ImageModel(id, header.Filename, filedata)
 
 	if suc != nil {
 		fmt.Println(err)

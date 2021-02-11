@@ -30,7 +30,7 @@ func Pdf(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.PDF(id, header.Filename, filedata)
+	suc := models.PDFModel(id, header.Filename, filedata)
 
 	if suc != nil {
 		fmt.Println(err)
