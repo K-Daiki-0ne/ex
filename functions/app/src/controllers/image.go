@@ -17,8 +17,8 @@ type Post struct {
 	Description string
 }
 
-// Image : post image file
-func Image(c *gin.Context) {
+// ImageController : post image file
+func ImageController(c *gin.Context) {
 	// Get name query
 	id := c.Query("userID")
 

@@ -10,8 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Pdf : post pdf file
-func Pdf(c *gin.Context) {
+// PdfController : post pdf file
+func PdfController(c *gin.Context) {
 	// Get name query
 	id := c.Query("userID")
 

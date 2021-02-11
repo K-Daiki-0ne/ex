@@ -10,8 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Text : post text file
-func Text(c *gin.Context) {
+// TextController : post text file
+func TextController(c *gin.Context) {
 	// Get name query
 	id := c.Query("userID")
 
