@@ -37,3 +37,11 @@ func PDFModel(id string, filename string, file string) error {
 
 	return nil
 }
+
+// GetPdfModel : get data from pdfs table
+func GetPdfModel(userID string) []PDF {
+	db := database.DBConnect
+	var pdf []PDF
+	db.First(&pdf, "user_id = ?", userID)
+	return pdf
+}

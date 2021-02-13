@@ -38,3 +38,11 @@ func TextModel(id string, filename string, file string) error {
 
 	return nil
 }
+
+// GetTextModel : get data from images table
+func GetTextModel(userID string) []Text {
+	db := database.DBConnect
+	var text []Text
+	db.First(&text, "user_id = ?", userID)
+	return text
+}
