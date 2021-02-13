@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Link from 'next/link'
 import { 
   IconButton,
   Card,
@@ -8,15 +7,14 @@ import {
   BottomNavigation,
   BottomNavigationAction
 } from '@material-ui/core';
-
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
-
 import { Pagination } from '@material-ui/lab';
 import useStyle from './style';
+
+import { UploadButton } from '../../components/molecules';
 
 const MainView: React.FC = (): JSX.Element => {
   const classes = useStyle();
@@ -64,14 +62,9 @@ const MainView: React.FC = (): JSX.Element => {
           </CardContent>
         </Card>
       </div>
-      <IconButton 
-        aria-label="add"
-        size="small"
-      >
-      <Link href='/post/12345'>
-        <AddCircleIcon className={classes.iconSize} />
-      </Link>
-      </IconButton>
+      <UploadButton 
+        props="12345"
+      />
       <div className={classes.page}>
         <Pagination count={10} className={classes.selected} />
       </div>
