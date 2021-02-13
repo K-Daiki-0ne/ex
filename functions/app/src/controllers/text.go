@@ -10,8 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Text : post text file
-func Text(c *gin.Context) {
+// TextController : post text file
+func TextController(c *gin.Context) {
 	// Get name query
 	id := c.Query("userID")
 
@@ -30,7 +30,7 @@ func Text(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.Text(id, header.Filename, filedata)
+	suc := models.TextModel(id, header.Filename, filedata)
 
 	if suc != nil {
 		fmt.Println(err)
