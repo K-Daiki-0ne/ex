@@ -23,16 +23,6 @@ const MainView: React.FC = (): JSX.Element => {
   const [value, setValue] = useState<number>(0)
   return (
     <div className={classes.root}>
-      <div className={classes.btn}>
-        <IconButton 
-          aria-label="add"
-          size="small"
-        >
-          <Link href='/post/12345'>
-            <AddCircleIcon className={classes.iconSize} />
-          </Link>
-        </IconButton>
-      </div>
       <div className={classes.bottomArea}>
         <BottomNavigation
           value={value}
@@ -74,6 +64,14 @@ const MainView: React.FC = (): JSX.Element => {
           </CardContent>
         </Card>
       </div>
+      <IconButton 
+        aria-label="add"
+        size="small"
+      >
+      <Link href='/post/12345'>
+        <AddCircleIcon className={classes.iconSize} />
+      </Link>
+      </IconButton>
       <div className={classes.page}>
         <Pagination count={10} className={classes.selected} />
       </div>
