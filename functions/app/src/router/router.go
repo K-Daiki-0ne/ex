@@ -13,7 +13,7 @@ func Router(app *gin.Engine) {
 	 *  Get all query name's user post files
 	 *	example: http://localhost:5050/app/all/files?name={username}
 	 */
-	app.GET("/app/all/files", controllers.All)
+	app.GET("/app/all/files", controllers.AllController)
 
 	/*
 	 *  Get single query name's user post file
@@ -25,17 +25,17 @@ func Router(app *gin.Engine) {
 	 *  Post query name's user text file
 	 *  example: http://localhost:5050/app/text?name={username}
 	 */
-	app.POST("/app/text", controllers.Text)
+	app.POST("/app/text", controllers.TextController)
 
 	/*
 	 *  Post query name's user image file
 	 *  example: http://localhost:5050/app/image?name={username}
 	 */
-	app.POST("/app/image", controllers.Image)
+	app.POST("/app/image", controllers.ImageController)
 
 	/*
 	 *  Post query name's user image file
 	 *  example: http://localhost:5050/app/pdf?name={username}
 	 */
-	app.POST("/app/pdf", controllers.Pdf)
+	app.POST("/app/pdf", controllers.PdfController)
 }
