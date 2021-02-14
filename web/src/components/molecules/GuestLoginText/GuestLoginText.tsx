@@ -8,9 +8,9 @@ export const GuestLoginText: FC = (): JSX.Element => {
 
   return (
     <Typography className={classes.guestLoginText}>
-      Don't have account? 
-      <Link href='/register'>
-        <a className={classes.guestLoginLinkText}>  Register</a>
+      If you want to try EX ? 
+      <Link href='/main/guest'>
+        <a className={classes.guestLoginLinkText}> Guest Login</a>
       </Link>
     </Typography>
   )
