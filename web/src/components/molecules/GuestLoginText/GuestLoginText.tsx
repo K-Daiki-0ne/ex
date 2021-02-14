@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Typography } from '@material-ui/core';
 import useStyle from './style';
 
-export const GuestLoginText = () => {
+export const GuestLoginText: FC = (): JSX.Element => {
   const classes = useStyle();
 
   return (
