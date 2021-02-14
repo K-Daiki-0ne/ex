@@ -23,10 +23,7 @@ const useStyle = makeStyles((theme) =>({
   bottomArea: {
     marginTop: "-80%",
   },
-  tabMenu: {
-    backgroundColor: "#202124",
-    width: 350
-  },
+  
   iconColor: {
     color: "#9e9e9e",
   },
