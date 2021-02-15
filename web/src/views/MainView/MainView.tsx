@@ -17,6 +17,9 @@ const MainView: FC = (): JSX.Element => {
   return (
     <div className={classes.root}>
       <div className={classes.bottomArea}>
+        <UploadButton 
+          props="12345"
+        />
         <CheckFileType />
       </div>
       <div>
@@ -34,9 +37,7 @@ const MainView: FC = (): JSX.Element => {
           </CardContent>
         </Card>
       </div>
-      <UploadButton 
-        props="12345"
-      />
+      
       <div className={classes.page}>
         <Pagination count={10} className={classes.selected} />
       </div>
