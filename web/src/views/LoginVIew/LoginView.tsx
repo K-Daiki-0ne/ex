@@ -11,7 +11,7 @@ import {
   LoginHeader,
   LoginButtonText
 } from '../../components/atoms';
-import { getUserInformation } from '../../api'
+import User from '../../api/User';
 import {
   RegisterLinkText,
   GuestLoginText
@@ -39,7 +39,7 @@ const LoginView: FC = (): JSX.Element => {
     }
 
     try {
-      getUserInformation(loginName, loginPass)
+      User.login(loginName, loginPass)
         .then((e) => console.log(e))
         .then(() => router.push(`main/${loginName}`));
     } catch(err) {

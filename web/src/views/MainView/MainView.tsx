@@ -9,7 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Pagination } from '@material-ui/lab';
 import { UploadButton } from '../../components/molecules';
 import { CheckFileType } from '../../components/organisms';
-import { getAllFiles } from '../../api';
+import File from '../../api/File';
 import useStyle from './style';
 
 
@@ -19,7 +19,7 @@ const MainView: FC = (): JSX.Element => {
   const classes = useStyle();
 
   useEffect(() => {
-    getAllFiles("12345")
+    File.getAllFiles("12345")
       .then((data: any) => console.log(data))
   }, [])
 
