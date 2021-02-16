@@ -9,7 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Pagination } from '@material-ui/lab';
 import { UploadButton } from '../../components/molecules';
 import { CheckFileType } from '../../components/organisms';
-import axios from 'axios';
+import { getAllFiles } from '../../api';
 import useStyle from './style';
 
 
@@ -19,11 +19,8 @@ const MainView: FC = (): JSX.Element => {
   const classes = useStyle();
 
   useEffect(() => {
-    async function GetFiles() {
-      const data = await axios.get("http://localhost:5050/app/all/files?userID=12345");
-      await console.log(data.data.image);
-    }
-    GetFiles()
+    getAllFiles("12345")
+      .then((data: any) => console.log(data))
   }, [])
 
   return (
