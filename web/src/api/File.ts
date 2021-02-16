@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class Get {
+class File {
   public async getAllFiles(id: string) {
     const data = await axios.get(`http://localhost:5050/app/all/files?userID=${id}`);
     const response = await data.data;
@@ -8,4 +8,4 @@ class Get {
   }
 }
 
-export default new Get();
+export default new File();
