@@ -8,7 +8,6 @@ import {
   TextField
 } from '@material-ui/core';
 import { RegisterHeader } from '../../components/atoms';
-import { postUserInformation } from '../../api';
 import User from '../../api/User';
 import useStyle from './style';
 
