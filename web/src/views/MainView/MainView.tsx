@@ -9,18 +9,37 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Pagination } from '@material-ui/lab';
 import { UploadButton } from '../../components/molecules';
 import { CheckFileType } from '../../components/organisms';
+import { useRecoilState } from 'recoil';
 import File from '../../api/File';
+import fileState from '../../store/atom/file'
 import useStyle from './style';
+
+type File = {
+  image: FileType[],
+  pdf: FileType[],
+  text: FileType[]
+}
+
+type FileType = {
+  ID: string,
+  CreatedAt: string,
+  UpdateAt: string,
+  DeletedAt: string,
+  userid: string,
+  filename: string,
+  file: string,
+}
 
 
 const MainView: FC = (): JSX.Element => {
-  const [files, setFiles] = useState<any[]>([])
+  const [files, setFiles] = useState<any[]>([]);
+  const [fileData, setFileData] = useRecoilState(fileState)
   
   const classes = useStyle();
 
   useEffect(() => {
     File.getAllFiles("12345")
-      .then((data: any) => console.log(data))
+      .then((data: File) => setFileData(data))
   }, [])
 
   return (
