@@ -11,24 +11,9 @@ import { UploadButton } from '../../components/molecules';
 import { CheckFileType } from '../../components/organisms';
 import { useRecoilState } from 'recoil';
 import File from '../../api/File';
+import FileType from '../../types'
 import fileState from '../../store/atom/file'
 import useStyle from './style';
-
-type File = {
-  image: FileType[],
-  pdf: FileType[],
-  text: FileType[]
-}
-
-type FileType = {
-  ID: string,
-  CreatedAt: string,
-  UpdateAt: string,
-  DeletedAt: string,
-  userid: string,
-  filename: string,
-  file: string,
-}
 
 
 const MainView: FC = (): JSX.Element => {
@@ -39,7 +24,7 @@ const MainView: FC = (): JSX.Element => {
 
   useEffect(() => {
     File.getAllFiles("12345")
-      .then((data: File) => setFileData(data))
+      .then((data: FileType) => setFileData(data))
   }, [])
 
   return (

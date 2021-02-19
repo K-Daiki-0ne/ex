@@ -1,10 +1,10 @@
-type File = {
-  image: FileType[],
-  pdf: FileType[],
-  text: FileType[]
+type FileType = {
+  image: File[],
+  pdf: File[],
+  text: File[]
 }
 
-type FileType = {
+type File = {
   ID: string,
   CreatedAt: string,
   UpdateAt: string,
@@ -14,4 +14,4 @@ type FileType = {
   file: string,
 }
 
-export default File;
+export default FileType;
