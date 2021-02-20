@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { 
   BottomNavigation,
   BottomNavigationAction
@@ -11,13 +11,22 @@ import useStyle from './style';
 export const CheckFileType: FC = (): JSX.Element => {
   const [value, setValue] = useState<number>(0)
 
+  useEffect(() => {
+    console.log(value)
+  }, [])
+
+  const changeFileType = (event, newValue: number) => {
+    event.preventDefault();
+    setValue(newValue)
+  }
+
   const classes = useStyle();
 
   return (
     <BottomNavigation
       value={value}
       onChange={(event, newValue) => {
-        setValue(newValue);
+        changeFileType(event, newValue);
       }}
       showLabels
       className={classes.tabMenu}
