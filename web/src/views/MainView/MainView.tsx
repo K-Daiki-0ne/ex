@@ -12,7 +12,7 @@ import { UploadButton } from '@src/components/molecules';
 import { CheckFileType } from '@src/components/organisms';
 import File from '@src/api/File';
 import FileType from '@src/types'
-import { fileState } from '@src/store/atom/file'
+import { fileState } from '@src/store/atoms/file'
 import useStyle from './style';
 
 

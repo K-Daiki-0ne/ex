@@ -1,3 +1,3 @@
-export { fileState } from './atom/file';
-export { fileTypeState } from './atom/file';
-export { userInfoState } from './atom/user';
+export { fileState } from './atoms/file';
+export { fileTypeState } from './atoms/file';
+export { userInfoState } from './atoms/user';
