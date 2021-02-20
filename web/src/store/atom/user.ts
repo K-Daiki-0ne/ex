@@ -6,10 +6,7 @@ type User = {
   password: string,
 }
 
-const userInfoState = atom<User>({
+export const userInfoState = atom<User>({
   key: "userInfoState",
   default: null
 })
-
-
-export default userInfoState;
