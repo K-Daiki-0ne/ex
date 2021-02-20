@@ -23,7 +23,7 @@ export const fileState = atom<File>({
   default: null
 })
 
-export const fileTypeState = atom<String>({
+export const fileTypeState = atom<string>({
   key: "fileTypeState",
   default: fileTypeNumberState
 })
