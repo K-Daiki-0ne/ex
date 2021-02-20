@@ -7,8 +7,8 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
-import { RegisterHeader } from '../../components/atoms';
-import User from '../../api/User';
+import { RegisterHeader } from '@src/components/atoms';
+import User from '@src/api/User';
 import useStyle from './style';
 
 const RegisterView: FC = (): JSX.Element => {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import style from '../../styles/Enter.module.css'
+import style from '@src/styles/Enter.module.css'
 
 const Enter: React.FC = (): JSX.Element => {
   const router = useRouter()

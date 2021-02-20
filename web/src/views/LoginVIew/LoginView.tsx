@@ -10,12 +10,12 @@ import {
 import { 
   LoginHeader,
   LoginButtonText
-} from '../../components/atoms';
-import User from '../../api/User';
+} from '@src/components/atoms';
+import User from '@src/api/User';
 import {
   RegisterLinkText,
   GuestLoginText
-} from '../../components/molecules';
+} from '@src/components/molecules';
 
 import useStyle from './style';
 

@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import { 
   IconButton,
   Card,
@@ -7,12 +8,11 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Pagination } from '@material-ui/lab';
-import { UploadButton } from '../../components/molecules';
-import { CheckFileType } from '../../components/organisms';
-import { useRecoilState } from 'recoil';
-import File from '../../api/File';
-import FileType from '../../types'
-import { fileState } from '../../store/atom/file'
+import { UploadButton } from '@src/components/molecules';
+import { CheckFileType } from '@src/components/organisms';
+import File from '@src/api/File';
+import FileType from '@src/types'
+import { fileState } from '@src/store/atom/file'
 import useStyle from './style';
 
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useDropzone} from 'react-dropzone';
 import { useRouter } from 'next/router';
-import { checkFile } from '../../lib/checkFileType'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PublishIcon from '@material-ui/icons/Publish';
 import {
@@ -13,7 +12,8 @@ import {
   Backdrop,
   Typography
 } from '@material-ui/core';
-import ProgressLabel from '../../components/organisms/ProgressLabel/ProgressLabel';
+import { checkFile } from '@src/lib/checkFileType'
+import { ProgressLabel } from '@src/components/organisms';
 import useStyle from './style';
 import axios from 'axios';
 

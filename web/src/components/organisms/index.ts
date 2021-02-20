@@ -1,2 +1,2 @@
 export { CheckFileType } from './CheckFileType/CheckFileType';
-export * from './ProgressLabel/ProgressLabel';
+export { ProgressLabel } from './ProgressLabel/ProgressLabel';
