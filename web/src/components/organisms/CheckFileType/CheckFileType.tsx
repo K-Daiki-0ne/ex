@@ -6,18 +6,17 @@ import {
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import { fileTypeState } from '@src/store/atoms';
+import { useRecoilState } from 'recoil';
 import useStyle from './style';
 
 export const CheckFileType: FC = (): JSX.Element => {
-  const [value, setValue] = useState<number>(0)
+  const [value, setValue] = useState<string>("text");
+  // const [fileTypeNumber, setValueTypeNumber] = useRecoilState(fileTypeState);
 
-  useEffect(() => {
-    console.log(value)
-  }, [])
-
-  const changeFileType = (event, newValue: number) => {
+  const changeFileType = (event: React.ChangeEvent<{}>, newValue: string) => {
     event.preventDefault();
-    setValue(newValue)
+    setValue(newValue);
   }
 
   const classes = useStyle();
@@ -34,16 +33,19 @@ export const CheckFileType: FC = (): JSX.Element => {
       <BottomNavigationAction 
         label="Text" 
         icon={<TextFieldsIcon />}
+        value="text"
         className={classes.iconColor}
       />
       <BottomNavigationAction 
         label="Images" 
         icon={<ImageIcon />}
+        value="image"
         className={classes.iconColor}
       />
       <BottomNavigationAction 
         label="PDF" 
         icon={<PictureAsPdfIcon />}
+        value="pdf"
         className={classes.iconColor}
       />          
     </BottomNavigation>
