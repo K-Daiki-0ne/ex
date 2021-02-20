@@ -16,9 +16,14 @@ type FileType = {
   file: string,
 }
 
-const fileState = atom<File>({
+const fileTypeNumberState: number = 0;
+
+export const fileState = atom<File>({
   key: "fileState",
   default: null
 })
 
-export default fileState;
+export const fileTypeState = atom({
+  key: "fileTypeState",
+  default: fileTypeNumberState
+})

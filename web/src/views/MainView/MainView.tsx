@@ -12,7 +12,7 @@ import { CheckFileType } from '../../components/organisms';
 import { useRecoilState } from 'recoil';
 import File from '../../api/File';
 import FileType from '../../types'
-import fileState from '../../store/atom/file'
+import { fileState } from '../../store/atom/file'
 import useStyle from './style';
 
 
