@@ -11,22 +11,19 @@ import { useRecoilState } from 'recoil';
 import useStyle from './style';
 
 export const CheckFileType: FC = (): JSX.Element => {
-  const [value, setValue] = useState<string>("text");
-  // const [fileTypeNumber, setValueTypeNumber] = useRecoilState(fileTypeState);
+  const [fileTypeNumber, setFileTypeNumber] = useRecoilState(fileTypeState);
 
   const changeFileType = (event: React.ChangeEvent<{}>, newValue: string) => {
     event.preventDefault();
-    setValue(newValue);
+    setFileTypeNumber(newValue);
   }
 
   const classes = useStyle();
 
   return (
     <BottomNavigation
-      value={value}
-      onChange={(event, newValue) => {
-        changeFileType(event, newValue);
-      }}
+      value={fileTypeNumber}
+      onChange={changeFileType}
       showLabels
       className={classes.tabMenu}
     >
