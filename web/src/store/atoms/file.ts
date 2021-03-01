@@ -18,7 +18,7 @@ type FileType = {
 
 const fileTypeNumberState: string = "text";
 
-export const fileState = atom<File>({
+export const fileState = atom<File[]>({
   key: "fileState",
   default: null
 })
