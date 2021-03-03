@@ -7,8 +7,8 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
-import { RegisterHeader } from '../../components/atoms';
-import { postUserInformation } from '../../api';
+import { RegisterHeader } from '@src/components/atoms';
+import User from '@src/api/User';
 import useStyle from './style';
 
 const RegisterView: FC = (): JSX.Element => {
@@ -23,7 +23,7 @@ const RegisterView: FC = (): JSX.Element => {
 
   const registerUserInformation = () => {
     try {
-      postUserInformation(registerName, registerPass)
+      User.register(registerName, registerPass)
         .then(() => router.push(`/main/${registerName}`))
         .catch((error) => console.log(error));
     } catch (error) {

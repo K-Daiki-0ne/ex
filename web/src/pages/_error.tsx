@@ -1,15 +1,14 @@
-import React from 'react'
-import Head from 'next/head'
+import { NextPage, NextPageContext } from 'next';
+import Head from 'next/head';
 import styles from '../styles/Home.module.css'
-import { Container } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Enter from '@src/views/Enter/Enter';
-import useStyle from '@src/theme/style';
+import { Container } from '@material-ui/core'
+import ErrorView from '@src/views/ErrorView/ErrorView';
 
-export default function Home():JSX.Element {
-  const classes = useStyle();
+type Props = {
+  statusCode: number;
+}
+
+const Error: NextPage<Props> = ({ statusCode }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,20 +16,12 @@ export default function Home():JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppBar position="fixed" className={classes.header}>
-        <Toolbar variant="dense" className={styles.title}>
-          <Typography variant="h4" color="inherit" className={classes.headerText}>
-            EX
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
       <main className={styles.main}>
         <Container 
           fixed
           maxWidth='xs'
         >
-          <Enter />
+          <ErrorView status={statusCode} />
         </Container>
       </main>
 
@@ -47,3 +38,11 @@ export default function Home():JSX.Element {
     </div>
   )
 }
+
+Error.getInitialProps = async({ res, err }: NextPageContext) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode ?? 500 : 404;
+
+  return { statusCode };
+}
+
+export default Error;

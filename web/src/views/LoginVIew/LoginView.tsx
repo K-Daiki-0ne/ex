@@ -1,19 +1,22 @@
 import React, { FC, useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   Card,
   CardActions,
   CardContent,
   Button,
-  Typography,
   TextField
 } from '@material-ui/core';
 import { 
   LoginHeader,
   LoginButtonText
-} from '../../components/atoms';
-import { getUserInformation } from '../../api'
+} from '@src/components/atoms';
+import User from '@src/api/User';
+import {
+  RegisterLinkText,
+  GuestLoginText
+} from '@src/components/molecules';
+
 import useStyle from './style';
 
 
@@ -36,7 +39,7 @@ const LoginView: FC = (): JSX.Element => {
     }
 
     try {
-      getUserInformation(loginName, loginPass)
+      User.login(loginName, loginPass)
         .then((e) => console.log(e))
         .then(() => router.push(`main/${loginName}`));
     } catch(err) {
@@ -96,26 +99,15 @@ const LoginView: FC = (): JSX.Element => {
               content="LOGIN"
             />
           </Button>
-        </CardActions>
-        
+        </CardActions>        
         <CardActions className={classes.cardAction}>
-          <Typography className={classes.registerText}>
-            Don't have account? 
-            <Link href='/register'>
-              <a className={classes.registerLinkText}>  Register</a>
-            </Link>
-          </Typography>
+          <RegisterLinkText />
         </CardActions>
       </Card>
       <div>
         <CardActions className={classes.cardAction}>
-            <Typography className={classes.registerText}>
-              If you want to try EX ? 
-              <Link href='/main/guest'>
-                <a className={classes.registerLinkText}> Guest Login</a>
-              </Link>
-            </Typography>
-          </CardActions>
+          <GuestLoginText />
+        </CardActions>
       </div>
     </div>
   )
