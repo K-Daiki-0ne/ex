@@ -1,8 +1,8 @@
 import { NextPage, NextPageContext } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css'
-import { Container, Typography } from '@material-ui/core'
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { Container } from '@material-ui/core'
+import ErrorView from '@src/views/ErrorView/ErrorView';
 
 type Props = {
   statusCode: number;
@@ -21,7 +21,7 @@ const Error: NextPage<Props> = ({ statusCode }) => {
           fixed
           maxWidth='xs'
         >
-          {/* views/ErrorView */}
+          <ErrorView status={statusCode} />
         </Container>
       </main>
 
