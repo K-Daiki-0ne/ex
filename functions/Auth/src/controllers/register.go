@@ -1,9 +1,7 @@
 package controllers
 
 import (
-	"EX/auth/src/lib"
 	"EX/auth/src/models"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,10 +9,8 @@ import (
 
 // Register : post user information from database
 func Register(c *gin.Context) {
-	sucMessage := "TRUE"
 	name := c.Param("name")
 	pass := c.Param("pass")
-	hashPass, err := lib.HashPassword(pass)
 
 	if name == "" {
 		c.JSON(http.StatusBadRequest, "require username")
@@ -24,17 +20,12 @@ func Register(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, "require username")
 	}
 
-	if err != nil {
-		errMessage := "Sorry, fatal"
-		c.JSON(http.StatusBadRequest, errMessage)
+	if err := models.CreateUser(name, pass); err != nil {
+		c.JSON(http.StatusUnauthorized, "Failed to create User information")
 	}
 
-	suc := models.Register(name, hashPass)
+	c.JSON(http.StatusOK, gin.H{
+		"data": name,
+	})
 
-	if suc != nil {
-		fmt.Println(suc)
-		c.JSON(http.StatusNotFound, err)
-	} else {
-		c.JSON(http.StatusOK, sucMessage)
-	}
 }
