@@ -15,8 +15,8 @@ type User struct {
 	Password string `json:"password"`
 }
 
-// getUser : get user information for users table;
-func getUser(name string, password string) User {
+// GetUser : get user information for users table;
+func GetUser(name string, password string) User {
 	db := database.DBConnect
 	var user User
 	db.First(&user, "username = ?", name)
@@ -25,8 +25,8 @@ func getUser(name string, password string) User {
 
 }
 
-// createUser : create user model
-func createUser(name string, password string) []error {
+// CreateUser : create user model
+func CreateUser(name string, password string) []error {
 	db := database.DBConnect
 	hashedPassword, _ := lib.HashPassword(password)
 	defer db.Close()
