@@ -10,7 +10,6 @@ import (
 // User get user information for database
 type User struct {
 	gorm.Model
-	ID       string `json:"id"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
@@ -20,21 +19,17 @@ func GetUser(name string, password string) User {
 	db := database.DBConnect
 	var user User
 	db.First(&user, "username = ?", name)
-	db.Close()
 	return user
-
 }
 
 // CreateUser : create user model
-func CreateUser(name string, password string) []error {
+func CreateUser(name string, password string) error {
 	db := database.DBConnect
 	hashedPassword, _ := lib.HashPassword(password)
-	defer db.Close()
 
-	if err := db.Create(&User{Username: name, Password: string(hashedPassword)}).GetErrors(); err != nil {
+	if err := db.Create(&User{Username: name, Password: string(hashedPassword)}).Error; err != nil {
 		return err
 	}
 
 	return nil
-
 }

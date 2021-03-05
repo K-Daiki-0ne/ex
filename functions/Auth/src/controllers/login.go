@@ -31,10 +31,10 @@ func Login(c *gin.Context) {
 	fmt.Println(hashPassword)
 
 	if err := lib.CompareHashPassword([]byte(hashPassword), pass); err != nil {
-		fmt.Println("User doesn't exit")
+		fmt.Println("User exists ...NO")
 		c.JSON(http.StatusUnauthorized, "User does not exist")
 	} else {
-		fmt.Println("User exits")
+		fmt.Println("User exits ...OK")
 		c.JSON(http.StatusOK, gin.H{
 			"data": user,
 		})
