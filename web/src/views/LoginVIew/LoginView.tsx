@@ -16,7 +16,7 @@ import {
   RegisterLinkText,
   GuestLoginText
 } from '@src/components/molecules';
-
+import { LoginUserType } from '@src/types/loginUser';
 import useStyle from './style';
 
 
@@ -32,7 +32,7 @@ const LoginView: FC = (): JSX.Element => {
 
   const loginUserInformation = () => {
 
-    if (loginName == '' || loginPass == '') {
+    if (loginName == '') {
       nameText = 'Require !';
     } else if (loginPass == ''){
       passText = 'Repuire!'
@@ -40,9 +40,18 @@ const LoginView: FC = (): JSX.Element => {
 
     try {
       User.login(loginName, loginPass)
-        .then((e) => console.log(e))
-        .then(() => router.push(`main/${loginName}`));
+        .then((response: LoginUserType) => {
+          console.log(response)
+          if (response.data) {
+            console.log("Success")
+          } else {
+            console.log("Failed")
+          }
+        })
+        .catch((err) => console.log("aaa"))
+        // .then(() => router.push(`main/${loginName}`));
     } catch(err) {
+      console.log("error")
       console.error(err);
       router.push('/login');
     }
