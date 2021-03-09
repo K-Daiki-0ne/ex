@@ -14,9 +14,14 @@ import useStyle from './style';
 const RegisterView: FC = (): JSX.Element => {
   const [registerName, setRegisterName] = useState<string>("");
   const [registerPass, setRegisterPass] = useState<string>("");
+  const [nameLabel, setNameLabel] = useState<string>('Enter your name');
+  const [passLabel, setPassLabel] = useState<string>('Enter your password');
+  const [isNameValid, setIsNameValid] = useState<boolean>(false);
+  const [isPassValid, setIsPassValid] = useState<boolean>(false);
+
 
   const classes = useStyle();
-  const router = useRouter();
+  // const router = useRouter();
 
   let nameText: string = 'Register your name';
   let passText: string = 'Register your password';
@@ -24,8 +29,31 @@ const RegisterView: FC = (): JSX.Element => {
   const registerUserInformation = () => {
     try {
       User.register(registerName, registerPass)
-        .then(() => router.push(`/main/${registerName}`))
-        .catch((error) => console.log(error));
+        .then((response: any) => {
+          if(response.data) {
+            // router.push(`/main/${registerName}`)
+            console.log('aaa');
+          } else {
+            if (registerName == '' && registerPass == '') {
+              setNameLabel('Require Name!');
+              setPassLabel('Repuire Password!')
+              setIsNameValid(true)
+              setIsPassValid(true)
+            } else if (registerName == ''){
+              setNameLabel('Require Name!');
+              setIsNameValid(true)
+            } else if (registerPass == ''){
+              setPassLabel('Repuire Password!')
+              setIsPassValid(true)
+            } else {
+              setNameLabel('aaaaaa');
+              setPassLabel('bbbbbb')
+              setIsNameValid(true)
+              setIsPassValid(true);
+            }      
+          }
+        })
+        .catch((err: Error) => console.error(err))
     } catch (error) {
       console.log("error");
     }
@@ -41,8 +69,8 @@ const RegisterView: FC = (): JSX.Element => {
           <TextField 
             id="standard-basic" 
             label="Name"
-            error={false}
-            helperText={nameText}
+            error={isNameValid}
+            helperText={nameLabel}
             fullWidth
             className={classes.root}
             inputProps={{
@@ -55,8 +83,9 @@ const RegisterView: FC = (): JSX.Element => {
           <TextField 
             id="filled-basic" 
             label="Password"
+            error={isPassValid}
             type="password"
-            helperText={passText}
+            helperText={passLabel}
             fullWidth
             className={classes.root}
             inputProps={{

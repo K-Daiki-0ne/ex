@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { LoginUserType } from '@src/types/loginUser';
 
 type Login = {
   id: string;
@@ -6,12 +7,14 @@ type Login = {
 }
 
 class User {
-  public async login(name: string, pass: string): Promise<Login> {
+  public async login(name: string, pass: string): Promise<LoginUserType> {
     try {
-      const data: Login = await axios.get(`http://localhost:4000/auth/login/${name}/${pass}`);
-      return data;
+      const data = await axios.get(`http://localhost:4000/auth/login/${name}/${pass}`);
+      const response = await data.data
+      return response;
     } catch (err) {
       console.error(err) 
+      return err
     }
   };
 

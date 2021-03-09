@@ -16,32 +16,49 @@ import {
   RegisterLinkText,
   GuestLoginText
 } from '@src/components/molecules';
-
+import { LoginUserType } from '@src/types/loginUser';
 import useStyle from './style';
 
 
 const LoginView: FC = (): JSX.Element => {
   const [loginName, setLoginName] = useState<string>('');
   const [loginPass, setLoginPass] = useState<string>('');
+  const [nameLabel, setNameLabel] = useState<string>('Enter your name');
+  const [passLabel, setPassLabel] = useState<string>('Enter your password');
+  const [isNameValid, setIsNameValid] = useState<boolean>(false);
+  const [isPassValid, setIsPassValid] = useState<boolean>(false);
 
   const classes = useStyle();
   const router = useRouter();
 
-  let nameText: string = 'Enter your name';
-  let passText: string = 'Enter your password';
-
   const loginUserInformation = () => {
-
-    if (loginName == '' || loginPass == '') {
-      nameText = 'Require !';
-    } else if (loginPass == ''){
-      passText = 'Repuire!'
-    }
-
     try {
       User.login(loginName, loginPass)
-        .then((e) => console.log(e))
-        .then(() => router.push(`main/${loginName}`));
+        .then((response: LoginUserType) => {
+          if (response.data) {
+            console.log("Success")
+          } else {
+            if (loginName == '' && loginPass == '') {
+              setNameLabel('Require Name!');
+              setPassLabel('Repuire Password!')
+              setIsNameValid(true)
+              setIsPassValid(true)
+            } else if (loginName == ''){
+              setNameLabel('Require Name!');
+              setIsNameValid(true)
+            } else if (loginPass == ''){
+              setPassLabel('Repuire Password!')
+              setIsPassValid(true)
+            } else {
+              setNameLabel('aaaaaa');
+              setPassLabel('bbbbbb')
+              setIsNameValid(true)
+              setIsPassValid(true);
+            }      
+          }
+        })
+        .catch((err) => console.log(err))
+        // .then(() => router.push(`main/${loginName}`));
     } catch(err) {
       console.error(err);
       router.push('/login');
@@ -56,11 +73,10 @@ const LoginView: FC = (): JSX.Element => {
         <CardContent>
         <form noValidate autoComplete="on">
           <TextField 
-            // id="standard-basic"
             id="standard-full-width" 
             label="Name"
-            error={false}
-            helperText={nameText}
+            error={isNameValid}
+            helperText={nameLabel}
             fullWidth
             className={classes.root}
             inputProps={{
@@ -73,8 +89,9 @@ const LoginView: FC = (): JSX.Element => {
           <TextField 
             id="filled-basic" 
             label="Password"
+            error={isPassValid}
             type="password"
-            helperText={passText}
+            helperText={passLabel}
             fullWidth
             className={classes.root}
             inputProps={{
