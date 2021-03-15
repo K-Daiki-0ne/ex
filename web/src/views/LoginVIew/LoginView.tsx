@@ -36,7 +36,8 @@ const LoginView: FC = (): JSX.Element => {
       User.login(loginName, loginPass)
         .then((response: LoginUserType) => {
           if (response.data) {
-            console.log("Success")
+            console.log(response.data)
+            router.push(`main/${loginName}`)
           } else {
             if (loginName == '' && loginPass == '') {
               setNameLabel('Require Name!');
