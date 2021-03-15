@@ -16,7 +16,7 @@ import {
   RegisterLinkText,
   GuestLoginText
 } from '@src/components/molecules';
-import { LoginUserType } from '@src/types/loginUser';
+import { LoginUserType } from '@src/types';
 import useStyle from './style';
 
 
@@ -36,7 +36,7 @@ const LoginView: FC = (): JSX.Element => {
       User.login(loginName, loginPass)
         .then((response: LoginUserType) => {
           if (response.data) {
-            console.log(response.data)
+            console.log(response)
             router.push(`main/${loginName}`)
           } else {
             if (loginName == '' && loginPass == '') {

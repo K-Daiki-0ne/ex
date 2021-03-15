@@ -1,17 +1,3 @@
-type FileType = {
-  image: File[],
-  pdf: File[],
-  text: File[]
-}
-
-type File = {
-  ID: string,
-  CreatedAt: string,
-  UpdateAt: string,
-  DeletedAt: string,
-  userid: string,
-  filename: string,
-  file: string,
-}
-
-export default FileType;
+export type { LoginUserType } from './loginUser';
+export type { FileType } from './file';
+export type { RegisterUser } from './registeruser';
