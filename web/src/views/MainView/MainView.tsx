@@ -11,7 +11,7 @@ import { Pagination } from '@material-ui/lab';
 import { UploadButton } from '@src/components/molecules';
 import { CheckFileType } from '@src/components/organisms';
 import File from '@src/api/File';
-import FileType from '@src/types'
+import { FileType } from '@src/types'
 import { fileState, fileTypeState } from '@src/store/atoms'
 import useStyle from './style';
 
