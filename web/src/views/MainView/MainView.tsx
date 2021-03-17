@@ -24,7 +24,7 @@ const MainView: FC = (): JSX.Element => {
 
   useEffect(() => {
     File.getAllFiles("12345")
-      .then((data: FileType[]) => setFileData(data))
+      .then((data: FileType) => setFileData(data))
 
     // atomsに格納されているファイルタイプが変更された場合は表示するコンテントを変更する 
   }, [])

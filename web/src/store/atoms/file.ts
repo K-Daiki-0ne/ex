@@ -3,7 +3,7 @@ import { FileType } from '@src/types';
 
 const fileTypeNumberState: string = "text";
 
-export const fileState = atom<FileType[]>({
+export const fileState = atom<FileType>({
   key: "fileState",
   default: null
 })
