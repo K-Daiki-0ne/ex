@@ -8,6 +8,7 @@ import {
   TextField
 } from '@material-ui/core';
 import { RegisterHeader } from '@src/components/atoms';
+import { RegisterUser } from '@src/types';
 import User from '@src/api/User';
 import useStyle from './style';
 
@@ -21,18 +22,15 @@ const RegisterView: FC = (): JSX.Element => {
 
 
   const classes = useStyle();
-  // const router = useRouter();
-
-  let nameText: string = 'Register your name';
-  let passText: string = 'Register your password';
+  const router = useRouter();
 
   const registerUserInformation = () => {
     try {
       User.register(registerName, registerPass)
-        .then((response: any) => {
+        .then((response: RegisterUser) => {
           if(response.data) {
-            // router.push(`/main/${registerName}`)
-            console.log('aaa');
+            router.push(`/main/${response.data}`)
+            console.log(response);
           } else {
             if (registerName == '' && registerPass == '') {
               setNameLabel('Require Name!');

@@ -1,26 +1,16 @@
 import { atom } from 'recoil';
+import { FileType } from '@src/types';
 
-type File = {
-  image: FileType[],
-  pdf: FileType[],
-  text: FileType[]
+const fileTypeNumberState: string = 'text';
+const defaultFileState: FileType = {
+  image: [],
+  pdf: [],
+  text: []
 }
 
-type FileType = {
-  ID: string,
-  CreatedAt: string,
-  UpdateAt: string,
-  DeletedAt: string,
-  userid: string,
-  filename: string,
-  file: string,
-}
-
-const fileTypeNumberState: string = "text";
-
-export const fileState = atom<File[]>({
+export const fileState = atom<FileType>({
   key: "fileState",
-  default: null
+  default: defaultFileState
 })
 
 export const fileTypeState = atom<string>({
