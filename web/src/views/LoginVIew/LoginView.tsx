@@ -36,8 +36,7 @@ const LoginView: FC = (): JSX.Element => {
       User.login(loginName, loginPass)
         .then((response: LoginUserType) => {
           if (response.data) {
-            console.log(response)
-            router.push(`main/${loginName}`)
+            router.push(`main/${response.data.ID}`)
           } else {
             if (loginName == '' && loginPass == '') {
               setNameLabel('Require Name!');
@@ -58,8 +57,7 @@ const LoginView: FC = (): JSX.Element => {
             }      
           }
         })
-        .catch((err) => console.log(err))
-        // .then(() => router.push(`main/${loginName}`));
+        .catch((err) => console.error(err))
     } catch(err) {
       console.error(err);
       router.push('/login');

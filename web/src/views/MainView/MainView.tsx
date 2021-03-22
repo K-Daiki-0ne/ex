@@ -1,54 +1,33 @@
 import React, { FC, useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { 
-  IconButton,
-  Card,
-  CardContent,
-  Typography,
-} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Pagination } from '@material-ui/lab';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { UploadButton } from '@src/components/molecules';
-import { CheckFileType } from '@src/components/organisms';
-import File from '@src/api/File';
-import { FileType } from '@src/types'
-import { fileState, fileTypeState } from '@src/store/atoms'
+import { 
+  CheckFileType,
+  FileDataCard
+} from '@src/components/organisms';
+import FileAPI from '@src/api/File';
+import { FileType, File } from '@src/types'
+import { fileState } from '@src/store/atoms'
+import { fileStateSelector } from '@src/store/selectors/fileStateSelector';
 import useStyle from './style';
 
-
 const MainView: FC = (): JSX.Element => {
-  const [files, setFiles] = useState<any[]>([]);
-  const [fileData, setFileData] = useRecoilState(fileState)
-  
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [ , setFileListState ] = useRecoilState(fileState);
+  const fileList = useRecoilValue(fileStateSelector)
+
   const classes = useStyle();
 
   useEffect(() => {
-    File.getAllFiles("12345")
-      .then((data: FileType[]) => setFileData(data))
+    setIsLoading(false)
+    FileAPI.getAllFiles("12345")
+      .then((data: FileType) => setFileListState(data))
+      .then(() => setIsLoading(true))
+    }, [])
 
-    // atomsに格納されているファイルタイプが変更された場合は表示するコンテントを変更する 
-  }, [])
-
-  const FileDataCard = (props: any) => {
-    console.log(props)
-    return (
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.dairyContent}>
-            2020/11/13
-          </Typography>
-          <Typography className={classes.fileTitle}>
-            Word of the Day
-          </Typography>
-          <IconButton aria-label="delete" className={classes.deleteBtn}>
-            <DeleteIcon className={classes.deleteIcon} />
-          </IconButton>
-        </CardContent>
-      </Card>
-    )
-  }
-
-  return (
+  return isLoading ? (
     <div className={classes.root}>
       <div className={classes.bottomArea}>
         <UploadButton 
@@ -56,10 +35,22 @@ const MainView: FC = (): JSX.Element => {
         />
         <CheckFileType />
       </div>
-      
+      {
+        fileList.map((files: File, index: number) => {
+          return (
+            <div key={index}>
+              <FileDataCard props={files}/>
+            </div>
+          )
+        })
+      }
       <div className={classes.page}>
         <Pagination count={10} className={classes.selected} />
       </div>
+    </div>
+  ) : (
+    <div className={classes.root}>
+      <CircularProgress size={140}/>
     </div>
   )
 }
