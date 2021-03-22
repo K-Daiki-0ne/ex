@@ -11,11 +11,12 @@ import { useRecoilState } from 'recoil';
 import useStyle from './style';
 
 export const CheckFileType: FC = (): JSX.Element => {
-  const [fileTypeNumber, setFileTypeNumber] = useRecoilState(fileTypeState);
+  const [fileTypeNumber, setFileTypeNumber] = useRecoilState<string>(fileTypeState);
 
   const changeFileType = (event: React.ChangeEvent<{}>, newValue: string) => {
     event.preventDefault();
     setFileTypeNumber(newValue);
+
   }
 
   const classes = useStyle();
