@@ -4,7 +4,7 @@ export type FileType = {
   text: File[]
 }
 
-type File = {
+export type File = {
   ID: string,
   CreatedAt: string,
   UpdateAt: string,
