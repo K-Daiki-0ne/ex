@@ -43,6 +43,6 @@ func PostImageModel(id string, filename string, file string) error {
 func GetImageModel(userID string) []Image {
 	db := database.DBConnect
 	var image []Image
-	db.First(&image, "user_id = ?", userID)
+	db.Find(&image, "user_id = ?", userID)
 	return image
 }
