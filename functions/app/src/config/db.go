@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// Image dsaf
+// Image table structure
 type Image struct {
 	gorm.Model
 	UserID   string `json:"userid"`
@@ -15,7 +15,7 @@ type Image struct {
 	File     string `json:"file"`
 }
 
-// Text dfasfdsaf
+// Text table structure
 type Text struct {
 	gorm.Model
 	UserID   string `json:"userid"`
@@ -23,12 +23,20 @@ type Text struct {
 	File     string `json:"file"`
 }
 
-// Pdf fdasfdsaf
+// Pdf table structure
 type Pdf struct {
 	gorm.Model
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
+}
+
+type Comment struct {
+	gorm.Model
+	FileId      int    `json:"fileid"`
+	FileType    string `json:"filetype"`
+	FileTitle   string `json:"filetitle"`
+	FileComment string `json:"filecomment"`
 }
 
 // Connect dfsfsaf
@@ -40,7 +48,7 @@ func Connect() *gorm.DB {
 	if err != nil {
 		fmt.Println("DB connect ...NO")
 	} else {
-		db.AutoMigrate(&Image{}, &Text{}, &Pdf{})
+		db.AutoMigrate(&Image{}, &Text{}, &Pdf{}, &Comment{})
 
 		fmt.Println("DB connect ...OK")
 	}
