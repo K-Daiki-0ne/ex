@@ -22,6 +22,12 @@ func ImageController(c *gin.Context) {
 	// Get name query
 	id := c.Query("userID")
 
+	// Get uplaod file title
+	// title := c.Query("title")
+
+	// Get upload file comment
+	// comment := c.Query("comment")
+
 	file, header, err := c.Request.FormFile("file")
 
 	if err != nil {
