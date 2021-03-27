@@ -27,7 +27,7 @@ const PostView: React.FC = (): JSX.Element => {
   const [uploadPercentage, setUploadPercentage] = useState<number>(0);
 
   useEffect(() => {
-    const reqUrl = checkFile(fileName, "12345");
+    const reqUrl = checkFile(fileName, "12345", uploadTitle, uploadComment);
     reqUrl
     .then((e) => setUrl(e))
     .catch((err) => console.log(err))
@@ -42,7 +42,6 @@ const PostView: React.FC = (): JSX.Element => {
   const postFile = async () => {
     setOpen(true);
     const fileData = new FormData();
-    console.log(file)
     fileData.append('file', file);
 
     try {
