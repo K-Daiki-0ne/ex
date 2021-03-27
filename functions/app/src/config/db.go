@@ -13,6 +13,8 @@ type Image struct {
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
 // Text table structure
@@ -21,6 +23,8 @@ type Text struct {
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
 // Pdf table structure
@@ -29,14 +33,8 @@ type Pdf struct {
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
-}
-
-type Comment struct {
-	gorm.Model
-	FileId      int    `json:"fileid"`
-	FileType    string `json:"filetype"`
-	FileTitle   string `json:"filetitle"`
-	FileComment string `json:"filecomment"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
 // Connect dfsfsaf
@@ -48,7 +46,7 @@ func Connect() *gorm.DB {
 	if err != nil {
 		fmt.Println("DB connect ...NO")
 	} else {
-		db.AutoMigrate(&Image{}, &Text{}, &Pdf{}, &Comment{})
+		db.AutoMigrate(&Image{}, &Text{}, &Pdf{})
 
 		fmt.Println("DB connect ...OK")
 	}
@@ -61,7 +59,7 @@ func Close() {
 	db := Connect()
 	close, err := db.DB()
 	if err != nil {
-
+		fmt.Println("DB close ...NO")
 	}
 	close.Close()
 	fmt.Println("DB close ...OK")
