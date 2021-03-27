@@ -11,13 +11,15 @@ import (
 // Text : Text file schema
 type Text struct {
 	gorm.Model
-	UserID     string `json:"userid"`
-	FileName   string `json:"filename"`
-	FileString string `json:"filestring"`
+	UserID   string `json:"userid"`
+	FileName string `json:"filename"`
+	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
 // TextModel : Text file model
-func TextModel(id string, filename string, file string) error {
+func TextModel(id string, filename string, file string, title string, comment string) error {
 
 	db := database.DBConnect
 
@@ -32,7 +34,9 @@ func TextModel(id string, filename string, file string) error {
 
 	Text.UserID = id
 	Text.FileName = filename
-	Text.FileString = file
+	Text.File = file
+	Text.Title = title
+	Text.Comment = comment
 
 	db.Create(&Text)
 
