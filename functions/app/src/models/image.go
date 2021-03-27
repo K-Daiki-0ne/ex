@@ -14,6 +14,8 @@ type Image struct {
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
 // PostImageModel : Image file model

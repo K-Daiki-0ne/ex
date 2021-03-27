@@ -9,11 +9,13 @@ import (
 )
 
 // PDF : PDF file schema
-type PDF struct {
+type Pdf struct {
 	gorm.Model
-	UserID     string `json:"userid"`
-	FileName   string `json:"filename"`
-	FileString string `json:"filestring"`
+	UserID   string `json:"userid"`
+	FileName string `json:"filename"`
+	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
 // PDFModel : Image file model
