@@ -19,7 +19,7 @@ type Image struct {
 }
 
 // PostImageModel : Image file model
-func PostImageModel(id string, filename string, file string) error {
+func PostImageModel(id string, filename string, file string, title string, comment string) error {
 
 	db := database.DBConnect
 
@@ -34,6 +34,8 @@ func PostImageModel(id string, filename string, file string) error {
 	Image.UserID = id
 	Image.FileName = filename
 	Image.File = file
+	Image.Title = title
+	Image.Comment = comment
 
 	db.Create(&Image)
 
