@@ -7,28 +7,34 @@ import (
 	"gorm.io/gorm"
 )
 
-// Image dsaf
+// Image table structure
 type Image struct {
 	gorm.Model
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
-// Text dfasfdsaf
+// Text table structure
 type Text struct {
 	gorm.Model
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
-// Pdf fdasfdsaf
+// Pdf table structure
 type Pdf struct {
 	gorm.Model
 	UserID   string `json:"userid"`
 	FileName string `json:"filename"`
 	File     string `json:"file"`
+	Title    string `json:"title"`
+	Comment  string `json:"comment"`
 }
 
 // Connect dfsfsaf
@@ -53,7 +59,7 @@ func Close() {
 	db := Connect()
 	close, err := db.DB()
 	if err != nil {
-
+		fmt.Println("DB close ...NO")
 	}
 	close.Close()
 	fmt.Println("DB close ...OK")
