@@ -23,10 +23,12 @@ func ImageController(c *gin.Context) {
 	id := c.Query("userID")
 
 	// Get uplaod file title
-	// title := c.Query("title")
+	title := c.Query("title")
 
 	// Get upload file comment
-	// comment := c.Query("comment")
+	comment := c.Query("comment")
+
+	fmt.Println("aaa", comment)
 
 	file, header, err := c.Request.FormFile("file")
 
@@ -44,7 +46,7 @@ func ImageController(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.PostImageModel(id, header.Filename, filedata)
+	suc := models.PostImageModel(id, header.Filename, filedata, title, comment)
 
 	if suc != nil {
 		fmt.Println(err)

@@ -12,10 +12,10 @@ import (
 type Pdf struct {
 	gorm.Model
 	UserID   string `json:"userid"`
-	FileName string `json:"filename"`
+	FileName string `json:"gorm:size:50"`
 	File     string `json:"file"`
-	Title    string `json:"title"`
-	Comment  string `json:"comment"`
+	Title    string `json:"gorm:size:50"`
+	Comment  string `json:"gorm:size:255"`
 }
 
 // PDFModel : Image file model
