@@ -27,19 +27,15 @@ const PostView: React.FC = (): JSX.Element => {
   const [uploadPercentage, setUploadPercentage] = useState<number>(0);
 
   const classes = useStyle();
-
   const router = useRouter();
-
   const { userId } = router.query;
 
   useEffect(() => {
-    console.log('aaa')
-
     const reqUrl = checkFile(fileName, userId, uploadTitle, uploadComment);
     reqUrl
-    .then((e) => setUrl(e))
-    .catch((err) => console.error(err))
-  }, [fileName])
+      .then((e) => setUrl(e))
+      .catch((err) => console.error(err))
+  }, [fileName, uploadTitle, uploadComment])
   
 
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
