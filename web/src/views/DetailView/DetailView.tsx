@@ -14,6 +14,11 @@ export const DetailView: FC = (): JSX.Element => {
   const classes = useStyle()
   return (
     <Card className={classes.root}>
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="h4" className={classes.filename}>
+          File name
+        </Typography>
+      </CardContent>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -22,20 +27,16 @@ export const DetailView: FC = (): JSX.Element => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            title
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            comment
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+          Edit
         </Button>
       </CardActions>
     </Card>

@@ -1,12 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyle = makeStyles({
+const useStyle = makeStyles(theme =>({
   root: {
-    maxWidth: 345,
+    width: 380,
+    maxWidth: 1200,
   },
   media: {
-    height: 140,
+    height: 370,
   },
-});
+  filename: {
+    fontSize: "28px",
+    fontWeight: "bold"
+  },
+}));
 
 export default useStyle;

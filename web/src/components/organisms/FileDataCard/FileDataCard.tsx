@@ -15,14 +15,15 @@ type Props = {
 
 export const FileDataCard: FC<Props> = ({ props }): JSX.Element => {
   const classes = useStyle();
+  const uplDate = props.CreatedAt.substring(0, 10)
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.dairyContent}>
-          2020/11/13
+          {uplDate}
         </Typography>
         <Typography className={classes.fileTitle}>
-          {props.filename}
+          {props.FileName}
         </Typography>
         <IconButton aria-label="delete" className={classes.deleteBtn}>
           <DeleteIcon className={classes.deleteIcon} />
