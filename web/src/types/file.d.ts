@@ -10,6 +10,8 @@ export type File = {
   UpdateAt: string,
   DeletedAt: string,
   userid: string,
-  filename: string,
+  FileName: string,
   file: string,
+  Title: string,
+  Commnet: string,
 }

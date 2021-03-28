@@ -1,10 +1,13 @@
 import { NextPage } from 'next';
 import Head from 'next/head'
-import styles from '../../styles/Home.module.css'
-import { Container } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import styles from '../../styles/Home.module.css';
+import { 
+  Container, 
+  AppBar, 
+  Toolbar, 
+  Typography 
+} from '@material-ui/core';
+import { DetailView } from '@src/views/DetailView/DetailView';
 import useStyle from '@src/theme/style';
 
 const Detail: NextPage = (): JSX.Element => {
@@ -29,7 +32,7 @@ const Detail: NextPage = (): JSX.Element => {
           fixed
           maxWidth='xs'
         >
-          <p>aaa</p>
+          <DetailView  />
         </Container>
       </main>
 

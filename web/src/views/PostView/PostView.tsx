@@ -58,7 +58,7 @@ const PostView: React.FC = (): JSX.Element => {
         }
       )
       await setTimeout(() => {
-        router.push('/main/user')
+        router.push(`/main/${userId}`)
       }, 1800);
     } catch (err) {
       console.log(typeof(err));
