@@ -34,7 +34,7 @@ const MainView: FC = (): JSX.Element => {
     <div className={classes.root}>
       <div className={classes.bottomArea}>
         <UploadButton 
-          props="12345"
+          props={userId}
         />
         <CheckFileType />
       </div>

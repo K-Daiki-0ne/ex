@@ -13,25 +13,25 @@ export const checkFile = async (fileName: string, userID: string | string[], tit
   const fileLen: number = fileType.length;
   const file: string = fileType[fileLen - 1];
 
-  try {
-    switch (file) {
-      case "txt":
-        return `http://localhost:5050/app/text?userID=${userID}&title=${title}&comment=${comment}`;
-        break;
-      case "png":
-        return `http://localhost:5050/app/image?userID=${userID}&title=${title}&comment=${comment}`;
-        break;
-      case "jpg":
-        return `http://localhost:5050/app/image?userID=${userID}&title=${title}&comment=${comment}`;
-        break;
-      case "pdf":
-        return `http://localhost:5050/app/pdf?userID=${userID}&title=${title}&comment=${comment}`;
-        break;
-      default:
-        throw new Error("Dont't support file");
-        break;
+  switch (file) {
+    case "txt":
+      return `http://localhost:5050/app/text?userID=${userID}&title=${title}&comment=${comment}`;
+      break;
+    case "png":
+      return `http://localhost:5050/app/image?userID=${userID}&title=${title}&comment=${comment}`;
+      break;
+    case "jpg":
+      return `http://localhost:5050/app/image?userID=${userID}&title=${title}&comment=${comment}`;
+      break;
+    case "pdf":
+      return `http://localhost:5050/app/pdf?userID=${userID}&title=${title}&comment=${comment}`;
+      break;
+    case "":
+      // If not upload file that hand over nothing ENDPOINT
+      return '';
+      break;
+    default:
+      throw new Error("Don't support file type");
+      break;
     }
-  } catch (err) {
-    throw new Error("Sorry failed API request");
-  }
 }
