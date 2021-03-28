@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Pagination } from '@material-ui/lab';
+import { useRouter } from 'next/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { UploadButton } from '@src/components/molecules';
 import { 
@@ -15,14 +16,16 @@ import useStyle from './style';
 
 const MainView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [ , setFileListState ] = useRecoilState(fileState);
-  const fileList = useRecoilValue(fileStateSelector)
+  const [ , setFileListState ]    = useRecoilState(fileState);
+  const fileList                  = useRecoilValue(fileStateSelector)
 
-  const classes = useStyle();
+  const classes     = useStyle();
+  const router      = useRouter();
+  const { userId }  = router.query;
 
   useEffect(() => {
     setIsLoading(false)
-    FileAPI.getAllFiles("12345")
+    FileAPI.getAllFiles(userId)
       .then((data: FileType) => setFileListState(data))
       .then(() => setIsLoading(true))
     }, [])

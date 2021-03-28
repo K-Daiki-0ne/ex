@@ -28,6 +28,8 @@ func ImageController(c *gin.Context) {
 	// Get upload file comment
 	comment := c.Query("comment")
 
+	fmt.Println("aaa", comment)
+
 	file, header, err := c.Request.FormFile("file")
 
 	if err != nil {

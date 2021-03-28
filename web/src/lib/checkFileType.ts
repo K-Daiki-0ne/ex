@@ -5,7 +5,7 @@
  *  @param { stirng } title     アップロードしたファイルのタイトル
  *  @param { string } comment   アップロードしたファイルのコメント
  */
-export const checkFile = async (fileName: string, userID: string, title: string, comment: string): Promise<string> => {
+export const checkFile = async (fileName: string, userID: string | string[], title: string, comment: string): Promise<string> => {
   if (!fileName) {
     throw new Error("Not exit File");
   };
@@ -16,16 +16,16 @@ export const checkFile = async (fileName: string, userID: string, title: string,
   try {
     switch (file) {
       case "txt":
-        return `http://localhost:5050/app/text?userID=${userID}?title=${title}?comment=${comment}`;
+        return `http://localhost:5050/app/text?userID=${userID}&title=${title}&comment=${comment}`;
         break;
       case "png":
-        return `http://localhost:5050/app/image?userID=${userID}?title=${title}?comment=${comment}`;
+        return `http://localhost:5050/app/image?userID=${userID}&title=${title}&comment=${comment}`;
         break;
       case "jpg":
-        return `http://localhost:5050/app/image?userID=${userID}?title=${title}?comment=${comment}`;
+        return `http://localhost:5050/app/image?userID=${userID}&title=${title}&comment=${comment}`;
         break;
       case "pdf":
-        return `http://localhost:5050/app/pdf?userID=${userID}?title=${title}?comment=${comment}`;
+        return `http://localhost:5050/app/pdf?userID=${userID}&title=${title}&comment=${comment}`;
         break;
       default:
         throw new Error("Dont't support file");
