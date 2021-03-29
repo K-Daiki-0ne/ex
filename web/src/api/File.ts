@@ -6,6 +6,12 @@ class FileAPI {
     const response = await data.data;
     return response;
   }
+
+  public async deleteSingleFile(fileID: string) {
+    axios.delete('')
+      .then(()  => console.log('Delete API ...OK'))
+      .catch(() => console.error('Delete API ...NO')) 
+  }
 }
 
 export default new FileAPI();
