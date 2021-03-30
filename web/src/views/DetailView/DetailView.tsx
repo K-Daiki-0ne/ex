@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   Card,
   CardActionArea,
@@ -11,7 +12,14 @@ import {
 import useStyle from './style';
 
 export const DetailView: FC = (): JSX.Element => {
-  const classes = useStyle()
+  const classes = useStyle();
+  const router = useRouter();
+  const { fileId } = router.query;
+  
+  useEffect(() => {
+    console.log(fileId)
+  }, [fileId])
+
   return (
     <Card className={classes.root}>
       <CardContent>
