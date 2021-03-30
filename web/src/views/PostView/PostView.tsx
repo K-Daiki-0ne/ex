@@ -26,23 +26,23 @@ const PostView: React.FC = (): JSX.Element => {
   const [uploadComment, setUploadComment] = useState<string>('');
   const [uploadPercentage, setUploadPercentage] = useState<number>(0);
 
-  useEffect(() => {
-    const reqUrl = checkFile(fileName, "12345");
-    reqUrl
-    .then((e) => setUrl(e))
-    .catch((err) => console.log(err))
-  }, [fileName])
-  
   const classes = useStyle();
-
   const router = useRouter();
+  const { userId } = router.query;
+
+  useEffect(() => {
+    const reqUrl = checkFile(fileName, userId, uploadTitle, uploadComment);
+    reqUrl
+      .then((e) => setUrl(e))
+      .catch((err) => console.error(err))
+  }, [fileName, uploadTitle, uploadComment])
+  
 
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
   const postFile = async () => {
     setOpen(true);
     const fileData = new FormData();
-    console.log(file)
     fileData.append('file', file);
 
     try {
@@ -58,7 +58,7 @@ const PostView: React.FC = (): JSX.Element => {
         }
       )
       await setTimeout(() => {
-        router.push('/main/user')
+        router.push(`/main/${userId}`)
       }, 1800);
     } catch (err) {
       console.log(typeof(err));

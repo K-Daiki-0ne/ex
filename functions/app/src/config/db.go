@@ -11,30 +11,30 @@ import (
 type Image struct {
 	gorm.Model
 	UserID   string `json:"userid"`
-	FileName string `json:"filename"`
+	FileName string `gorm:"gorm:size:50" json:"filename"`
 	File     string `json:"file"`
-	Title    string `json:"title"`
-	Comment  string `json:"comment"`
+	Title    string `gorm:"gorm:size:50" json:"title"`
+	Comment  string `gorm:"gorm:size:255" json:"comment"`
 }
 
 // Text table structure
 type Text struct {
 	gorm.Model
 	UserID   string `json:"userid"`
-	FileName string `json:"filename"`
+	FileName string `gorm:"gorm:size:50" json:"filename"`
 	File     string `json:"file"`
-	Title    string `json:"title"`
-	Comment  string `json:"comment"`
+	Title    string `gorm:"gorm:size:50" json:"title"`
+	Comment  string `gorm:"gorm:size:255" json:"comment"`
 }
 
 // Pdf table structure
 type Pdf struct {
 	gorm.Model
 	UserID   string `json:"userid"`
-	FileName string `json:"filename"`
+	FileName string `gorm:"gorm:size:50" json:"filename"`
 	File     string `json:"file"`
-	Title    string `json:"title"`
-	Comment  string `json:"comment"`
+	Title    string `gorm:"gorm:size:50" json:"title"`
+	Comment  string `gorm:"gorm:size:255" json:"comment"`
 }
 
 // Connect dfsfsaf

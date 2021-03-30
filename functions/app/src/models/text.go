@@ -12,10 +12,10 @@ import (
 type Text struct {
 	gorm.Model
 	UserID   string `json:"userid"`
-	FileName string `json:"filename"`
+	FileName string `gorm:"gorm:size:50;"`
 	File     string `json:"file"`
-	Title    string `json:"title"`
-	Comment  string `json:"comment"`
+	Title    string `gorm:"gorm:size:50;"`
+	Comment  string `gorm:"gorm:size:255;"`
 }
 
 // TextModel : Text file model
