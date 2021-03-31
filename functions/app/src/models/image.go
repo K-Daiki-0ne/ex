@@ -50,3 +50,10 @@ func GetImageModel(userID string) []Image {
 	db.Find(&image, "user_id = ?", userID)
 	return image
 }
+
+func DeleteImageModel(userID string, fileID string) string {
+	db := database.DBConnect
+	var deleteImage Image
+	db.Where("id = ? AND userID = ?", fileID, userID).Delete(&deleteImage)
+	return "OK"
+}

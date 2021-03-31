@@ -50,3 +50,10 @@ func GetTextModel(userID string) []Text {
 	db.First(&text, "user_id = ?", userID)
 	return text
 }
+
+func DeleteTextModel(userID string, fileID string) string {
+	db := database.DBConnect
+	var deleteText Text
+	db.Where("id = ? AND userID = ?", fileID, userID).Delete(&deleteText)
+	return "OK"
+}
