@@ -41,20 +41,20 @@ func Router(app *gin.Engine) {
 
 	/*
 	 *  Delete query user's userID text file
-	 *  example: http://localhost:5050/app/delete/text?userID={userID}
+	 *  example: http://localhost:5050/app/delete/text?userID={userID}&fileID={fileID}
 	 */
-	app.DELETE("/app/delete/text")
+	app.DELETE("/app/delete/text", controllers.DeleteTextController)
 
 	/*
 	 *  Delete query user's userID image file
-	 *  example: http://localhost:5050/app/delete/image?userID={userID}
+	 *  example: http://localhost:5050/app/delete/image?userID={userID}&fileID={fileID}
 	 */
-	app.DELETE("/app/delete/iamge")
+	app.DELETE("/app/delete/iamge", controllers.DeleteImageController)
 
 	/*
 	 *  Delete query user's userID pdf file
-	 *  example: http://localhost:5050/app/delete/pdf?userID={userID}
+	 *  example: http://localhost:5050/app/delete/pdf?userID={userID}&fileID={fileID}
 	 */
-	app.DELETE("/app/delete/pdf")
+	app.DELETE("/app/delete/pdf", controllers.DeletePDFController)
 
 }
