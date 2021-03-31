@@ -20,3 +20,11 @@ func Validate(userID string, fileName string, file string) error {
 	return nil
 
 }
+
+func DeleteValidate(userID string) error {
+	if userID == "" {
+		return errors.New("require UserID")
+	}
+
+	return nil
+}
