@@ -49,3 +49,10 @@ func GetPdfModel(userID string) []Pdf {
 	db.First(&pdf, "user_id = ?", userID)
 	return pdf
 }
+
+func DeletePDFModel(userID string, fileID string) string {
+	db := database.DBConnect
+	var deletePDF Pdf
+	db.Where("id = ? AND userID = ?", fileID, userID).Delete(&deletePDF)
+	return "OK"
+}
