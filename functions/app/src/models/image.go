@@ -51,10 +51,17 @@ func GetImageModel(userID string) []Image {
 	return image
 }
 
+// GetSingleImageModel : get single image data from images table
+func GetSingleImageModel(fileID string) Image {
+	db := database.DBConnect
+	var image Image
+	db.First(&image).Where("id = ?", fileID)
+	return image
+}
+
+// DeleteImageModel : delete iamge data from images table
 func DeleteImageModel(userID string, fileID string) string {
 	db := database.DBConnect
-	// var deleteImage Image
 	db.Debug().Where("id = ?", fileID).Delete(&Image{})
-	// db.Debug().Delete(&Image{}, "userID = ? AND id = ?", userID, fileID)
 	return "OK"
 }
