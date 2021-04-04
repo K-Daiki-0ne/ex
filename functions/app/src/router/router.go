@@ -49,7 +49,7 @@ func Router(app *gin.Engine) {
 	 *  Delete query user's userID image file
 	 *  example: http://localhost:5050/app/delete/image?userID={userID}&fileID={fileID}
 	 */
-	app.DELETE("/app/delete/iamge", controllers.DeleteImageController)
+	app.DELETE("/app/delete/image", controllers.DeleteImageController)
 
 	/*
 	 *  Delete query user's userID pdf file

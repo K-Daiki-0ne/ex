@@ -53,7 +53,8 @@ func GetImageModel(userID string) []Image {
 
 func DeleteImageModel(userID string, fileID string) string {
 	db := database.DBConnect
-	var deleteImage Image
-	db.Where("id = ? AND userID = ?", fileID, userID).Delete(&deleteImage)
+	// var deleteImage Image
+	db.Debug().Where("id = ?", fileID).Delete(&Image{})
+	// db.Debug().Delete(&Image{}, "userID = ? AND id = ?", userID, fileID)
 	return "OK"
 }
