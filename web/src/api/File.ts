@@ -7,10 +7,16 @@ class FileAPI {
     return response;
   }
 
-  public async deleteSingleFile(fileID: string) {
-    axios.delete('')
-      .then(()  => console.log('Delete API ...OK'))
-      .catch(() => console.error('Delete API ...NO')) 
+  public async deleteSingleFile(userID: string | string[], fileID: string, fileType: string) {
+    try {
+      await axios.delete(`http://localhost:5050/app/delete/${fileType}?userID=${userID}&fileID=${fileID}`)     
+      .then(() => console.log('aaa'))
+      .catch(() => console.error('Delete API ...NO'))
+      const data = await this.getAllFiles(userID);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 

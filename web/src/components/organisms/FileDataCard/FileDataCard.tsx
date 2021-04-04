@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { 
   Card,
   CardContent,
@@ -7,7 +7,12 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Link from 'next/link';
-import { File } from '@src/types';
+import { useRouter } from 'next/router';
+import { FileType, File } from '@src/types'
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { fileState } from '@src/store/atoms'
+import { fileTypeState } from '@src/store/atoms';
+import FileAPI from '@src/api/File';
 import useStyle from './style';
 
 type Props = {
@@ -15,8 +20,39 @@ type Props = {
 }
 
 export const FileDataCard: FC<Props> = ({ props }): JSX.Element => {
+  const [isDelSuc, setIsDelSuc] = useState<boolean>(false);
+  const fileType = useRecoilValue(fileTypeState);
+  const [ , setFileListState ]    = useRecoilState(fileState);
   const classes = useStyle();
   const uplDate = props.CreatedAt.substring(0, 10);
+  const router      = useRouter();
+  const { userId }  = router.query;
+
+  useEffect(() => {
+    console.log('aaa')
+    if (isDelSuc) {
+      console.log('bbb')
+      router.push({
+        pathname: '/main/[userId]',
+        query: {userId: userId}
+      })
+    }
+  }, [isDelSuc])
+
+  const deleteFile = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setIsDelSuc(false);
+    FileAPI.deleteSingleFile(userId, props.ID, fileType)
+      .then(() => {
+        FileAPI.getAllFiles(userId)
+          .then((data: FileType) => setFileListState(data))
+          .then(() => setIsDelSuc(true))
+      })
+      .catch((err) => console.error(err))
+    // FileAPI.getAllFiles(userId)
+    //   .then((data: FileType) => setFileListState(data))
+    //   .then(() => setIsDelSuc(true))
+  }
 
   return (
     <Card className={classes.card}>
@@ -29,7 +65,7 @@ export const FileDataCard: FC<Props> = ({ props }): JSX.Element => {
             {props.FileName}
           </Typography>
         </Link>
-        <IconButton aria-label="delete" className={classes.deleteBtn}>
+        <IconButton aria-label="delete" className={classes.deleteBtn} onClick={deleteFile}>
           <DeleteIcon className={classes.deleteIcon} />
         </IconButton>
       </CardContent>
