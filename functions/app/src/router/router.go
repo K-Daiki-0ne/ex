@@ -10,32 +10,51 @@ import (
 func Router(app *gin.Engine) {
 
 	/*
-	 *  Get all query name's user post files
-	 *	example: http://localhost:5050/app/all/files?name={username}
+	 *  Get all query user's userID post files
+	 *	example: http://localhost:5050/app/all/files?userID={userID}
 	 */
 	app.GET("/app/all/files", controllers.AllController)
 
 	/*
-	 *  Get single query name's user post file
-	 *	example: http://localhost:5050/app/single/file?name={username}
+	 *  Get single query user's userID post file
+	 *	example: http://localhost:5050/app/single/file?userID={userID}
 	 */
 	app.GET("/app/single/file", controllers.Single)
 
 	/*
-	 *  Post query name's user text file
-	 *  example: http://localhost:5050/app/text?name={username}
+	 *  Post query user's userID text file
+	 *  example: http://localhost:5050/app/text?userID={userID}
 	 */
 	app.POST("/app/text", controllers.TextController)
 
 	/*
-	 *  Post query name's user image file
-	 *  example: http://localhost:5050/app/image?name={username}
+	 *  Post query user's userID image file
+	 *  example: http://localhost:5050/app/image?userID={userID}
 	 */
 	app.POST("/app/image", controllers.ImageController)
 
 	/*
-	 *  Post query name's user image file
-	 *  example: http://localhost:5050/app/pdf?name={username}
+	 *  Post query user's userID image file
+	 *  example: http://localhost:5050/app/pdf?userID={userID}
 	 */
 	app.POST("/app/pdf", controllers.PdfController)
+
+	/*
+	 *  Delete query user's userID text file
+	 *  example: http://localhost:5050/app/delete/text?userID={userID}&fileID={fileID}
+	 */
+	app.DELETE("/app/delete/text", controllers.DeleteTextController)
+
+	/*
+	 *  Delete query user's userID image file
+	 *  example: http://localhost:5050/app/delete/image?userID={userID}&fileID={fileID}
+	 */
+	app.DELETE("/app/delete/image", controllers.DeleteImageController)
+
+	/*
+	 *  Delete query user's userID pdf file
+	 *  example: http://localhost:5050/app/delete/pdf?userID={userID}&fileID={fileID}
+	 */
+	app.DELETE("/app/delete/pdf", controllers.DeletePDFController)
+
 }
