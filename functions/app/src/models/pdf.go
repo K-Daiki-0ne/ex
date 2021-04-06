@@ -46,13 +46,21 @@ func PDFModel(id string, filename string, file string, title string, comment str
 func GetPdfModel(userID string) []Pdf {
 	db := database.DBConnect
 	var pdf []Pdf
-	db.First(&pdf, "user_id = ?", userID)
+	db.Find(&pdf, "user_id = ?", userID)
 	return pdf
 }
 
+// GetSinglePdfModel : get single text data from texts table
+func GetSinglePdfModel(fileID string) Pdf {
+	db := database.DBConnect
+	var pdf Pdf
+	db.First(&pdf).Where("user_id = ?", fileID)
+	return pdf
+}
+
+// DeletePDFModel : delete pdf data from pdfs table
 func DeletePDFModel(userID string, fileID string) string {
 	db := database.DBConnect
-	var deletePDF Pdf
-	db.Where("id = ? AND userID = ?", fileID, userID).Delete(&deletePDF)
+	db.Debug().Where("id = ?", fileID).Delete(&Pdf{})
 	return "OK"
 }

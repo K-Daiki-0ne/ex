@@ -17,9 +17,21 @@ func Router(app *gin.Engine) {
 
 	/*
 	 *  Get single query user's userID post file
-	 *	example: http://localhost:5050/app/single/file?userID={userID}
+	 *	example: http://localhost:5050/app/single/text?fileID={fileID}
 	 */
-	app.GET("/app/single/file", controllers.Single)
+	app.GET("/app/single/text", controllers.GetSingleTextController)
+
+	/*
+	 *  Get single query user's userID post file
+	 *	example: http://localhost:5050/app/single/image?fileID={fileID}
+	 */
+	app.GET("/app/single/image", controllers.GetSingleImageController)
+
+	/*
+	 *  Get single query user's userID post file
+	 *	example: http://localhost:5050/app/single/pdf?fileID={fileID}
+	 */
+	app.GET("/app/single/pdf", controllers.GetSinglePDFController)
 
 	/*
 	 *  Post query user's userID text file
