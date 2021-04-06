@@ -1,20 +1,5 @@
 import axios from 'axios';
-
-type SingleFileAPIType = {
-  data: FileAPIType
-}
-
-type FileAPIType = {
-  ID: number,
-  CreatedAt: string,
-  UpdatedAt: string,
-  DeletedAt: string,
-  userid: string,
-  FileName: string,
-  file: string,
-  Title: string,
-  Comment: string,
-}
+import { SingleFileAPIType } from '@src/types'
 
 class FileAPI {
   public async getAllFiles(id: string | string[]) {
@@ -35,10 +20,11 @@ class FileAPI {
     }
   }
 
-  public async getSingleFile(url: string): Promise<FileAPIType> {
+  public async getSingleFile(url: string): Promise<SingleFileAPIType> {
     try {
-      const response: SingleFileAPIType = await axios.get(url);
-      const data: FileAPIType = await response.data;
+      const response = await axios.get(url);
+      const data = await response.data;
+      console.log(data);
       return data;
     } catch(err) {
       console.error(err);
