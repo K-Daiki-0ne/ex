@@ -7,6 +7,7 @@ const useStyle = makeStyles(theme =>({
   },
   media: {
     height: 370,
+ 
   },
   filename: {
     fontSize: "28px",
