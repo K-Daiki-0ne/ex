@@ -42,8 +42,10 @@ export const DetailView: FC = (): JSX.Element => {
       </CardContent>
       <CardActionArea>
         <CardMedia
+          component='img'
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          height='140'
+          src={`data:image/png;base64,${singleFile.file}`}
           title={singleFile.FileName}
         />
         <CardContent>
