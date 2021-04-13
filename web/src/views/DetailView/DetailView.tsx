@@ -15,7 +15,7 @@ import {
   DetailFileName,
   DetailFileTitle,
   DetailFileComment
-} from '@src/components/molecules'
+} from '@src/components/atoms'
 import { fileTypeState } from '@src/store/atoms';
 import { getSingleURL } from '@src/lib/getSingleURL';
 import { FileAPIType } from '@src/types';
