@@ -11,6 +11,11 @@ import {
   Typography,
   CircularProgress
 } from '@material-ui/core';
+import {
+  DetailFileName,
+  DetailFileTitle,
+  DetailFileComment
+} from '@src/components/molecules'
 import { fileTypeState } from '@src/store/atoms';
 import { getSingleURL } from '@src/lib/getSingleURL';
 import { FileAPIType } from '@src/types';
@@ -36,9 +41,7 @@ export const DetailView: FC = (): JSX.Element => {
   return isLoading ? (
     <Card className={classes.root}>
       <CardContent>
-        <Typography gutterBottom variant="h4" component="h4" className={classes.filename}>
-          { singleFile.FileName }
-        </Typography>
+        <DetailFileName name={singleFile.FileName} />
       </CardContent>
       <CardActionArea>
         <CardMedia
@@ -49,12 +52,8 @@ export const DetailView: FC = (): JSX.Element => {
           title={singleFile.FileName}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            { singleFile.Title }
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            { singleFile.Comment }
-          </Typography>
+          <DetailFileTitle title={singleFile.Title} />
+          <DetailFileComment comment={singleFile.Comment} />
         </CardContent>
       </CardActionArea>
       <CardActions>

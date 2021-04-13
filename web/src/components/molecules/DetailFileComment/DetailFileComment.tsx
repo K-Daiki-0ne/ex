@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
 
-export const DetailFileComment: FC<String> = (comment: string):JSX.Element => {
+type Props = {
+  comment: string
+}
+
+export const DetailFileComment: FC<Props> = (comment):JSX.Element => {
   return (
     <Typography gutterBottom variant="h5" component="h2">
       { comment }
