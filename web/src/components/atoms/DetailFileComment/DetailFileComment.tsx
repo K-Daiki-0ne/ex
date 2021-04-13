@@ -7,7 +7,11 @@ type Props = {
 
 export const DetailFileComment: FC<Props> = (comment):JSX.Element => {
   return (
-    <Typography gutterBottom variant="h5" component="h2">
+    <Typography 
+      gutterBottom 
+      variant="h5" 
+      component="h2"
+    >
       { comment }
     </Typography>
   )
