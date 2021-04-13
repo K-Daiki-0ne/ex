@@ -8,7 +8,6 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Typography,
   CircularProgress
 } from '@material-ui/core';
 import {
