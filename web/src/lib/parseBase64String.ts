@@ -4,21 +4,16 @@
  * @returns { string }          画面に表示できるようなデータ形式にする
  */
 
-export const parseBase64String = (fileName: string) => {
-  if (!fileName) {
+export const parseBase64String = (fileType: string) => {
+  if (!fileType) {
     throw new Error("Not exit File");
   };
-  let fileType: string[] = fileName.split(".");
-  const fileLen: number = fileType.length;
-  const file: string = fileType[fileLen - 1];
 
-  switch (file) {
+  switch (fileType) {
     case 'text':
       return 'data:text/plain;base64,';
-    case 'png':
+    case 'image':
       return 'data:image/png;base64,';
-    case 'jpg': 
-      return 'data:image/jpg;base64,';
     case 'pdf':
       return ''
     default:

@@ -8,15 +8,17 @@ import {
   CardContent,
   CardMedia,
   Button,
+  Typography,
   CircularProgress
 } from '@material-ui/core';
 import {
   DetailFileName,
   DetailFileTitle,
   DetailFileComment
-} from '@src/components/atoms'
+} from '@src/components/atoms';
 import { fileTypeState } from '@src/store/atoms';
 import { getSingleURL } from '@src/lib/getSingleURL';
+import { parseBase64String } from '@src/lib/parseBase64String';
 import { FileAPIType } from '@src/types';
 import FileAPI from '@src/api/File';
 import useStyle from './style';
@@ -24,6 +26,7 @@ import useStyle from './style';
 export const DetailView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [singleFile, setSingleFile] = useState<FileAPIType>();
+  const [base64String, setBase64String] = useState<string>('');
   const fileType = useRecoilValue(fileTypeState);
   const classes = useStyle();
   const router = useRouter();
@@ -31,6 +34,7 @@ export const DetailView: FC = (): JSX.Element => {
 
   useEffect(() => {
     setIsLoading(false);
+    // setBase64String(parseBase64String(fileType))
     const END_POINT = getSingleURL(fileId, fileType);
     FileAPI.getSingleFile(END_POINT)
       .then((data) => setSingleFile(data.data))
@@ -40,7 +44,13 @@ export const DetailView: FC = (): JSX.Element => {
   return isLoading ? (
     <Card className={classes.root}>
       <CardContent>
-        <DetailFileName name={singleFile.FileName} />
+        <Typography 
+          gutterBottom 
+          variant="h5" 
+          component="h2"
+        >
+          { singleFile.FileName }
+        </Typography>
       </CardContent>
       <CardActionArea>
         <CardMedia
@@ -51,8 +61,20 @@ export const DetailView: FC = (): JSX.Element => {
           title={singleFile.FileName}
         />
         <CardContent>
-          <DetailFileTitle title={singleFile.Title} />
-          <DetailFileComment comment={singleFile.Comment} />
+          <Typography 
+            gutterBottom 
+            variant="h5" 
+            component="h2"
+          >
+            { singleFile.Title }
+          </Typography>
+          <Typography 
+            gutterBottom 
+            variant="h5" 
+            component="h2"
+          >
+            { singleFile.Comment }
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
