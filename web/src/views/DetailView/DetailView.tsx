@@ -34,7 +34,8 @@ export const DetailView: FC = (): JSX.Element => {
 
   useEffect(() => {
     setIsLoading(false);
-    // setBase64String(parseBase64String(fileType))
+    const base64 = parseBase64String(fileType)
+    setBase64String(base64)
     const END_POINT = getSingleURL(fileId, fileType);
     FileAPI.getSingleFile(END_POINT)
       .then((data) => setSingleFile(data.data))
@@ -49,7 +50,7 @@ export const DetailView: FC = (): JSX.Element => {
           variant="h5" 
           component="h2"
         >
-          { singleFile.FileName }
+          { base64String }
         </Typography>
       </CardContent>
       <CardActionArea>

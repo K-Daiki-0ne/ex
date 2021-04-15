@@ -29,9 +29,7 @@ export const FileDataCard: FC<Props> = ({ props }): JSX.Element => {
   const { userId }  = router.query;
 
   useEffect(() => {
-    console.log('aaa')
     if (isDelSuc) {
-      console.log('bbb')
       router.push({
         pathname: '/main/[userId]',
         query: {userId: userId}
