@@ -47,9 +47,6 @@ export const FileDataCard: FC<Props> = ({ props }): JSX.Element => {
           .then(() => setIsDelSuc(true))
       })
       .catch((err) => console.error(err))
-    // FileAPI.getAllFiles(userId)
-    //   .then((data: FileType) => setFileListState(data))
-    //   .then(() => setIsDelSuc(true))
   }
 
   return (
