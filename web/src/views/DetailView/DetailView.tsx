@@ -50,15 +50,14 @@ export const DetailView: FC = (): JSX.Element => {
           variant="h5" 
           component="h2"
         >
-          { base64String }
+          { singleFile.FileName }
         </Typography>
       </CardContent>
       <CardActionArea>
         <CardMedia
           component='img'
           className={classes.media}
-          height='140'
-          src={`data:image/png;base64,${singleFile.file}`}
+          src={`${base64String}${singleFile.file}`}
           title={singleFile.FileName}
         />
         <CardContent>
