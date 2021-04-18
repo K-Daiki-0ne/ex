@@ -5,7 +5,7 @@ type Props = {
   comment: string
 }
 
-export const DetailFileComment: FC<Props> = (comment):JSX.Element => {
+export const DetailFileComment: FC<Props> = ({ comment }):JSX.Element => {
   return (
     <Typography 
       gutterBottom 

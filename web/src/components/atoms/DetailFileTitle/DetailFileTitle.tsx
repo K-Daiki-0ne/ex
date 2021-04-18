@@ -5,7 +5,7 @@ type Props = {
   title: string
 }
 
-export const DetailFileTitle: FC<Props> = (title):JSX.Element => {
+export const DetailFileTitle: FC<Props> = ({ title }):JSX.Element => {
   return (
     <Typography 
       gutterBottom 

@@ -8,8 +8,8 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Typography,
-  CircularProgress
+  CircularProgress,
+  TextareaAutosize
 } from '@material-ui/core';
 import {
   DetailFileName,
@@ -42,39 +42,50 @@ export const DetailView: FC = (): JSX.Element => {
       .then(() => setIsLoading(true))
   }, [])
 
-  return isLoading ? (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography 
-          gutterBottom 
-          variant="h5" 
-          component="h2"
-        >
-          { singleFile.FileName }
-        </Typography>
-      </CardContent>
-      <CardActionArea>
+  const FileContentComponent = () => {
+    if (fileType =='image') {
+      return (
         <CardMedia
           component='img'
           className={classes.media}
           src={`${base64String}${singleFile.file}`}
           title={singleFile.FileName}
         />
+      )
+    } else if (fileType == 'text') {
+      return (
+        <div>
+          <TextareaAutosize 
+            aria-label="minimum height"
+            rowsMin={3}
+            placeholder='aaaaaa'
+            defaultValue={`${base64String}${singleFile.file}`}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <p>PDF</p>
+      )
+    }
+  }
+
+  return isLoading ? (
+    <Card className={classes.root}>
+      <CardContent>
+        <DetailFileName name={singleFile.FileName} />
+      </CardContent>
+      <CardActionArea>
+        {/* <CardMedia
+          component='img'
+          className={classes.media}
+          src={`${base64String}${singleFile.file}`}
+          title={singleFile.FileName}
+        /> */}
+        <FileContentComponent />
         <CardContent>
-          <Typography 
-            gutterBottom 
-            variant="h5" 
-            component="h2"
-          >
-            { singleFile.Title }
-          </Typography>
-          <Typography 
-            gutterBottom 
-            variant="h5" 
-            component="h2"
-          >
-            { singleFile.Comment }
-          </Typography>
+          <DetailFileTitle title={singleFile.Title} />
+          <DetailFileComment comment={singleFile.Comment} />
         </CardContent>
       </CardActionArea>
       <CardActions>
