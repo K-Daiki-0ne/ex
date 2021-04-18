@@ -55,7 +55,7 @@ func GetTextModel(userID string) []Text {
 func GetSingleTextModel(fileID string) Text {
 	db := database.DBConnect
 	var text Text
-	db.Where("user_id = ?", fileID).First(&text)
+	db.Where("id = ?", fileID).First(&text)
 	return text
 
 }

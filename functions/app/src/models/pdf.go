@@ -54,7 +54,7 @@ func GetPdfModel(userID string) []Pdf {
 func GetSinglePdfModel(fileID string) Pdf {
 	db := database.DBConnect
 	var pdf Pdf
-	db.Where("user_id = ?", fileID).Find(&pdf)
+	db.Where("id = ?", fileID).Find(&pdf)
 	return pdf
 }
 
