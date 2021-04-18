@@ -2,11 +2,11 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyle = makeStyles(theme =>({
   root: {
-    width: 380,
+    width: 390,
     maxWidth: 1200,
   },
   media: {
-    height: 370,
+    height: "auto"
   },
   filename: {
     fontSize: "28px",

@@ -55,7 +55,7 @@ func GetImageModel(userID string) []Image {
 func GetSingleImageModel(fileID string) Image {
 	db := database.DBConnect
 	var image Image
-	db.First(&image).Where("id = ?", fileID)
+	db.Debug().Where("id = ?", fileID).Find(&image)
 	return image
 }
 

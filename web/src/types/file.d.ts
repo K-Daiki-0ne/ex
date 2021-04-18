@@ -15,3 +15,19 @@ export type File = {
   Title: string,
   Commnet: string,
 }
+
+export type SingleFileAPIType = {
+  data: FileAPIType
+}
+
+export type FileAPIType = {
+  ID: number,
+  CreatedAt: string,
+  UpdatedAt: string,
+  DeletedAt: string,
+  userid: string,
+  FileName: string,
+  file: string,
+  Title: string,
+  Comment: string,
+}

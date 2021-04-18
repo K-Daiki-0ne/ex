@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Typography ,Button } from '@material-ui/core';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -13,7 +12,6 @@ export const UploadButton: FC<Props> = ({ props }):JSX.Element => {
   const classes = useStyle();
   const router  = useRouter();
   
-
   const goMainPage = () => {
     console.log(props)
     router.push(`/post/${props}`)

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { SingleFileAPIType } from '@src/types'
 
 class FileAPI {
   public async getAllFiles(id: string | string[]) {
@@ -10,12 +11,22 @@ class FileAPI {
   public async deleteSingleFile(userID: string | string[], fileID: string, fileType: string) {
     try {
       await axios.delete(`http://localhost:5050/app/delete/${fileType}?userID=${userID}&fileID=${fileID}`)     
-      .then(() => console.log('aaa'))
-      .catch(() => console.error('Delete API ...NO'))
+        .catch(() => console.error('Delete API ...NO'))
       const data = await this.getAllFiles(userID);
       return data;
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  public async getSingleFile(url: string): Promise<SingleFileAPIType> {
+    try {
+      const response = await axios.get(url);
+      const data = await response.data;
+      console.log(data);
+      return data;
+    } catch(err) {
+      console.error(err);
     }
   }
 }
