@@ -1,19 +1,16 @@
 import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
-import useStyle from './style';
 
 type Props = {
   name: string
 }
 
-export const DetailFileName: FC<Props> = (name): JSX.Element => {
-  const classes = useStyle();
+export const DetailFileName: FC<Props> = ({ name }): JSX.Element => {
   return (
     <Typography 
       gutterBottom 
       variant="h4" 
       component="h4" 
-      className={classes.filename}
     >
       { name }
     </Typography>
