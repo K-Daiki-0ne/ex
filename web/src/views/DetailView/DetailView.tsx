@@ -8,7 +8,6 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Typography,
   CircularProgress
 } from '@material-ui/core';
 import {
@@ -45,13 +44,7 @@ export const DetailView: FC = (): JSX.Element => {
   return isLoading ? (
     <Card className={classes.root}>
       <CardContent>
-        <Typography 
-          gutterBottom 
-          variant="h5" 
-          component="h2"
-        >
-          { singleFile.FileName }
-        </Typography>
+        <DetailFileName name={singleFile.FileName} />
       </CardContent>
       <CardActionArea>
         <CardMedia
@@ -61,20 +54,8 @@ export const DetailView: FC = (): JSX.Element => {
           title={singleFile.FileName}
         />
         <CardContent>
-          <Typography 
-            gutterBottom 
-            variant="h5" 
-            component="h2"
-          >
-            { singleFile.Title }
-          </Typography>
-          <Typography 
-            gutterBottom 
-            variant="h5" 
-            component="h2"
-          >
-            { singleFile.Comment }
-          </Typography>
+          <DetailFileTitle title={singleFile.Title} />
+          <DetailFileComment comment={singleFile.Comment} />
         </CardContent>
       </CardActionArea>
       <CardActions>
