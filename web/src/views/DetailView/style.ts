@@ -8,6 +8,11 @@ const useStyle = makeStyles(theme =>({
   media: {
     height: "auto"
   },
+  text: {
+    // height: "auto",
+    width: "80%",
+    pointerEvents: "none"
+  },
   filename: {
     fontSize: "28px",
     fontWeight: "bold"
