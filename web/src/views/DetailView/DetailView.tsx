@@ -42,22 +42,6 @@ export const DetailView: FC = (): JSX.Element => {
       .then(() => setIsLoading(true))
   }, [])
 
-  const decodeFileBase64 = (base64String) => {
-    // From Bytestream to Percent-encoding to Original string
-    return decodeURIComponent(
-      atob(base64String)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-  };
-
-  const decodeBase64 = decodeFileBase64(
-    singleFile.file.substring(singleFile.file.indexOf(",") + 1)
-  );
-
   const FileContentComponent = () => {
     if (fileType =='image') {
       return (
@@ -69,6 +53,22 @@ export const DetailView: FC = (): JSX.Element => {
         />
       )
     } else if (fileType == 'text') {
+      const decodeFileBase64 = (base64String) => {
+        // From Bytestream to Percent-encoding to Original string
+        return decodeURIComponent(
+          atob(base64String)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+      };
+    
+      const decodeBase64 = decodeFileBase64(
+        singleFile.file.substring(singleFile.file.indexOf(",") + 1)
+      );
+    
       return (
         <div>
           <TextareaAutosize 
