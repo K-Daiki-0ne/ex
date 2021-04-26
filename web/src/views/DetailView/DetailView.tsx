@@ -30,7 +30,6 @@ export const DetailView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [singleFile, setSingleFile] = useState<FileAPIType>();
   const [base64String, setBase64String] = useState<string>('');
-  const [numPages, setNumPages] = useState(null);
   const fileType = useRecoilValue(fileTypeState);
   const classes = useStyle();
   const router = useRouter();
