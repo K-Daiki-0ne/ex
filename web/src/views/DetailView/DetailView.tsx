@@ -16,17 +16,21 @@ import {
   DetailFileTitle,
   DetailFileComment
 } from '@src/components/atoms';
+import { Document, Page, pdfjs } from 'react-pdf';
 import { fileTypeState } from '@src/store/atoms';
 import { getSingleURL } from '@src/lib/getSingleURL';
 import { parseBase64String } from '@src/lib/parseBase64String';
 import { FileAPIType } from '@src/types';
 import FileAPI from '@src/api/File';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import useStyle from './style';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export const DetailView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [singleFile, setSingleFile] = useState<FileAPIType>();
   const [base64String, setBase64String] = useState<string>('');
+  const [numPages, setNumPages] = useState(null);
   const fileType = useRecoilValue(fileTypeState);
   const classes = useStyle();
   const router = useRouter();
@@ -64,11 +68,9 @@ export const DetailView: FC = (): JSX.Element => {
             .join("")
         );
       };
-    
       const decodeBase64 = decodeFileBase64(
         singleFile.file.substring(singleFile.file.indexOf(",") + 1)
       );
-    
       return (
         <div>
           <TextareaAutosize 
@@ -80,7 +82,17 @@ export const DetailView: FC = (): JSX.Element => {
       )
     } else {
       return (
-        <p>PDF</p>
+        <div>
+          <Document 
+            
+            file={`data:application/pdf;base64,${singleFile.file}`}
+          >
+            <Page
+              width={390}
+              pageNumber={1}
+            />
+          </Document>
+        </div>
       )
     }
   }
@@ -91,12 +103,6 @@ export const DetailView: FC = (): JSX.Element => {
         <DetailFileName name={singleFile.FileName} />
       </CardContent>
       <CardActionArea>
-        {/* <CardMedia
-          component='img'
-          className={classes.media}
-          src={`${base64String}${singleFile.file}`}
-          title={singleFile.FileName}
-        /> */}
         <FileContentComponent />
         <CardContent>
           <DetailFileTitle title={singleFile.Title} />

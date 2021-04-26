@@ -15,7 +15,7 @@ export const parseBase64String = (fileType: string) => {
     case 'image':
       return 'data:image/png;base64,';
     case 'pdf':
-      return ''
+      return 'data:application/pdf;base64,';
     default:
       throw new Error("Dont't support file type")
       break;
