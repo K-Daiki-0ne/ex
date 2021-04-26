@@ -13,6 +13,11 @@ const useStyle = makeStyles(theme =>({
     width: "80%",
     pointerEvents: "none"
   },
+  pdf: {
+    height: "auto",
+    width: "80%"
+
+  },
   filename: {
     fontSize: "28px",
     fontWeight: "bold"
