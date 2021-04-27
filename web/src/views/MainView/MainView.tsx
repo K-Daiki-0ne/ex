@@ -48,7 +48,7 @@ const MainView: FC = (): JSX.Element => {
         })
       }
       <div className={classes.page}>
-        <Pagination count={10} className={classes.selected} />
+        <Pagination count={10} classes={{ ul: classes.ul }} />
       </div>
     </div>
   ) : (
