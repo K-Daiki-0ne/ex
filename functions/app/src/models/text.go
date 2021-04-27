@@ -43,17 +43,26 @@ func TextModel(id string, filename string, file string, title string, comment st
 	return nil
 }
 
-// GetTextModel : get data from images table
+// GetTextModel : get data from texts table
 func GetTextModel(userID string) []Text {
 	db := database.DBConnect
 	var text []Text
-	db.First(&text, "user_id = ?", userID)
+	db.Find(&text, "user_id = ?", userID)
 	return text
 }
 
+// GetSingleTextModel ; get single text data from texts table
+func GetSingleTextModel(fileID string) Text {
+	db := database.DBConnect
+	var text Text
+	db.Where("id = ?", fileID).First(&text)
+	return text
+
+}
+
+// DeleteTextModel : delete single text data from texts table
 func DeleteTextModel(userID string, fileID string) string {
 	db := database.DBConnect
-	var deleteText Text
-	db.Where("id = ? AND userID = ?", fileID, userID).Delete(&deleteText)
+	db.Debug().Where("id = ?", fileID).Delete(&Text{})
 	return "OK"
 }

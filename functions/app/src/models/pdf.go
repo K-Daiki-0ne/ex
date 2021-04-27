@@ -12,10 +12,10 @@ import (
 type Pdf struct {
 	gorm.Model
 	UserID   string `json:"userid"`
-	FileName string `json:"gorm:size:50"`
+	FileName string `json:"gorm:size:50;"`
 	File     string `json:"file"`
-	Title    string `json:"gorm:size:50"`
-	Comment  string `json:"gorm:size:255"`
+	Title    string `json:"gorm:size:50;"`
+	Comment  string `json:"gorm:size:255;"`
 }
 
 // PDFModel : Image file model
@@ -46,13 +46,21 @@ func PDFModel(id string, filename string, file string, title string, comment str
 func GetPdfModel(userID string) []Pdf {
 	db := database.DBConnect
 	var pdf []Pdf
-	db.First(&pdf, "user_id = ?", userID)
+	db.Find(&pdf, "user_id = ?", userID)
 	return pdf
 }
 
+// GetSinglePdfModel : get single text data from texts table
+func GetSinglePdfModel(fileID string) Pdf {
+	db := database.DBConnect
+	var pdf Pdf
+	db.Where("id = ?", fileID).Find(&pdf)
+	return pdf
+}
+
+// DeletePDFModel : delete pdf data from pdfs table
 func DeletePDFModel(userID string, fileID string) string {
 	db := database.DBConnect
-	var deletePDF Pdf
-	db.Where("id = ? AND userID = ?", fileID, userID).Delete(&deletePDF)
+	db.Debug().Where("id = ?", fileID).Delete(&Pdf{})
 	return "OK"
 }

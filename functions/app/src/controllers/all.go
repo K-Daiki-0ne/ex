@@ -27,9 +27,9 @@ type Text struct {
 // PDF : PDF file schema
 type PDF struct {
 	gorm.Model
-	UserID     string `json:"userid"`
-	FileName   string `json:"filename"`
-	FileString string `json:"filestring"`
+	UserID   string `json:"userid"`
+	FileName string `json:"filename"`
+	File     string `json:"file"`
 }
 
 // AllController : get all user's all file

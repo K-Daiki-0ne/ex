@@ -53,6 +53,11 @@ const useStyle = makeStyles((theme) =>({
     textAlign: "center",
     position: "fixed"
   },
+  ul: {
+    "& .MuiPaginationItem-root": {
+      color: "#9e9e9e"
+    }
+  }
 }));
 
 

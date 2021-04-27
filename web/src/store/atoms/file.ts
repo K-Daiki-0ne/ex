@@ -2,6 +2,7 @@ import { atom } from 'recoil';
 import { FileType } from '@src/types';
 
 const fileTypeNumberState: string = 'text';
+
 const defaultFileState: FileType = {
   image: [],
   pdf: [],
