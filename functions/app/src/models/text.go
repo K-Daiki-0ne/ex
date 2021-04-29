@@ -66,3 +66,9 @@ func DeleteTextModel(userID string, fileID string) string {
 	db.Debug().Where("id = ?", fileID).Delete(&Text{})
 	return "OK"
 }
+
+// UpdateTextModel : Update update text data from texts table
+func UpdateTextModel(fileID string, title string, comment string) {
+	db := database.DBConnect
+	db.Model(&Text{}).Debug().Where("id = ?", fileID).Updates(Text{Title: title, Comment: comment})
+}
