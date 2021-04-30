@@ -35,9 +35,9 @@ type PDF struct {
 
 // AllController : get all user's all file
 func AllController(c *gin.Context) {
-	id := c.Query("userID")
+	userID := c.Query("userID")
 
-	err := libs.UserIDValidate(id)
+	err := libs.UserIDValidate(userID)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -45,9 +45,9 @@ func AllController(c *gin.Context) {
 		})
 	}
 
-	images := models.GetImageModel(id)
-	texts := models.GetTextModel(id)
-	pdfs := models.GetPdfModel(id)
+	images := models.GetImageModel(userID)
+	texts := models.GetTextModel(userID)
+	pdfs := models.GetPdfModel(userID)
 
 	c.JSON(http.StatusOK, gin.H{
 		"image": images,

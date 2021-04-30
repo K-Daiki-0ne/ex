@@ -10,10 +10,10 @@ import (
 )
 
 func DeleteTextController(c *gin.Context) {
-	userId := c.Query("userID")
-	fileId := c.Query("fileID")
+	userID := c.Query("userID")
+	fileID := c.Query("fileID")
 
-	err := libs.FileIDValidate(fileId)
+	err := libs.FileIDValidate(fileID)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -21,7 +21,7 @@ func DeleteTextController(c *gin.Context) {
 		})
 	}
 
-	suc := models.DeleteTextModel(userId, fileId)
+	suc := models.DeleteTextModel(userID, fileID)
 
 	if suc != "OK" {
 		c.JSON(http.StatusBadRequest, "Fatal upload file")
