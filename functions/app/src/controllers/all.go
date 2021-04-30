@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"EX/app/src/libs"
 	"EX/app/src/models"
 	"net/http"
 
@@ -35,6 +36,14 @@ type PDF struct {
 // AllController : get all user's all file
 func AllController(c *gin.Context) {
 	id := c.Query("userID")
+
+	err := libs.UserIDValidate(id)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"data": "Require userID",
+		})
+	}
 
 	images := models.GetImageModel(id)
 	texts := models.GetTextModel(id)
