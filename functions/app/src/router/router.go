@@ -73,17 +73,17 @@ func Router(app *gin.Engine) {
 	 *  Update query fileID's title & comment for texts table
 	 *  example: http://localhost:5050/app/update/text?fileID={fileID}
 	 */
-	app.PUT("/app/update/text")
+	app.PUT("/app/update/text", controllers.UpdateTextController)
 
 	/*
 	 *  Update query fileID's title & comment for images table
 	 *  example: http://localhost:5050/app/update/image?fileID={userID}
 	 */
-	app.PUT("/app/update/image")
+	app.PUT("/app/update/image", controllers.UpdateImageController)
 
 	/*
 	 *  Update query fileID's title & comment for pdfs table
 	 *  example: http://localhost:5050/app/update/pdf?fileID={userID}
 	 */
-	app.PUT("/app/update/pdf")
+	app.PUT("/app/update/pdf", controllers.UpdatePDFController)
 }
