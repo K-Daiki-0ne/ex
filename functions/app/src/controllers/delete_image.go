@@ -14,11 +14,11 @@ func DeleteImageController(c *gin.Context) {
 	userId := c.Query("userID")
 	fileId := c.Query("fileID")
 
-	err := libs.DeleteValidate(userId)
+	err := libs.FileIDValidate(fileId)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"data": "Require userID",
+			"data": "Require fileID",
 		})
 	}
 
