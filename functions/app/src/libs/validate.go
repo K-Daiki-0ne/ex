@@ -28,3 +28,10 @@ func FileIDValidate(fileID string) error {
 
 	return nil
 }
+
+func UserIDValidate(userID string) error {
+	if userID == "" {
+		return errors.New("requrie userID")
+	}
+	return nil
+}
