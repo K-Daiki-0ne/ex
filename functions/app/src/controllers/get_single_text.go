@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"EX/app/src/libs"
 	"EX/app/src/models"
 	"net/http"
 
@@ -10,7 +11,9 @@ import (
 func GetSingleTextController(c *gin.Context) {
 	fileID := c.Query("fileID")
 
-	if fileID == "" {
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})

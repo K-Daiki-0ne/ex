@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"EX/app/src/libs"
 	"EX/app/src/models"
 	"net/http"
 
@@ -12,7 +13,9 @@ func UpdateTextController(c *gin.Context) {
 	title := c.Query("Title")
 	comment := c.Query("Comment")
 
-	if fileID == "" {
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
