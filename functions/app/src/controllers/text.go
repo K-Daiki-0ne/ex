@@ -13,7 +13,7 @@ import (
 // TextController : post text file
 func TextController(c *gin.Context) {
 	// Get name query
-	id := c.Query("userID")
+	userID := c.Query("userID")
 
 	// Get uplaod file title
 	title := c.Query("title")
@@ -36,7 +36,7 @@ func TextController(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.TextModel(id, header.Filename, filedata, title, comment)
+	suc := models.TextModel(userID, header.Filename, filedata, title, comment)
 
 	if suc != nil {
 		fmt.Println(err)

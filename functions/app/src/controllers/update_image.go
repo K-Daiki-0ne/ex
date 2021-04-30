@@ -8,9 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//
-func GetSingleImageController(c *gin.Context) {
+func UpdateImageController(c *gin.Context) {
 	fileID := c.Query("fileID")
+	title := c.Query("Title")
+	comment := c.Query("Comment")
 
 	err := libs.FileIDValidate(fileID)
 
@@ -20,10 +21,10 @@ func GetSingleImageController(c *gin.Context) {
 		})
 	}
 
-	data := models.GetSingleImageModel(fileID)
+	models.UpdateImageModel(fileID, title, comment)
 
 	c.JSON(http.StatusOK, gin.H{
-		"data": data,
+		"data": "Update Image table",
 	})
 
 }
