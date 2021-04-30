@@ -64,3 +64,9 @@ func DeletePDFModel(userID string, fileID string) string {
 	db.Debug().Where("id = ?", fileID).Delete(&Pdf{})
 	return "OK"
 }
+
+// UpdatePDFModel : Update update pdf data from pdfs table
+func UpdatePDFModel(fileID string, title string, comment string) {
+	db := database.DBConnect
+	db.Model(&Pdf{}).Debug().Where("id = ?", fileID).Updates(Pdf{Title: title, Comment: comment})
+}

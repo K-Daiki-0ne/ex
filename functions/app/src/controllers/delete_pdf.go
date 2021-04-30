@@ -10,18 +10,18 @@ import (
 )
 
 func DeletePDFController(c *gin.Context) {
-	userId := c.Query("userID")
-	fileId := c.Query("fileID")
+	userID := c.Query("userID")
+	fileID := c.Query("fileID")
 
-	err := libs.DeleteValidate(userId)
+	err := libs.FileIDValidate(fileID)
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"data": "Require userID",
+			"data": "Require fileID",
 		})
 	}
 
-	suc := models.DeletePDFModel(userId, fileId)
+	suc := models.DeletePDFModel(userID, fileID)
 
 	if suc != "OK" {
 		c.JSON(http.StatusBadRequest, "Fatal upload file")
