@@ -12,12 +12,16 @@ import EditIcon from '@material-ui/icons/Edit';
 import { fileTypeState } from '@src/store/atoms';
 import { FileAPIType } from '@src/types';
 import { getSingleURL } from '@src/lib/getSingleURL';
+import { updateSingleURL } from '@src/lib/updateSingleURL';
 import FileAPI from '@src/api/File';
 import useStyle from './style';
 
 export const EditView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [singleFile, setSingleFile] = useState<FileAPIType>();
+  const [fileName, setFileName] = useState<string>('');
+  const [fileTitle, setFileTitle] = useState<string>('');
+  const [fileComment, setFileComment] = useState<string>('');
   const router = useRouter();
   const fileType = useRecoilValue(fileTypeState);
   const { fileId } = router.query;
@@ -31,12 +35,32 @@ export const EditView: FC = (): JSX.Element => {
       .then((data) => setSingleFile(data.data))
       .then(() => setIsLoading(true))
   }, [])
+
+  const updateFileContent = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    if (fileName == '') {
+      setFileName(singleFile.FileName);
+    } else if(fileTitle == '') {
+      setFileTitle(singleFile.Title);
+    } else if(fileComment == '') {
+      setFileComment(singleFile.Comment)
+    }
+
+    const END_POINT = updateSingleURL(fileType, fileName, fileTitle, fileComment)
+
+    FileAPI.updateSingleFile(END_POINT)
+      .then()
+  }
+
   return isLoading ? (
     <div className={classes.root}>
       <TextField 
         id="standard-basic"
         label="File's name"
         color="primary"
+        defaultValue={singleFile.FileName}
+        onChange={e => setFileName(e.target.value)}
         inputProps={{
           className: classes.textField
         }}
@@ -45,6 +69,12 @@ export const EditView: FC = (): JSX.Element => {
       <TextField 
         id="standard-basic" 
         label="Title"
+        color="primary"
+        defaultValue={singleFile.Title}
+        onChange={e => setFileTitle(e.target.value)}
+        inputProps={{
+          className: classes.textField
+        }}
         className={classes.textField}
       />
       <Typography 
@@ -61,6 +91,8 @@ export const EditView: FC = (): JSX.Element => {
         placeholder="comment area zone"
         className={classes.commentArea}
         rowsMin={5}
+        defaultValue={singleFile.Comment}
+        onChange={e => setFileComment(e.target.value)}
       />
       <div>
         <Button
@@ -68,6 +100,7 @@ export const EditView: FC = (): JSX.Element => {
           color="primary"
           className={classes.button}
           startIcon={<EditIcon />}
+          onClick={updateFileContent}
         >
           Edit
         </Button>

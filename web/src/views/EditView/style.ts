@@ -6,13 +6,14 @@ const useStyle = makeStyles(theme =>({
   },
   textField: {
     width: "100%",
-    color: "#9e9e9e",
+    color: "#E8EAED",
     "& label": {
       color: "#9e9e9e"
     },
     "& p": {
       color: "#E8EAED"
     },
+    marginTop: "5%"
   },
   comment: {
     fontSize: "20px",
