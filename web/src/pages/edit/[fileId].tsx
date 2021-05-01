@@ -7,6 +7,7 @@ import {
   Toolbar, 
   Typography 
 } from '@material-ui/core';
+import { EditView } from '@src/views/EditView/EditView';
 import useStyle from '@src/theme/style';
 
 const Edit: NextPage = (): JSX.Element => {
@@ -31,6 +32,7 @@ const Edit: NextPage = (): JSX.Element => {
           fixed
           maxWidth='xs'
         >
+          <EditView />
         </Container>
       </main>
 
