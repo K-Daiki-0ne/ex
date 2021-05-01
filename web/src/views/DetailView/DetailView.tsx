@@ -45,6 +45,10 @@ export const DetailView: FC = (): JSX.Element => {
       .then(() => setIsLoading(true))
   }, [])
 
+  const transitionEditPage = () => {
+    router.push(`/edit/${fileId}`)
+  }
+
   const FileContentComponent = () => {
     if (fileType =='image') {
       return (
@@ -109,7 +113,7 @@ export const DetailView: FC = (): JSX.Element => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={transitionEditPage}>
           Edit
         </Button>
       </CardActions>
