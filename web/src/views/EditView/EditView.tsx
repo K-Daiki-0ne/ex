@@ -5,13 +5,15 @@ import {
   CircularProgress,
   Typography,
   TextField,
-  TextareaAutosize
+  TextareaAutosize,
+  Button
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import { fileTypeState } from '@src/store/atoms';
 import { FileAPIType } from '@src/types';
 import { getSingleURL } from '@src/lib/getSingleURL';
 import FileAPI from '@src/api/File';
-
+import useStyle from './style';
 
 export const EditView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,6 +21,8 @@ export const EditView: FC = (): JSX.Element => {
   const router = useRouter();
   const fileType = useRecoilValue(fileTypeState);
   const { fileId } = router.query;
+
+  const classes = useStyle();
 
   useEffect(() => {
     setIsLoading(false);
@@ -28,34 +32,46 @@ export const EditView: FC = (): JSX.Element => {
       .then(() => setIsLoading(true))
   }, [])
   return isLoading ? (
-    <div>
-      <div>
-        <Typography 
-          variant="h6" 
-          gutterBottom
-        >
-          File Name
-        </Typography>
-        <TextField id="standard-basic" label="Standard" />
-      </div>
+    <div className={classes.root}>
+      <TextField 
+        id="standard-basic"
+        label="File's name"
+        color="primary"
+        inputProps={{
+          className: classes.textField
+        }}
+        className={classes.textField} 
+      />
+      <TextField 
+        id="standard-basic" 
+        label="Title"
+        className={classes.textField}
+      />
       <Typography 
-          variant="h6" 
-          gutterBottom
+        variant="h6" 
+        gutterBottom
+        align="left"
+        className={classes.comment}
+      >
+        Comment
+      </Typography>
+      <TextareaAutosize
+        rowsMax={4}
+        aria-label="maximum height"
+        placeholder="comment area zone"
+        className={classes.commentArea}
+        rowsMin={5}
+      />
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          startIcon={<EditIcon />}
         >
-          Title
-        </Typography>
-        <TextField id="standard-basic" label="Standard" />
-        <Typography 
-          variant="h6" 
-          gutterBottom
-        >
-          Comment
-        </Typography>
-        <TextareaAutosize
-          rowsMax={4}
-          aria-label="maximum height"
-          placeholder="Maximum 4 rows"
-        />
+          Edit
+        </Button>
+      </div>
     </div>
   ) : (
     <div>
