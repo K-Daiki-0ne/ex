@@ -7,7 +7,7 @@
  */
 export const updateSingleURL = (
   fileType: string, 
-  fileID: string, 
+  fileID: string | string[], 
   title: string, 
   commnet: string
 ) => {

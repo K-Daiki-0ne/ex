@@ -10,13 +10,14 @@ import {
 } from '@src/components/organisms';
 import FileAPI from '@src/api/File';
 import { FileType, File } from '@src/types'
-import { fileState } from '@src/store/atoms'
+import { fileState, userInfoState } from '@src/store/atoms'
 import { fileStateSelector } from '@src/store/selectors/fileStateSelector';
 import useStyle from './style';
 
 const MainView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [ , setFileListState ]    = useRecoilState(fileState);
+  const [ , setUserIDState]       = useRecoilState(userInfoState)
   const fileList                  = useRecoilValue(fileStateSelector)
 
   const classes     = useStyle();
@@ -28,6 +29,7 @@ const MainView: FC = (): JSX.Element => {
     FileAPI.getAllFiles(userId)
       .then((data: FileType) => setFileListState(data))
       .then(() => setIsLoading(true))
+    setUserIDState(userId)
     }, [])
 
   return isLoading ? (

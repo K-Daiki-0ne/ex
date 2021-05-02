@@ -9,7 +9,7 @@ import {
   Button
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import { fileTypeState } from '@src/store/atoms';
+import { fileTypeState, userInfoState } from '@src/store/atoms';
 import { FileAPIType } from '@src/types';
 import { getSingleURL } from '@src/lib/getSingleURL';
 import { updateSingleURL } from '@src/lib/updateSingleURL';
@@ -22,8 +22,9 @@ export const EditView: FC = (): JSX.Element => {
   const [fileName, setFileName] = useState<string>('');
   const [fileTitle, setFileTitle] = useState<string>('');
   const [fileComment, setFileComment] = useState<string>('');
-  const router = useRouter();
   const fileType = useRecoilValue(fileTypeState);
+  const userID   = useRecoilValue(userInfoState);
+  const router = useRouter();
   const { fileId } = router.query;
 
   const classes = useStyle();
@@ -36,30 +37,41 @@ export const EditView: FC = (): JSX.Element => {
       .then(() => setIsLoading(true))
   }, [])
 
-  const updateFileContent = (e: React.MouseEvent<HTMLInputElement>) => {
+  const updateFileContent = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    if (fileName == '') {
-      setFileName(singleFile.FileName);
-    } else if(fileTitle == '') {
-      setFileTitle(singleFile.Title);
-    } else if(fileComment == '') {
-      setFileComment(singleFile.Comment)
-    }
+    setIsLoading(false);
 
-    const END_POINT = updateSingleURL(fileType, fileName, fileTitle, fileComment)
+    // if (fileName == '') {
+    //   await setFileName(singleFile.FileName);
+    // } 
+    
+    // if(fileTitle == '') {
+    //   await setFileTitle(singleFile.Title);
+    // } 
+
+    // if(fileComment == '') {
+    //   await setFileComment(singleFile.Comment)
+    // }
+
+    const END_POINT = updateSingleURL(fileType, fileId, fileTitle, fileComment)
+
+    console.log(userID)
+    console.log(END_POINT)
+
+    setIsLoading(true)
 
     FileAPI.updateSingleFile(END_POINT)
-      .then()
+    .then(() => setIsLoading(true))
+    .then(() => router.push(`/main/${userID}`))
   }
 
   return isLoading ? (
     <div className={classes.root}>
       <TextField 
-        id="standard-basic"
         label="File's name"
         color="primary"
-        defaultValue={singleFile.FileName}
+        value={singleFile.FileName}
         onChange={e => setFileName(e.target.value)}
         inputProps={{
           className: classes.textField
@@ -67,7 +79,6 @@ export const EditView: FC = (): JSX.Element => {
         className={classes.textField} 
       />
       <TextField 
-        id="standard-basic" 
         label="Title"
         color="primary"
         defaultValue={singleFile.Title}

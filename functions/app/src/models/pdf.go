@@ -68,5 +68,5 @@ func DeletePDFModel(userID string, fileID string) string {
 // UpdatePDFModel : Update update pdf data from pdfs table
 func UpdatePDFModel(fileID string, title string, comment string) {
 	db := database.DBConnect
-	db.Model(&Pdf{}).Debug().Where("id = ?", fileID).Updates(Pdf{Title: title, Comment: comment})
+	db.Debug().Model(&Pdf{}).Where("id = ?", fileID).Updates(Pdf{Title: title, Comment: comment})
 }
