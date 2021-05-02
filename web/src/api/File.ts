@@ -28,6 +28,15 @@ class FileAPI {
       console.error(err);
     }
   }
+
+  public async updateSingleFile(url: string): Promise<void> {
+    try {
+      await axios.put(url)
+        .catch((err) => console.error(err))
+    } catch (err) {
+      console.error(err)
+    }
+  }
 }
 
 export default new FileAPI();

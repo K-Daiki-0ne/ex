@@ -69,5 +69,5 @@ func DeleteImageModel(userID string, fileID string) string {
 // UpdateImageModel : Update update image data from images table
 func UpdateImageModel(fileID string, title string, comment string) {
 	db := database.DBConnect
-	db.Model(&Image{}).Debug().Where("id = ?", fileID).Updates(Image{Title: title, Comment: comment})
+	db.Debug().Model(&Image{}).Where("id = ?", fileID).Updates(Image{Title: title, Comment: comment})
 }
