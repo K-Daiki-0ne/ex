@@ -1,8 +1,6 @@
 import { atom } from 'recoil';
 
-type User = {
-  ID: string,
-}
+type User = string | string[]
 
 export const userInfoState = atom<User>({
   key: "userInfoState",

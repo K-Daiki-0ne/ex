@@ -3,6 +3,7 @@ package controllers
 import (
 	"EX/app/src/libs"
 	"EX/app/src/models"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,8 +11,10 @@ import (
 
 func UpdateTextController(c *gin.Context) {
 	fileID := c.Query("fileID")
-	title := c.Query("Title")
-	comment := c.Query("Comment")
+	title := c.Query("title")
+	comment := c.Query("comment")
+
+	fmt.Println("aaa", title)
 
 	err := libs.FileIDValidate(fileID)
 

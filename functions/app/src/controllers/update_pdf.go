@@ -10,8 +10,8 @@ import (
 
 func UpdatePDFController(c *gin.Context) {
 	fileID := c.Query("fileID")
-	title := c.Query("Title")
-	comment := c.Query("Comment")
+	title := c.Query("title")
+	comment := c.Query("comment")
 
 	err := libs.FileIDValidate(fileID)
 
