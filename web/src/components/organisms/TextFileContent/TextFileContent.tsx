@@ -3,11 +3,11 @@ import { TextareaAutosize } from '@material-ui/core';
 import useStyle from './style';
 
 type Props = {
-  base64String: string
+  file: string
 }
 
-export const TextFileContent: FC<Props> = ({ base64String }): JSX.Element => {
-  const decodeFileBase64 = (base64String) => {
+export const TextFileContent: FC<Props> = ({ file }): JSX.Element => {
+  const decodeFileBase64 = (base64String: string) => {
     // From Bytestream to Percent-encoding to Original string
     return decodeURIComponent(
       atob(base64String)
@@ -20,7 +20,7 @@ export const TextFileContent: FC<Props> = ({ base64String }): JSX.Element => {
   };
 
   const decodeBase64 = decodeFileBase64(
-    base64String.substring(base64String.indexOf(",") + 1)
+    file.substring(file.indexOf(",") + 1)
   );
 
   const classes = useStyle();
