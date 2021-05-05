@@ -15,8 +15,10 @@ import {
   DetailFileComment
 } from '@src/components/atoms';
 import { fileTypeState } from '@src/store/atoms';
-import { getSingleURL } from '@src/lib/getSingleURL';
-import { parseBase64String } from '@src/lib/parseBase64String';
+import { 
+  getSingleURL, 
+  parseBase64String 
+} from '@src/lib';
 import { FileAPIType } from '@src/types';
 import FileAPI from '@src/api/File';
 import {

@@ -11,8 +11,10 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 import { fileTypeState, userInfoState } from '@src/store/atoms';
 import { FileAPIType } from '@src/types';
-import { getSingleURL } from '@src/lib/getSingleURL';
-import { updateSingleURL } from '@src/lib/updateSingleURL';
+import { 
+  getSingleURL, 
+  updateSingleURL 
+} from '@src/lib';
 import FileAPI from '@src/api/File';
 import useStyle from './style';
 
