@@ -6,7 +6,11 @@ const useStyle = makeStyles({
   },
   guestLoginLinkText: {
     textDecoration: "none",
-    color: "#e57373"
+    color: "#e57373",
+    cursor: "pointer"
+  },
+  alertTitle: {
+    textAlign: "left"
   }
 });
 

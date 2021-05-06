@@ -35,6 +35,10 @@ func Connect() *gorm.DB {
 		fmt.Println("DB connect ...NO")
 	} else {
 		db.AutoMigrate(&User{})
+
+		// Guest User用に事前の事前作成
+		db.Create(&User{Username: "Guest", Password: "12345"})
+
 		fmt.Println("DB connect ...OK")
 	}
 	return db
