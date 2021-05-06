@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//
+// GetSingleImageController : get image's single file controller
 func GetSingleImageController(c *gin.Context) {
 	fileID := c.Query("fileID")
 

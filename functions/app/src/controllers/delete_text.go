@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DeleteTextController : delete text's file controller
 func DeleteTextController(c *gin.Context) {
 	userID := c.Query("userID")
 	fileID := c.Query("fileID")

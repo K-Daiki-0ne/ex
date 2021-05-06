@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetSingleTextController : get text's single file controller
 func GetSingleTextController(c *gin.Context) {
 	fileID := c.Query("fileID")
 

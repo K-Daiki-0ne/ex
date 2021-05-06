@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DeletePDFController : delete PDF's file controller
 func DeletePDFController(c *gin.Context) {
 	userID := c.Query("userID")
 	fileID := c.Query("fileID")

@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UpdateImageController : update image's file controller
 func UpdateImageController(c *gin.Context) {
 	fileID := c.Query("fileID")
 	title := c.Query("title")

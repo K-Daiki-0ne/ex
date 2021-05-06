@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UpdatePDFController : update PDF's file controller
 func UpdatePDFController(c *gin.Context) {
 	fileID := c.Query("fileID")
 	title := c.Query("title")

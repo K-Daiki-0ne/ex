@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetSinglePDFController : get PDF's single file controller
 func GetSinglePDFController(c *gin.Context) {
 	fileID := c.Query("fileID")
 

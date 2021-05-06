@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UpdateTextController : update text's file controller
 func UpdateTextController(c *gin.Context) {
 	fileID := c.Query("fileID")
 	title := c.Query("title")
