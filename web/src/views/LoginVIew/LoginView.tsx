@@ -32,6 +32,12 @@ const LoginView: FC = (): JSX.Element => {
   const router = useRouter();
 
   const loginUserInformation = () => {
+    if (loginName == 'Guest') {
+      setNameLabel('This username cannot be used!');
+      setIsNameValid(true)
+      return;
+    }
+
     try {
       User.login(loginName, loginPass)
         .then((response: LoginUserType) => {
@@ -43,17 +49,21 @@ const LoginView: FC = (): JSX.Element => {
               setPassLabel('Repuire Password!')
               setIsNameValid(true)
               setIsPassValid(true)
+              return;
             } else if (loginName == ''){
               setNameLabel('Require Name!');
               setIsNameValid(true)
+              return;
             } else if (loginPass == ''){
               setPassLabel('Repuire Password!')
               setIsPassValid(true)
+              return;
             } else {
-              setNameLabel('aaaaaa');
-              setPassLabel('bbbbbb')
-              setIsNameValid(true)
+              setNameLabel('Not registerd');
+              setPassLabel('Not registerd')
+              setIsNameValid(true);
               setIsPassValid(true);
+              return;
             }      
           }
         })
