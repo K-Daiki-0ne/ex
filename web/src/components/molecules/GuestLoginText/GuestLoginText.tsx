@@ -17,7 +17,7 @@ export const GuestLoginText: FC = (): JSX.Element => {
   const classes = useStyle();
   const router = useRouter();
 
-  const guestLoginMood = () => {
+  const guestLoginMoode= () => {
     try {
       User.login('Guest', '12345')
       .then((response: LoginUserType) => {
@@ -35,7 +35,7 @@ export const GuestLoginText: FC = (): JSX.Element => {
     <div>
       <Typography className={classes.guestLoginText}>
         If you want to try EX ? 
-          <a className={classes.guestLoginLinkText} onClick={guestLoginMood}> Guest Login</a>
+          <a className={classes.guestLoginLinkText} onClick={guestLoginMoode}> Guest Login</a>
       </Typography>
       <Collapse in={open}>
       <Alert severity="error" className={classes.alertTitle}>
