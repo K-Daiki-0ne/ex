@@ -20,12 +20,14 @@ func DeleteImageController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Require fileID",
 		})
+		return
 	}
 
 	suc := models.DeleteImageModel(userID, fileID)
 
 	if suc != "OK" {
 		c.JSON(http.StatusBadRequest, "Fatal upload file")
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

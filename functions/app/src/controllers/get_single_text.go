@@ -17,6 +17,7 @@ func GetSingleTextController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
+		return
 	}
 
 	data := models.GetSingleTextModel(fileID)

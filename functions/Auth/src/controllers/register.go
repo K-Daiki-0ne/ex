@@ -15,24 +15,13 @@ func Register(c *gin.Context) {
 
 	if name == "" {
 		c.JSON(http.StatusBadRequest, "require username")
+		return
 	}
 
 	if pass == "" {
 		c.JSON(http.StatusBadRequest, "require username")
+		return
 	}
-
-	// if err := models.CreateUser(name, pass); err != nil {
-	// 	fmt.Println("OK", err)
-	// 	c.JSON(http.StatusBadRequest, gin.H{
-	// 		"status": "Failed to create User information",
-	// 	})
-	// } else {
-	// 	fmt.Println("NO")
-
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"data": name,
-	// 	})
-	// }
 
 	if err := models.CreateUser(name, pass); err != nil {
 		fmt.Println("User create ...NO")

@@ -19,6 +19,7 @@ func UpdateImageController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
+		return
 	}
 
 	models.UpdateImageModel(fileID, title, comment)

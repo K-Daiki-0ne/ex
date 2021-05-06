@@ -22,6 +22,7 @@ func UpdateTextController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
+		return
 	}
 
 	models.UpdateTextModel(fileID, title, comment)
