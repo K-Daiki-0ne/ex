@@ -43,6 +43,7 @@ func AllController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Require userID",
 		})
+		return
 	}
 
 	images := models.GetImageModel(userID)
