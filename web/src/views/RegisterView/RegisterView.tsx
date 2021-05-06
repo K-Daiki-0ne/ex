@@ -25,6 +25,11 @@ const RegisterView: FC = (): JSX.Element => {
   const router = useRouter();
 
   const registerUserInformation = () => {
+    if (registerName == 'Guest') {
+      setNameLabel('This username can not be used');
+      setIsNameValid(true)
+      return;
+    }
     try {
       User.register(registerName, registerPass)
         .then((response: RegisterUser) => {
@@ -34,19 +39,20 @@ const RegisterView: FC = (): JSX.Element => {
           } else {
             if (registerName == '' && registerPass == '') {
               setNameLabel('Require Name!');
-              setPassLabel('Repuire Password!')
-              setIsNameValid(true)
-              setIsPassValid(true)
+              setPassLabel('Repuire Password!');
+              setIsNameValid(true);
+              setIsPassValid(true);
+              return;
             } else if (registerName == ''){
               setNameLabel('Require Name!');
-              setIsNameValid(true)
+              setIsNameValid(true);
             } else if (registerPass == ''){
-              setPassLabel('Repuire Password!')
-              setIsPassValid(true)
+              setPassLabel('Repuire Password!');
+              setIsPassValid(true);
             } else {
               setNameLabel('aaaaaa');
-              setPassLabel('bbbbbb')
-              setIsNameValid(true)
+              setPassLabel('bbbbbb');
+              setIsNameValid(true);
               setIsPassValid(true);
             }      
           }

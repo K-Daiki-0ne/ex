@@ -6,25 +6,27 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Button,
   CircularProgress,
-  TextareaAutosize
 } from '@material-ui/core';
 import {
   DetailFileName,
   DetailFileTitle,
   DetailFileComment
 } from '@src/components/atoms';
-import { Document, Page, pdfjs } from 'react-pdf';
 import { fileTypeState } from '@src/store/atoms';
-import { getSingleURL } from '@src/lib/getSingleURL';
-import { parseBase64String } from '@src/lib/parseBase64String';
+import { 
+  getSingleURL, 
+  parseBase64String 
+} from '@src/lib';
 import { FileAPIType } from '@src/types';
 import FileAPI from '@src/api/File';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import {
+  TextFileContent,
+  ImageFileContent,
+  PDFFileContent
+} from '@src/components/organisms';
 import useStyle from './style';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export const DetailView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -52,50 +54,24 @@ export const DetailView: FC = (): JSX.Element => {
   const FileContentComponent = () => {
     if (fileType =='image') {
       return (
-        <CardMedia
-          component='img'
-          className={classes.media}
-          src={`${base64String}${singleFile.file}`}
-          title={singleFile.FileName}
+        <ImageFileContent 
+          base64String={base64String}
+          file={singleFile.file}
+          fileName={singleFile.Title}
         />
       )
     } else if (fileType == 'text') {
-      const decodeFileBase64 = (base64String) => {
-        // From Bytestream to Percent-encoding to Original string
-        return decodeURIComponent(
-          atob(base64String)
-            .split("")
-            .map(function (c) {
-              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-            })
-            .join("")
-        );
-      };
-      const decodeBase64 = decodeFileBase64(
-        singleFile.file.substring(singleFile.file.indexOf(",") + 1)
-      );
       return (
-        <div>
-          <TextareaAutosize 
-            rows={8}
-            value={decodeBase64}
-            className={classes.text}
-          />
-        </div>
+        <TextFileContent 
+          file={singleFile.file}
+        />
       )
     } else {
       return (
-        <div>
-          <Document 
-            
-            file={`data:application/pdf;base64,${singleFile.file}`}
-          >
-            <Page
-              width={390}
-              pageNumber={1}
-            />
-          </Document>
-        </div>
+        <PDFFileContent 
+          base64String={base64String}
+          file={singleFile.file}
+        />
       )
     }
   }

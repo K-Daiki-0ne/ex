@@ -12,7 +12,7 @@ import {
   Backdrop,
   Typography
 } from '@material-ui/core';
-import { checkFile } from '@src/lib/checkFileType'
+import { checkFile } from '@src/lib'
 import { ProgressLabel } from '@src/components/organisms';
 import useStyle from './style';
 import axios from 'axios';
@@ -119,11 +119,9 @@ const PostView: React.FC = (): JSX.Element => {
       </div>
       <div onClick={postFile}>
         <IconButton className={classes.postBtn}>
-          {/* <Link href='/main/1223'> */}
             <PublishIcon 
               className={classes.postIcon}
             />
-          {/* </Link> */}
         </IconButton>
       </div>
       <Modal

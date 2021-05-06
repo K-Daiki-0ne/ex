@@ -26,6 +26,14 @@ func Login(c *gin.Context) {
 
 	user := models.GetUser(name, pass)
 
+	// ゲストユーザーの場合はハッシュ化したパスワードとの比較は行わない
+	if name == "Guest" {
+		c.JSON(http.StatusOK, gin.H{
+			"data": user,
+		})
+		return
+	}
+
 	hashPassword := models.GetUser(name, pass).Password
 
 	fmt.Println(hashPassword)
