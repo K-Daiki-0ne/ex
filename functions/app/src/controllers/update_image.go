@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UpdateImageController : update image's file controller
 func UpdateImageController(c *gin.Context) {
 	fileID := c.Query("fileID")
 	title := c.Query("title")
@@ -19,6 +20,7 @@ func UpdateImageController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
+		return
 	}
 
 	models.UpdateImageModel(fileID, title, comment)

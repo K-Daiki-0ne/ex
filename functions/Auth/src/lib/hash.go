@@ -7,7 +7,7 @@ func HashPassword(password string) ([]byte, error) {
 	return bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 }
 
-// CompareHashPassword :
+// CompareHashPassword : compare original password with hashed password
 func CompareHashPassword(hash []byte, password string) error {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	if err != nil {

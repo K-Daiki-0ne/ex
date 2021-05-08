@@ -3,10 +3,10 @@ import { Typography } from '@material-ui/core';
 import useStyle from './style';
 
 type Props = {
-  content: string
+  text: string
 }
 
-export const LoginButtonText: FC<Props> = ({content}):JSX.Element => {
+export const ButtonText: FC<Props> = ({ text }):JSX.Element => {
   const classes = useStyle();
   return (
     <Typography 
@@ -14,7 +14,7 @@ export const LoginButtonText: FC<Props> = ({content}):JSX.Element => {
       align="center" 
       className={classes.btnText}
     >
-      {content}
+      {text}
     </Typography>
-)
+  )
 }

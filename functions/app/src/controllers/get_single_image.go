@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//
+// GetSingleImageController : get image's single file controller
 func GetSingleImageController(c *gin.Context) {
 	fileID := c.Query("fileID")
 
@@ -18,6 +18,7 @@ func GetSingleImageController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
+		return
 	}
 
 	data := models.GetSingleImageModel(fileID)

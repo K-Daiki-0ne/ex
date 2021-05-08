@@ -8,9 +8,9 @@ export const RegisterLinkText: FC = (): JSX.Element => {
 
   return (
     <Typography className={classes.registerText}>
-      Don't have account? 
+      アカウントをお持ちでない方は
       <Link href='/register'>
-        <a className={classes.registerLinkText}>  Register</a>
+        <a className={classes.registerLinkText}>こちら</a>
       </Link>
     </Typography>
   )

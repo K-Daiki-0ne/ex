@@ -21,6 +21,7 @@ func Validate(userID string, fileName string, file string) error {
 
 }
 
+// FileIDValidate : check fileID validate function
 func FileIDValidate(fileID string) error {
 	if fileID == "" {
 		return errors.New("require file")
@@ -29,6 +30,7 @@ func FileIDValidate(fileID string) error {
 	return nil
 }
 
+// UserIDValidate : check userID validate function
 func UserIDValidate(userID string) error {
 	if userID == "" {
 		return errors.New("requrie userID")

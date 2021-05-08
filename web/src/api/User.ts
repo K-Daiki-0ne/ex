@@ -1,12 +1,16 @@
 import axios from 'axios';
 import { LoginUserType } from '@src/types/loginUser';
 
-type Login = {
-  id: string;
-  name: string;
-}
-
 class User {
+
+  /**
+   * ログインをおこなうためのメソッド
+   *
+   * @param {string} name
+   * @param {string} pass
+   * @return {object}
+   * @memberof User
+   */
   public async login(name: string, pass: string): Promise<LoginUserType> {
     try {
       const data = await axios.get(`http://localhost:4000/auth/login/${name}/${pass}`);
@@ -18,6 +22,15 @@ class User {
     }
   };
 
+
+  /**
+   * 登録をおこなうためのメソッド
+   *
+   * @param {string} name
+   * @param {string} password
+   * @return {object}
+   * @memberof User
+   */
   public async register(name: string, password: string) {
     try {
       const data = await axios.post(`http://localhost:4000/auth/register/${name}/${password}`);

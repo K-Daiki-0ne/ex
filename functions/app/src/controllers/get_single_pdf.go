@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetSinglePDFController : get PDF's single file controller
 func GetSinglePDFController(c *gin.Context) {
 	fileID := c.Query("fileID")
 
@@ -17,6 +18,7 @@ func GetSinglePDFController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
+		return
 	}
 
 	data := models.GetSinglePdfModel(fileID)

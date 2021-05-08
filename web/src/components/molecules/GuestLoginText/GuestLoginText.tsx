@@ -34,13 +34,12 @@ export const GuestLoginText: FC = (): JSX.Element => {
   return (
     <div>
       <Typography className={classes.guestLoginText}>
-        If you want to try EX ? 
-          <a className={classes.guestLoginLinkText} onClick={guestLoginMoode}> Guest Login</a>
+          <a className={classes.guestLoginLinkText} onClick={guestLoginMoode}>ゲストログイン</a>
       </Typography>
       <Collapse in={open}>
       <Alert severity="error" className={classes.alertTitle}>
         <AlertTitle >Error</AlertTitle>
-          Guest login currentry s currently not supported.
+          現在ゲストログインはサポートされていません。
       </Alert>
       </Collapse>
     </div>

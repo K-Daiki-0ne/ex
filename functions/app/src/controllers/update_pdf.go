@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UpdatePDFController : update PDF's file controller
 func UpdatePDFController(c *gin.Context) {
 	fileID := c.Query("fileID")
 	title := c.Query("title")
@@ -19,6 +20,7 @@ func UpdatePDFController(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"data": "Not receive fileID",
 		})
+		return
 	}
 
 	models.UpdatePDFModel(fileID, title, comment)

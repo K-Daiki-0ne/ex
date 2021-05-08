@@ -1,5 +1,6 @@
 /**
- *  @description 単一のファイルを取得するAPIのエンドポイントを判定する。
+ *  単一のファイルを取得するAPIのエンドポイントを判定する。
+ * 
  *  @param { string } fileID    ファイルのID
  *  @param { stirng } fileType  ファイルの種類
  */

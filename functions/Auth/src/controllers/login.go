@@ -17,11 +17,13 @@ func Login(c *gin.Context) {
 	// Confirm Username is space or not space.
 	if name == "" {
 		c.JSON(http.StatusUnauthorized, "require username")
+		return
 	}
 
 	// Confirm Password is space or not space.
 	if pass == "" {
 		c.JSON(http.StatusUnauthorized, "requrie password")
+		return
 	}
 
 	user := models.GetUser(name, pass)

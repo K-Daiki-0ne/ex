@@ -25,6 +25,7 @@ func PdfController(c *gin.Context) {
 	if err != nil {
 		log.Panic(err)
 		c.String(http.StatusBadRequest, "Bad request")
+		return
 	}
 
 	defer file.Close()
@@ -41,6 +42,7 @@ func PdfController(c *gin.Context) {
 	if suc != nil {
 		fmt.Println(err)
 		c.String(http.StatusBadRequest, "Fatal upload file")
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": "Successfully Uploaded File",

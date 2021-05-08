@@ -12,7 +12,8 @@ import {
   Backdrop,
   Typography
 } from '@material-ui/core';
-import { checkFile } from '@src/lib'
+import { checkFile } from '@src/lib';
+import { PostHeader } from '@src/components/molecules';
 import { ProgressLabel } from '@src/components/organisms';
 import useStyle from './style';
 import axios from 'axios';
@@ -36,7 +37,6 @@ const PostView: React.FC = (): JSX.Element => {
       .then((e) => setUrl(e))
       .catch((err) => console.error(err))
   }, [fileName, uploadTitle, uploadComment])
-  
 
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
@@ -77,15 +77,11 @@ const PostView: React.FC = (): JSX.Element => {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.description}>
-        .txt .jpg .pdfファイルをアップロードできます。
-        <br />
-        アップロードできるファイルはひとつだけです。
-      </Typography>
+      <PostHeader />
       <div className={classes.fileTitle}>
         <TextField 
           required 
-          label="Enter file title" 
+          label="タイトルを入力してください"
           fullWidth
           className={classes.fileTitleColor}
           inputProps={{
@@ -98,11 +94,11 @@ const PostView: React.FC = (): JSX.Element => {
         <div {...getRootProps({className: 'dropzone'})}>
           <CloudUploadIcon className={classes.uploadIcon} />
           <form>
-          <input 
-            {...getInputProps()} 
-            onChange={uploadFile}
-            type='file'
-          />
+            <input 
+              {...getInputProps()} 
+              onChange={uploadFile}
+              type='file'
+            />
           </form>
           <p>{fileName}</p>
         </div>
@@ -112,16 +108,16 @@ const PostView: React.FC = (): JSX.Element => {
       <div onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUploadComment(event.target.value)}>
         <TextareaAutosize 
           aria-label="empty textarea" 
-          placeholder="Please post file comment"
+          placeholder="コメントを入力してください"
           rowsMin={3}
           className={classes.fileCommentContent}
         />
       </div>
       <div onClick={postFile}>
         <IconButton className={classes.postBtn}>
-            <PublishIcon 
-              className={classes.postIcon}
-            />
+          <PublishIcon 
+            className={classes.postIcon}
+          />
         </IconButton>
       </div>
       <Modal
