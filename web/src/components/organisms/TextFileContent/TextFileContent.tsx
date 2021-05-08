@@ -8,7 +8,7 @@ type Props = {
 
 export const TextFileContent: FC<Props> = ({ file }): JSX.Element => {
   const decodeFileBase64 = (base64String: string) => {
-    // From Bytestream to Percent-encoding to Original string
+    // Base64にエンコードされたファイルをatobを用いてデコードする
     return decodeURIComponent(
       atob(base64String)
         .split("")
@@ -19,6 +19,7 @@ export const TextFileContent: FC<Props> = ({ file }): JSX.Element => {
     );
   };
 
+  // デコードされたテキストファイルの内容を表示できるようにする
   const decodeBase64 = decodeFileBase64(
     file.substring(file.indexOf(",") + 1)
   );

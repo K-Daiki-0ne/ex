@@ -1,5 +1,6 @@
 /**
- * @description                 Base64のデータを画面に表示できるようにする
+ * Base64のデータを画面に表示できるようにする
+ * 
  * @param   { string } fileName ファイル名から拡張子を取得する
  * @returns { string }          画面に表示できるようなデータ形式にする
  */

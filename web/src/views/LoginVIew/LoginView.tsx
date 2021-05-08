@@ -9,12 +9,12 @@ import {
 } from '@material-ui/core';
 import { 
   LoginHeader,
-  LoginButtonText
+  ButtonText
 } from '@src/components/atoms';
 import User from '@src/api/User';
 import {
   RegisterLinkText,
-  GuestLoginText
+  GuestLoginText,
 } from '@src/components/molecules';
 import { LoginUserType } from '@src/types';
 import useStyle from './style';
@@ -23,8 +23,8 @@ import useStyle from './style';
 const LoginView: FC = (): JSX.Element => {
   const [loginName, setLoginName] = useState<string>('');
   const [loginPass, setLoginPass] = useState<string>('');
-  const [nameLabel, setNameLabel] = useState<string>('Enter your name');
-  const [passLabel, setPassLabel] = useState<string>('Enter your password');
+  const [nameLabel, setNameLabel] = useState<string>('ユーザーネームを入力してください');
+  const [passLabel, setPassLabel] = useState<string>('パスワードを入力してください');
   const [isNameValid, setIsNameValid] = useState<boolean>(false);
   const [isPassValid, setIsPassValid] = useState<boolean>(false);
 
@@ -45,22 +45,22 @@ const LoginView: FC = (): JSX.Element => {
             router.push(`main/${response.data.ID}`)
           } else {
             if (loginName == '' && loginPass == '') {
-              setNameLabel('Require Name!');
-              setPassLabel('Repuire Password!')
+              setNameLabel('ユーザーネームを入力してください!');
+              setPassLabel('パスワードを入力してください!')
               setIsNameValid(true)
               setIsPassValid(true)
               return;
             } else if (loginName == ''){
-              setNameLabel('Require Name!');
+              setNameLabel('ユーザーネームを入力してください');
               setIsNameValid(true)
               return;
             } else if (loginPass == ''){
-              setPassLabel('Repuire Password!')
+              setPassLabel('パスワードを入力してください!')
               setIsPassValid(true)
               return;
             } else {
-              setNameLabel('Not registerd');
-              setPassLabel('Not registerd')
+              setNameLabel('登録されていないユーザーネームです');
+              setPassLabel('登録されていないパスワードです')
               setIsNameValid(true);
               setIsPassValid(true);
               return;
@@ -121,8 +121,8 @@ const LoginView: FC = (): JSX.Element => {
             fullWidth
             onClick={loginUserInformation}
           >
-            <LoginButtonText 
-              content="LOGIN"
+            <ButtonText 
+              text="LOGIN"
             />
           </Button>
         </CardActions>        

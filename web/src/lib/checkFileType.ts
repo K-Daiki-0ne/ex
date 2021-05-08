@@ -1,5 +1,6 @@
 /**
- *  @description ファイルの拡張子を判定しAPIリクエストのエンドポイントを判定する関数。
+ *  ファイルの拡張子を判定しAPIリクエストのエンドポイントを判定する関数。
+ * 
  *  @param { string } fileName  ファイルの名前
  *  @param { stirng } userID    ユーザーID
  *  @param { stirng } title     アップロードしたファイルのタイトル

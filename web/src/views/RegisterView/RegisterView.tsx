@@ -5,9 +5,12 @@ import {
   CardActions,
   CardContent,
   Button,
-  TextField
+  TextField,
 } from '@material-ui/core';
-import { RegisterHeader } from '@src/components/atoms';
+import { 
+  RegisterHeader,
+  ButtonText
+} from '@src/components/atoms';
 import { RegisterUser } from '@src/types';
 import User from '@src/api/User';
 import useStyle from './style';
@@ -15,8 +18,8 @@ import useStyle from './style';
 const RegisterView: FC = (): JSX.Element => {
   const [registerName, setRegisterName] = useState<string>("");
   const [registerPass, setRegisterPass] = useState<string>("");
-  const [nameLabel, setNameLabel] = useState<string>('Enter your name');
-  const [passLabel, setPassLabel] = useState<string>('Enter your password');
+  const [nameLabel, setNameLabel] = useState<string>('ユーザーネームを入力してください');
+  const [passLabel, setPassLabel] = useState<string>('パスワードを入力してください');
   const [isNameValid, setIsNameValid] = useState<boolean>(false);
   const [isPassValid, setIsPassValid] = useState<boolean>(false);
 
@@ -38,20 +41,20 @@ const RegisterView: FC = (): JSX.Element => {
             console.log(response);
           } else {
             if (registerName == '' && registerPass == '') {
-              setNameLabel('Require Name!');
-              setPassLabel('Repuire Password!');
+              setNameLabel('ユーザーネームを入力してください!');
+              setPassLabel('パスワードを入力してください!');
               setIsNameValid(true);
               setIsPassValid(true);
               return;
             } else if (registerName == ''){
-              setNameLabel('Require Name!');
+              setNameLabel('ユーザーネームを入力してください!');
               setIsNameValid(true);
             } else if (registerPass == ''){
-              setPassLabel('Repuire Password!');
+              setPassLabel('パスワードを入力してください!');
               setIsPassValid(true);
             } else {
-              setNameLabel('aaaaaa');
-              setPassLabel('bbbbbb');
+              setNameLabel('登録できないユーザーネームです');
+              setPassLabel('登録できないパスワードです');
               setIsNameValid(true);
               setIsPassValid(true);
             }      
@@ -66,7 +69,6 @@ const RegisterView: FC = (): JSX.Element => {
   return (
     <div className={classes.register}>
       <RegisterHeader />
-
       <Card className={classes.card}>
         <CardContent>
         <form noValidate autoComplete="on">
@@ -103,13 +105,12 @@ const RegisterView: FC = (): JSX.Element => {
         <CardActions>
           <Button 
             variant="contained" 
-            // color="primary" 
             size="small"
             fullWidth
             className={classes.btn}
             onClick={registerUserInformation}
           >
-              <p>Register</p>
+            <ButtonText text='Register' />
           </Button>
         </CardActions>
       </Card>

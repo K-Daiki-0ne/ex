@@ -2,7 +2,7 @@ import { selector } from 'recoil';
 import { fileTypeState, fileState } from '../atoms';
 import { FileType } from '@src/types';
 
-
+// ファイルの種類をもとにファイル情報を取得する
 export const fileStateSelector = selector({
   key: "fileStateSelector",
   get: ({ get }) => {

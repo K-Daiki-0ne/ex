@@ -9,11 +9,13 @@ const defaultFileState: FileType = {
   text: []
 }
 
+// ファイル情報を格納する
 export const fileState = atom<FileType>({
   key: "fileState",
   default: defaultFileState
 })
 
+// ファイルの種類を格納する
 export const fileTypeState = atom<string>({
   key: "fileTypeState",
   default: fileTypeNumberState

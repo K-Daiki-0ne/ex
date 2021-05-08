@@ -44,28 +44,13 @@ export const EditView: FC = (): JSX.Element => {
 
     setIsLoading(false);
 
-    // if (fileName == '') {
-    //   await setFileName(singleFile.FileName);
-    // } 
-    
-    // if(fileTitle == '') {
-    //   await setFileTitle(singleFile.Title);
-    // } 
-
-    // if(fileComment == '') {
-    //   await setFileComment(singleFile.Comment)
-    // }
-
     const END_POINT = updateSingleURL(fileType, fileId, fileTitle, fileComment)
-
-    console.log(userID)
-    console.log(END_POINT)
 
     setIsLoading(true)
 
     FileAPI.updateSingleFile(END_POINT)
-    .then(() => setIsLoading(true))
-    .then(() => router.push(`/main/${userID}`))
+      .then(() => setIsLoading(true))
+      .then(() => router.push(`/main/${userID}`))
   }
 
   return isLoading ? (

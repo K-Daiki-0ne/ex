@@ -1,5 +1,6 @@
 /**
- *  @description 単一のファイルをアップデートするAPIのエンドポイントを判定する。
+ *  単一のファイルをアップデートするAPIのエンドポイントを判定する。
+ * 
  *  @param { stirng } fileType  ファイルの種類
  *  @param { string } fileID    ファイルのID
  *  @param { string } title     アップロードしたファイルのタイトル

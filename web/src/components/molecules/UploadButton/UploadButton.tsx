@@ -25,7 +25,7 @@ export const UploadButton: FC<Props> = ({ props }):JSX.Element => {
       onClick={goMainPage}
     >
       <Typography>
-        Upload
+        アップロード
       </Typography>
     </Button>
   )
