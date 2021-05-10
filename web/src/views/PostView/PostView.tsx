@@ -10,20 +10,18 @@ import {
   Modal,
   Fade,
   Backdrop,
-  Typography
 } from '@material-ui/core';
 import { checkFile } from '@src/lib';
 import { PostHeader } from '@src/components/molecules';
 import { ProgressLabel } from '@src/components/organisms';
 import useStyle from './style';
 import axios from 'axios';
-import { Alert } from '@material-ui/lab';
 
 const PostView: React.FC = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File>();
   const [url, setUrl] = useState<string>("");
-  const [fileName, setFileName] = useState<string>('Choose File');
+  const [fileName, setFileName] = useState<string>('ファイルを選択してください');
   const [uploadTitle, setUploadTitle] = useState<string>('');
   const [uploadComment, setUploadComment] = useState<string>('');
   const [uploadPercentage, setUploadPercentage] = useState<number>(0);
@@ -101,7 +99,7 @@ const PostView: React.FC = (): JSX.Element => {
           <CloudUploadIcon className={classes.uploadIcon} />
           <form>
             <input 
-              {...getInputProps()} 
+              {...getInputProps()}
               onChange={uploadFile}
               type='file'
             />
