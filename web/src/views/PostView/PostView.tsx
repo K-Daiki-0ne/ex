@@ -17,6 +17,7 @@ import { PostHeader } from '@src/components/molecules';
 import { ProgressLabel } from '@src/components/organisms';
 import useStyle from './style';
 import axios from 'axios';
+import { Alert } from '@material-ui/lab';
 
 const PostView: React.FC = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
@@ -41,6 +42,11 @@ const PostView: React.FC = (): JSX.Element => {
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
   const postFile = async () => {
+    if(!file) {
+      alert('ファイルを取り込んでください');
+      return;
+    }
+
     setOpen(true);
     const fileData = new FormData();
     fileData.append('file', file);
