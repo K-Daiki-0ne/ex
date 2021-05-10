@@ -1,44 +1,73 @@
 import React, { FC, useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
   Card,
   CardActions,
   CardContent,
   Button,
-  Typography,
   TextField
 } from '@material-ui/core';
 import { 
   LoginHeader,
-  LoginButtonText
-} from '../../components/atoms';
-import { getUserInformation } from '../../api'
+  ButtonText
+} from '@src/components/atoms';
+import User from '@src/api/User';
+import {
+  RegisterLinkText,
+  GuestLoginText,
+} from '@src/components/molecules';
+import { LoginUserType } from '@src/types';
 import useStyle from './style';
 
 
 const LoginView: FC = (): JSX.Element => {
   const [loginName, setLoginName] = useState<string>('');
   const [loginPass, setLoginPass] = useState<string>('');
+  const [nameLabel, setNameLabel] = useState<string>('ユーザーネームを入力してください');
+  const [passLabel, setPassLabel] = useState<string>('パスワードを入力してください');
+  const [isNameValid, setIsNameValid] = useState<boolean>(false);
+  const [isPassValid, setIsPassValid] = useState<boolean>(false);
 
   const classes = useStyle();
   const router = useRouter();
 
-  let nameText: string = 'Enter your name';
-  let passText: string = 'Enter your password';
-
   const loginUserInformation = () => {
-
-    if (loginName == '' || loginPass == '') {
-      nameText = 'Require !';
-    } else if (loginPass == ''){
-      passText = 'Repuire!'
+    if (loginName == 'Guest') {
+      setNameLabel('This username cannot be used!');
+      setIsNameValid(true)
+      return;
     }
 
     try {
-      getUserInformation(loginName, loginPass)
-        .then((e) => console.log(e))
-        .then(() => router.push(`main/${loginName}`));
+      User.login(loginName, loginPass)
+        .then((response: LoginUserType) => {
+          if (response.data) {
+            router.push(`main/${response.data.ID}`)
+          } else {
+            if (loginName == '' && loginPass == '') {
+              setNameLabel('ユーザーネームを入力してください!');
+              setPassLabel('パスワードを入力してください!')
+              setIsNameValid(true)
+              setIsPassValid(true)
+              return;
+            } else if (loginName == ''){
+              setNameLabel('ユーザーネームを入力してください');
+              setIsNameValid(true)
+              return;
+            } else if (loginPass == ''){
+              setPassLabel('パスワードを入力してください!')
+              setIsPassValid(true)
+              return;
+            } else {
+              setNameLabel('登録されていないユーザーネームです');
+              setPassLabel('登録されていないパスワードです')
+              setIsNameValid(true);
+              setIsPassValid(true);
+              return;
+            }      
+          }
+        })
+        .catch((err) => console.error(err))
     } catch(err) {
       console.error(err);
       router.push('/login');
@@ -53,11 +82,10 @@ const LoginView: FC = (): JSX.Element => {
         <CardContent>
         <form noValidate autoComplete="on">
           <TextField 
-            // id="standard-basic"
             id="standard-full-width" 
             label="Name"
-            error={false}
-            helperText={nameText}
+            error={isNameValid}
+            helperText={nameLabel}
             fullWidth
             className={classes.root}
             inputProps={{
@@ -70,8 +98,9 @@ const LoginView: FC = (): JSX.Element => {
           <TextField 
             id="filled-basic" 
             label="Password"
+            error={isPassValid}
             type="password"
-            helperText={passText}
+            helperText={passLabel}
             fullWidth
             className={classes.root}
             inputProps={{
@@ -92,30 +121,19 @@ const LoginView: FC = (): JSX.Element => {
             fullWidth
             onClick={loginUserInformation}
           >
-            <LoginButtonText 
-              content="LOGIN"
+            <ButtonText 
+              text="LOGIN"
             />
           </Button>
-        </CardActions>
-        
+        </CardActions>        
         <CardActions className={classes.cardAction}>
-          <Typography className={classes.registerText}>
-            Don't have account? 
-            <Link href='/register'>
-              <a className={classes.registerLinkText}>  Register</a>
-            </Link>
-          </Typography>
+          <RegisterLinkText />
         </CardActions>
       </Card>
       <div>
         <CardActions className={classes.cardAction}>
-            <Typography className={classes.registerText}>
-              If you want to try EX ? 
-              <Link href='/main/guest'>
-                <a className={classes.registerLinkText}> Guest Login</a>
-              </Link>
-            </Typography>
-          </CardActions>
+          <GuestLoginText />
+        </CardActions>
       </div>
     </div>
   )

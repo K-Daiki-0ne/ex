@@ -17,16 +17,25 @@ type Post struct {
 	Description string
 }
 
-// Image : post image file
-func Image(c *gin.Context) {
+// ImageController : post image file
+func ImageController(c *gin.Context) {
 	// Get name query
-	id := c.Query("userID")
+	userID := c.Query("userID")
+
+	// Get uplaod file title
+	title := c.Query("title")
+
+	// Get upload file comment
+	comment := c.Query("comment")
+
+	fmt.Println("aaa", comment)
 
 	file, header, err := c.Request.FormFile("file")
 
 	if err != nil {
 		log.Panic(err)
 		c.String(http.StatusBadRequest, "Bad request")
+		return
 	}
 
 	defer file.Close()
@@ -38,11 +47,12 @@ func Image(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.Image(id, header.Filename, filedata)
+	suc := models.PostImageModel(userID, header.Filename, filedata, title, comment)
 
 	if suc != nil {
 		fmt.Println(err)
 		c.String(http.StatusBadRequest, "Fatal upload file")
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

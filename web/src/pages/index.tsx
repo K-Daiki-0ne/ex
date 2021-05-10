@@ -5,8 +5,8 @@ import { Container } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Enter from '../views/Enter/Enter';
-import useStyle from '../theme/style';
+import Enter from '@src/views/Enter/Enter';
+import useStyle from '@src/theme/style';
 
 export default function Home():JSX.Element {
   const classes = useStyle();

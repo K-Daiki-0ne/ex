@@ -1,76 +1,53 @@
 package controllers
 
 import (
-	"EX/auth/src/middleware"
+	"EX/auth/src/lib"
 	"EX/auth/src/models"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
-
-// User : post user type
-type User struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
-// Response : response user information
-type Response struct {
-	ID       string `json:"id"`
-	Username string `json:"username"`
-}
 
 // Login : get user information from database
 func Login(c *gin.Context) {
 	name := c.Param("name")
 	pass := c.Param("pass")
 
-	var user = User{
-		Username: name,
-		Password: pass,
-	}
-
-	/*
-	 * 取得したユーザーネームとパスワードと一致するかを確認する
-	 * ModelのLoginにnameとpassを引数に入れる
-	 */
-
 	// Confirm Username is space or not space.
-	if user.Username == "" {
+	if name == "" {
 		c.JSON(http.StatusUnauthorized, "require username")
+		return
 	}
 
 	// Confirm Password is space or not space.
-	if user.Password == "" {
+	if pass == "" {
 		c.JSON(http.StatusUnauthorized, "requrie password")
+		return
 	}
 
-	/*
-		Model's Login inputs username password.
-		Hashed password compares origin password in Model Login.
-		If doesn't exit user information that Login controller response error status.
-	*/
+	user := models.GetUser(name, pass)
 
-	suc := models.Login(name, pass)
-
-	if suc == nil {
-		// Create JWT token
-		token, err := middleware.AuthMiddleware(1)
-
-		if err != nil {
-			c.JSON(http.StatusUnprocessableEntity, err.Error())
-			return
-		}
-
-		var response = Response{
-			ID:       token,
-			Username: user.Username,
-		}
-		// If get user information succesfull that Login controller response success status.
-		c.JSON(http.StatusOK, response)
+	// ゲストユーザーの場合はハッシュ化したパスワードとの比較は行わない
+	if name == "Guest" {
+		c.JSON(http.StatusOK, gin.H{
+			"data": user,
+		})
+		return
 	}
 
-	if suc != nil {
-		c.String(http.StatusBadRequest, "Bad Request")
+	hashPassword := models.GetUser(name, pass).Password
+
+	fmt.Println(hashPassword)
+
+	if err := lib.CompareHashPassword([]byte(hashPassword), pass); err != nil {
+		fmt.Println("User exists ...NO")
+		c.JSON(http.StatusUnauthorized, "User does not exist")
+	} else {
+		fmt.Println("User exits ...OK")
+		c.JSON(http.StatusOK, gin.H{
+			"data": user,
+		})
 	}
+
 }

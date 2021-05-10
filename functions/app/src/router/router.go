@@ -10,32 +10,80 @@ import (
 func Router(app *gin.Engine) {
 
 	/*
-	 *  Get all query name's user post files
-	 *	example: http://localhost:5050/app/all/files?name={username}
+	 *  Get all query user's userID post files
+	 *	example: http://localhost:5050/app/all/files?userID={userID}
 	 */
-	app.GET("/app/all/files", controllers.All)
+	app.GET("/app/all/files", controllers.AllController)
 
 	/*
-	 *  Get single query name's user post file
-	 *	example: http://localhost:5050/app/single/file?name={username}
+	 *  Get single query user's userID post file
+	 *	example: http://localhost:5050/app/single/text?fileID={fileID}
 	 */
-	app.GET("/app/single/file", controllers.Single)
+	app.GET("/app/single/text", controllers.GetSingleTextController)
 
 	/*
-	 *  Post query name's user text file
-	 *  example: http://localhost:5050/app/text?name={username}
+	 *  Get single query user's userID post file
+	 *	example: http://localhost:5050/app/single/image?fileID={fileID}
 	 */
-	app.POST("/app/text", controllers.Text)
+	app.GET("/app/single/image", controllers.GetSingleImageController)
 
 	/*
-	 *  Post query name's user image file
-	 *  example: http://localhost:5050/app/image?name={username}
+	 *  Get single query user's userID post file
+	 *	example: http://localhost:5050/app/single/pdf?fileID={fileID}
 	 */
-	app.POST("/app/image", controllers.Image)
+	app.GET("/app/single/pdf", controllers.GetSinglePDFController)
 
 	/*
-	 *  Post query name's user image file
-	 *  example: http://localhost:5050/app/pdf?name={username}
+	 *  Post query user's userID text file
+	 *  example: http://localhost:5050/app/text?userID={userID}
 	 */
-	app.POST("/app/pdf", controllers.Pdf)
+	app.POST("/app/text", controllers.TextController)
+
+	/*
+	 *  Post query user's userID image file
+	 *  example: http://localhost:5050/app/image?userID={userID}
+	 */
+	app.POST("/app/image", controllers.ImageController)
+
+	/*
+	 *  Post query user's userID image file
+	 *  example: http://localhost:5050/app/pdf?userID={userID}
+	 */
+	app.POST("/app/pdf", controllers.PdfController)
+
+	/*
+	 *  Delete query user's userID text file
+	 *  example: http://localhost:5050/app/delete/text?userID={userID}&fileID={fileID}
+	 */
+	app.DELETE("/app/delete/text", controllers.DeleteTextController)
+
+	/*
+	 *  Delete query user's userID image file
+	 *  example: http://localhost:5050/app/delete/image?userID={userID}&fileID={fileID}
+	 */
+	app.DELETE("/app/delete/image", controllers.DeleteImageController)
+
+	/*
+	 *  Delete query user's userID pdf file
+	 *  example: http://localhost:5050/app/delete/pdf?userID={userID}&fileID={fileID}
+	 */
+	app.DELETE("/app/delete/pdf", controllers.DeletePDFController)
+
+	/*
+	 *  Update query fileID's title & comment for texts table
+	 *  example: http://localhost:5050/app/update/text?fileID={fileID}
+	 */
+	app.PUT("/app/update/text", controllers.UpdateTextController)
+
+	/*
+	 *  Update query fileID's title & comment for images table
+	 *  example: http://localhost:5050/app/update/image?fileID={userID}
+	 */
+	app.PUT("/app/update/image", controllers.UpdateImageController)
+
+	/*
+	 *  Update query fileID's title & comment for pdfs table
+	 *  example: http://localhost:5050/app/update/pdf?fileID={userID}
+	 */
+	app.PUT("/app/update/pdf", controllers.UpdatePDFController)
 }

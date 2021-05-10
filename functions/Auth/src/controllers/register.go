@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"EX/auth/src/lib"
 	"EX/auth/src/models"
 	"fmt"
 	"net/http"
@@ -11,30 +10,28 @@ import (
 
 // Register : post user information from database
 func Register(c *gin.Context) {
-	sucMessage := "TRUE"
 	name := c.Param("name")
 	pass := c.Param("pass")
-	hashPass, err := lib.HashPassword(pass)
 
 	if name == "" {
 		c.JSON(http.StatusBadRequest, "require username")
+		return
 	}
 
 	if pass == "" {
 		c.JSON(http.StatusBadRequest, "require username")
+		return
 	}
 
-	if err != nil {
-		errMessage := "Sorry, fatal"
-		c.JSON(http.StatusBadRequest, errMessage)
-	}
-
-	suc := models.Register(name, hashPass)
-
-	if suc != nil {
-		fmt.Println(suc)
-		c.JSON(http.StatusNotFound, err)
+	if err := models.CreateUser(name, pass); err != nil {
+		fmt.Println("User create ...NO")
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "Failed to create User information",
+		})
 	} else {
-		c.JSON(http.StatusOK, sucMessage)
+		fmt.Println("User create ...OK")
+		c.JSON(http.StatusOK, gin.H{
+			"data": name,
+		})
 	}
 }

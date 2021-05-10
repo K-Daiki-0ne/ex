@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-const ProgressLabel = (props: LinearProgressProps & { value: number }): JSX.Element => {
+export const ProgressLabel = (props: LinearProgressProps & { value: number }): JSX.Element => {
   return (
     <Box display="flex" alignItems="center">
       <Box width="100%" mr={1}>
@@ -17,5 +17,3 @@ const ProgressLabel = (props: LinearProgressProps & { value: number }): JSX.Elem
     </Box>
   );
 }
-
-export default ProgressLabel;

@@ -1,82 +1,61 @@
-import React, { useState } from 'react';
-import Link from 'next/link'
-import { 
-  IconButton,
-  Card,
-  CardContent,
-  Typography,
-  BottomNavigation,
-  BottomNavigationAction
-} from '@material-ui/core';
-
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import DeleteIcon from '@material-ui/icons/Delete';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
-
+import React, { FC, useState, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Pagination } from '@material-ui/lab';
+import { useRouter } from 'next/router';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { UploadButton } from '@src/components/molecules';
+import { 
+  CheckFileType,
+  FileDataCard
+} from '@src/components/organisms';
+import FileAPI from '@src/api/File';
+import { FileType, File } from '@src/types'
+import { fileState, userInfoState } from '@src/store/atoms'
+import { fileStateSelector } from '@src/store/selectors/fileStateSelector';
 import useStyle from './style';
 
-const MainView: React.FC = (): JSX.Element => {
-  const classes = useStyle();
-  const [value, setValue] = useState<number>(0)
-  return (
+const MainView: FC = (): JSX.Element => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [ , setFileListState ]    = useRecoilState(fileState);
+  const [ , setUserIDState]       = useRecoilState(userInfoState)
+  const fileList                  = useRecoilValue(fileStateSelector)
+
+  const classes     = useStyle();
+  const router      = useRouter();
+  const { userId }  = router.query;
+
+  useEffect(() => {
+    setIsLoading(false)
+    FileAPI.getAllFiles(userId)
+      .then((data: FileType) => setFileListState(data))
+      .then(() => setIsLoading(true))
+    setUserIDState(userId)
+    }, [])
+
+  return isLoading ? (
     <div className={classes.root}>
-      <div className={classes.btn}>
-        <IconButton 
-          aria-label="add"
-          size="small"
-        >
-          <Link href='/post/12345'>
-            <AddCircleIcon className={classes.iconSize} />
-          </Link>
-        </IconButton>
-      </div>
       <div className={classes.bottomArea}>
-        <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-          className={classes.tabMenu}
-        >
-          <BottomNavigationAction 
-            label="Text" 
-            icon={<TextFieldsIcon />}
-            className={classes.iconColor}
-          />
-          <BottomNavigationAction 
-            label="Images" 
-            icon={<ImageIcon />}
-            className={classes.iconColor}
-          />
-          <BottomNavigationAction 
-            label="PDF" 
-            icon={<PictureAsPdfIcon />}
-            className={classes.iconColor}
-          />
-        </BottomNavigation>
+        <UploadButton 
+          props={userId}
+        />
+        <CheckFileType />
       </div>
-      <div>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography className={classes.dairyContent}>
-              2020/11/13
-            </Typography>
-            <Typography className={classes.fileTitle}>
-              Word of the Day
-            </Typography>
-            <IconButton aria-label="delete" className={classes.deleteBtn}>
-              <DeleteIcon className={classes.deleteIcon} />
-            </IconButton>
-          </CardContent>
-        </Card>
-      </div>
+      {
+        fileList.map((files: File, index: number) => {
+          return (
+            <div key={index}>
+              <FileDataCard props={files}/>
+            </div>
+          )
+        })
+      }
       <div className={classes.page}>
-        <Pagination count={10} className={classes.selected} />
+        <Pagination count={10} classes={{ ul: classes.ul }} />
       </div>
+    </div>
+  ) : (
+    <div className={classes.root}>
+      <CircularProgress size={140}/>
     </div>
   )
 }

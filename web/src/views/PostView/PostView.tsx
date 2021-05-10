@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useDropzone} from 'react-dropzone';
 import { useRouter } from 'next/router';
-import { checkFile } from '../../lib/checkFileType'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import PublishIcon from '@material-ui/icons/Publish';
 import {
@@ -11,9 +10,10 @@ import {
   Modal,
   Fade,
   Backdrop,
-  Typography
 } from '@material-ui/core';
-import ProgressLabel from '../../components/organisms/ProgressLabel/ProgressLabel';
+import { checkFile } from '@src/lib';
+import { PostHeader } from '@src/components/molecules';
+import { ProgressLabel } from '@src/components/organisms';
 import useStyle from './style';
 import axios from 'axios';
 
@@ -21,28 +21,32 @@ const PostView: React.FC = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File>();
   const [url, setUrl] = useState<string>("");
-  const [fileName, setFileName] = useState<string>('Choose File');
+  const [fileName, setFileName] = useState<string>('ファイルを選択してください');
   const [uploadTitle, setUploadTitle] = useState<string>('');
   const [uploadComment, setUploadComment] = useState<string>('');
   const [uploadPercentage, setUploadPercentage] = useState<number>(0);
 
-  useEffect(() => {
-    const reqUrl = checkFile(fileName, "12345");
-    reqUrl
-    .then((e) => setUrl(e))
-    .catch((err) => console.log(err))
-  }, [fileName])
-  
   const classes = useStyle();
-
   const router = useRouter();
+  const { userId } = router.query;
+
+  useEffect(() => {
+    const reqUrl = checkFile(fileName, userId, uploadTitle, uploadComment);
+    reqUrl
+      .then((e) => setUrl(e))
+      .catch((err) => console.error(err))
+  }, [fileName, uploadTitle, uploadComment])
 
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
   const postFile = async () => {
+    if(!file) {
+      alert('ファイルを取り込んでください');
+      return;
+    }
+
     setOpen(true);
     const fileData = new FormData();
-    console.log(file)
     fileData.append('file', file);
 
     try {
@@ -58,7 +62,7 @@ const PostView: React.FC = (): JSX.Element => {
         }
       )
       await setTimeout(() => {
-        router.push('/main/user')
+        router.push(`/main/${userId}`)
       }, 1800);
     } catch (err) {
       console.log(typeof(err));
@@ -77,15 +81,11 @@ const PostView: React.FC = (): JSX.Element => {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.description}>
-        .txt .jpg .pdfファイルをアップロードできます。
-        <br />
-        アップロードできるファイルはひとつだけです。
-      </Typography>
+      <PostHeader />
       <div className={classes.fileTitle}>
         <TextField 
           required 
-          label="Enter file title" 
+          label="タイトルを入力してください"
           fullWidth
           className={classes.fileTitleColor}
           inputProps={{
@@ -98,11 +98,11 @@ const PostView: React.FC = (): JSX.Element => {
         <div {...getRootProps({className: 'dropzone'})}>
           <CloudUploadIcon className={classes.uploadIcon} />
           <form>
-          <input 
-            {...getInputProps()} 
-            onChange={uploadFile}
-            type='file'
-          />
+            <input 
+              {...getInputProps()}
+              onChange={uploadFile}
+              type='file'
+            />
           </form>
           <p>{fileName}</p>
         </div>
@@ -112,18 +112,16 @@ const PostView: React.FC = (): JSX.Element => {
       <div onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUploadComment(event.target.value)}>
         <TextareaAutosize 
           aria-label="empty textarea" 
-          placeholder="Please post file comment"
+          placeholder="コメントを入力してください"
           rowsMin={3}
           className={classes.fileCommentContent}
         />
       </div>
       <div onClick={postFile}>
         <IconButton className={classes.postBtn}>
-          {/* <Link href='/main/1223'> */}
-            <PublishIcon 
-              className={classes.postIcon}
-            />
-          {/* </Link> */}
+          <PublishIcon 
+            className={classes.postIcon}
+          />
         </IconButton>
       </div>
       <Modal

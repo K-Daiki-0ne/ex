@@ -12,8 +12,8 @@ import (
 // User : user type
 type User struct {
 	gorm.Model
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `json:"username" binding:"required" gorm:"unique;not null"`
+	Password string `json:"password" binding:"required"`
 }
 
 // Connect : Database connect function
@@ -35,6 +35,10 @@ func Connect() *gorm.DB {
 		fmt.Println("DB connect ...NO")
 	} else {
 		db.AutoMigrate(&User{})
+
+		// Guest User用に事前の事前作成
+		db.Create(&User{Username: "Guest", Password: "12345"})
+
 		fmt.Println("DB connect ...OK")
 	}
 	return db

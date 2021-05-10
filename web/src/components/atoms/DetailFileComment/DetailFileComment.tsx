@@ -3,18 +3,20 @@ import { Typography } from '@material-ui/core';
 import useStyle from './style';
 
 type Props = {
-  content: string
+  comment: string
 }
 
-export const LoginButtonText: FC<Props> = ({content}):JSX.Element => {
+export const DetailFileComment: FC<Props> = ({ comment }):JSX.Element => {
   const classes = useStyle();
+
   return (
     <Typography 
       gutterBottom 
-      align="center" 
-      className={classes.btnText}
+      variant="h5" 
+      component="h2"
+      className={classes.detailFileComment}
     >
-      {content}
+      { comment }
     </Typography>
-)
+  )
 }

@@ -10,15 +10,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Pdf : post pdf file
-func Pdf(c *gin.Context) {
+// PdfController : post pdf file
+func PdfController(c *gin.Context) {
 	// Get name query
-	id := c.Query("userID")
+	userID := c.Query("userID")
+
+	// Get uplaod file title
+	title := c.Query("title")
+
+	// Get upload file comment
+	comment := c.Query("comment")
 
 	file, header, err := c.Request.FormFile("file")
 	if err != nil {
 		log.Panic(err)
 		c.String(http.StatusBadRequest, "Bad request")
+		return
 	}
 
 	defer file.Close()
@@ -30,11 +37,12 @@ func Pdf(c *gin.Context) {
 	// Encode file to string
 	filedata := base64.StdEncoding.EncodeToString(data)
 
-	suc := models.PDF(id, header.Filename, filedata)
+	suc := models.PDFModel(userID, header.Filename, filedata, title, comment)
 
 	if suc != nil {
 		fmt.Println(err)
 		c.String(http.StatusBadRequest, "Fatal upload file")
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"status": "Successfully Uploaded File",

@@ -16,24 +16,14 @@ const useStyle = makeStyles((theme) =>({
     backgroundColor: 'transparent',
     color:'#90caf9',
   },
-  btn: {
-    position: "fixed",
-    top: "10%",
-    right: "10%"
-  },
   iconSize: {
-    fontSize: "80px",
+    fontSize: "43px",
     color: "#9e9e9e"
   },
   bottomArea: {
-    paddingBottom: "30px",
-    marginTop: "-35%",
-    // height: 100
+    marginTop: "-80%",
   },
-  tabMenu: {
-    backgroundColor: "#202124",
-    width: 350
-  },
+  
   iconColor: {
     color: "#9e9e9e",
   },
@@ -63,6 +53,11 @@ const useStyle = makeStyles((theme) =>({
     textAlign: "center",
     position: "fixed"
   },
+  ul: {
+    "& .MuiPaginationItem-root": {
+      color: "#9e9e9e"
+    }
+  }
 }));
 
 
