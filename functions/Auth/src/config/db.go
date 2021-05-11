@@ -33,6 +33,7 @@ func Connect() *gorm.DB {
 
 	if err != nil {
 		fmt.Println("DB connect ...NO")
+		return nil
 	} else {
 		db.AutoMigrate(&User{})
 

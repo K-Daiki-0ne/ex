@@ -14,11 +14,14 @@ func TestHashPassword(t *testing.T) {
 
 	if err != nil {
 		t.Fatalf("Test HashPassword ...NO")
+		return
 	}
 
-	t.Log(suc)
-
-	t.Log("Test HashPassword ...OK")
+	if suc != nil {
+		t.Log("Test HashPassword ...OK")
+	} else {
+		t.Fatalf("Fatal create hashed password")
+	}
 }
 
 func TestCompareHashPassword(t *testing.T) {
@@ -26,12 +29,14 @@ func TestCompareHashPassword(t *testing.T) {
 
 	if fail != nil {
 		t.Fatalf("Create HashPassword ...NO")
+		return
 	}
 
 	err := lib.CompareHashPassword(hashedPass, password)
 
 	if err != nil {
 		t.Fatalf("Test CompareHashPassword ...NO")
+		return
 	}
 
 	t.Log("Test CompareHashPassword ...OK")
