@@ -6,7 +6,7 @@
  *  @param { stirng } title     アップロードしたファイルのタイトル
  *  @param { string } comment   アップロードしたファイルのコメント
  */
-export const checkFile = async (fileName: string, userID: string | string[], title: string, comment: string): Promise<string> => {
+export const checkFile = (fileName: string, userID: string | string[], title: string, comment: string): string => {
   if (!fileName) {
     throw new Error("Not exit File");
   };
