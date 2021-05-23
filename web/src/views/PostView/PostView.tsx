@@ -32,9 +32,7 @@ const PostView: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     const reqUrl = checkFile(fileName, userId, uploadTitle, uploadComment);
-    reqUrl
-      .then((e) => setUrl(e))
-      .catch((err) => console.error(err))
+    setUrl(reqUrl)
   }, [fileName, uploadTitle, uploadComment])
 
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();

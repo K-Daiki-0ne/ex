@@ -1,0 +1,7 @@
+{
+  // JestでTypeScriptを使用するための設定ファイル
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react"
+  }
+}
