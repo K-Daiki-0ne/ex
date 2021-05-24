@@ -21,14 +21,12 @@ describe('ButtonText component test', () => {
   it('div tag rendering test', () => {
     const div = wrapper.find('div');
     expect(div).toBeTruthy();
-    expect(div.length).toBe(1)
   });
 
 
   it('material-ui typography component rendering test', () => {
     const typography = wrapper.find(Typography);
     expect(typography).toBeTruthy();
-    expect(typography.length).toBe(1);
   });
 
 })

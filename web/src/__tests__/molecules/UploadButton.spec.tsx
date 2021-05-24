@@ -34,13 +34,11 @@ describe('ButtonText component test', () => {
   it('material-ui typography component rendering test', () => {
     const button = wrapper.find(Button);
     expect(button).toBeTruthy();
-    expect(button.length).toBe(1);
   });
 
   it('material-ui typography component rendering test', () => {
     const typography = wrapper.find(Typography);
     expect(typography).toBeTruthy();
-    expect(typography.length).toBe(1);
   });
 
   it('props test', () => {

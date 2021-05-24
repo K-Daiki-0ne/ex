@@ -34,7 +34,6 @@ describe('ButtonText component test', () => {
   it('material-ui typography component rendering test', () => {
     const typography = wrapper.find(Typography);
     expect(typography).toBeTruthy();
-    expect(typography.length).toBe(1);
   });
 
   it('props test', () => {

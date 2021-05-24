@@ -26,31 +26,26 @@ describe('ButtonText component test', () => {
   it('div tag rendering test', () => {
     const div = wrapper.find('div');
     expect(div).toBeTruthy();
-    expect(div.length).toBe(1)
   });
 
 
   it('material-ui typography component rendering test', () => {
     const typography = wrapper.find(Typography);
     expect(typography).toBeTruthy();
-    expect(typography.length).toBe(1);
   });
 
   it('material-ui Collapse component rendering test', () => {
     const collapse = wrapper.find(Collapse);
     expect(collapse).toBeTruthy();
-    expect(collapse.length).toBe(1);
   });
 
   it('material-ui Alert component rendering test', () => {
     const alert = wrapper.find(Alert);
     expect(alert).toBeTruthy();
-    expect(alert.length).toBe(1);
   });
 
   it('material-ui AlertTitle component rendering test', () => {
     const alertTitle = wrapper.find(AlertTitle);
     expect(alertTitle).toBeTruthy();
-    expect(alertTitle.length).toBe(1);
   });
 })

@@ -27,9 +27,14 @@ module.exports = {
       'tsConfig': '<rootDir>/test/tsconfig.jest.json'
     }
   },
+  modulePaths: [
+    "<rootDir>/@src/"
+  ],
 
-  // sass及びCSSの設定
-  "moduleNameMapper": {
-    "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+  moduleNameMapper: {
+    // sass及びCSSの設定
+    "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
+    // 絶対パスについての設定
+    "@src(.*)$": "<rootDir>/src/$1"
   }
 };

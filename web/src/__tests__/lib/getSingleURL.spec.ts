@@ -20,7 +20,7 @@ describe('Test URL determination based on file type', () => {
   });
 
   it('text file endpoint test', () => {
-    const pdfFileEndPoint: string    = getSingleURL(smpPDFFile, smpPDFFile);
+    const pdfFileEndPoint: string    = getSingleURL(smpFileID, smpPDFFile);
     const sucPDFFileEndPoint: string = 'http://localhost:5050/app/single/pdf?fileID=12345';
     expect(pdfFileEndPoint).toEqual(sucPDFFileEndPoint);    
   });
