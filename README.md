@@ -57,9 +57,9 @@ EXはファイルを保存するWebクラウドストレージアプリケーシ
 
 より詳細な内容や環境の構築などを知りたい人は以下リンクからお願いします。
 
-フロントの詳細情報は[こちらから]('./web/README.md')
+フロントの詳細情報は[こちらから]('https://github.com/K-Daiki-0ne/ex/tree/main/web#readme)
 
-バックエンドの詳細情報は[こちらから]('./functions/README.md')
+バックエンドの詳細情報は[こちらから]('https://github.com/K-Daiki-0ne/ex/tree/main/functions#readme)
 
 ## Author
 
