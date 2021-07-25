@@ -29,17 +29,18 @@ const PostView: React.FC = (): JSX.Element => {
   const classes = useStyle();
   const router = useRouter();
   const { userId } = router.query;
-
-  useEffect(() => {
-    const reqUrl = checkFile(fileName, userId, uploadTitle, uploadComment);
-    setUrl(reqUrl)
-  }, [fileName, uploadTitle, uploadComment])
-
   const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
 
   const postFile = async () => {
     if(!file) {
       alert('ファイルを取り込んでください');
+      return;
+    }
+
+    const reqUrl = checkFile(fileName, userId, uploadTitle, uploadComment);
+    try {
+      setUrl(reqUrl)      
+    } catch (error) { 
       return;
     }
 
@@ -71,6 +72,7 @@ const PostView: React.FC = (): JSX.Element => {
     event.preventDefault()
     setFile(event.target.files[0]);
     setFileName(event.target.files[0].name);
+
   }
 
   function closeModal() {
