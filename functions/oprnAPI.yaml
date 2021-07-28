@@ -1,0 +1,582 @@
+openapi: 3.0.0
+info: 
+  title: EX APIs
+  version: 1.0.0
+paths:
+  /auth/login/${name}/${pass}:
+    get:
+      operationId: getSingleUserInformation
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pass  
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get Single User
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+              example: # サンプルデータ
+                data:
+                  ID: 1
+                  CreatedAt: "2021-03-05T22:04:02+09:00"
+                  UpdatedAt: "2021-03-05T22:04:02+09:00"
+                  DeletedAt: "0001-01-01T00:00:00Z"
+                  username: "sample"
+                  password: "LBvuZJoSzchvves3UXkgi.t2LHibc"
+        '401':
+          description: login Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              example:
+                'User does not exist'
+                
+  /auth/register/${name}/${pass}:
+    post:
+      operationId: registerUserInformation
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pass  
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Register User
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+              example: # サンプルデータ
+                data: "sample"
+        '404':
+          description: Failed to register user
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+              example: # サンプルデータ
+                status: 'Failed to create User information'
+  /app/all/files:
+    get:
+      operationId: GetAllFiles
+      parameters:
+        - name: userID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get All Files
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/UserID'
+              example: 
+                image:
+                  - ID: 1
+                    CreatedAt: '2021-04-04T21:55:11.243+09:00'
+                    UpdatedAt: '2021-04-04T21:55:11.243+09:00'
+                    DeletedAt: '2021-04-04T21:55:11.243+09:00'
+                    userid: '1'
+                    FileName: 'sample.png'
+                    file: 'sdfafsafdsff8afdsafda'
+                    Title: 'sample'
+                    Comment: 'sample'
+                pdf:
+                  - ID: 2
+                    CreatedAt: '2021-04-04T21:55:11.243+09:00'
+                    UpdatedAt: '2021-04-04T21:55:11.243+09:00'
+                    DeletedAt: '2021-04-04T21:55:11.243+09:00'
+                    userid: '1'
+                    FileName: 'sample.pdf'
+                    file: 'sdfafsafdsff8afdsafda'
+                    Title: 'sample'
+                    Comment: 'sample'
+                text:
+                  - ID: 2
+                    CreatedAt: '2021-04-04T21:55:11.243+09:00'
+                    UpdatedAt: '2021-04-04T21:55:11.243+09:00'
+                    DeletedAt: '2021-04-04T21:55:11.243+09:00'
+                    userid: '1'
+                    FileName: 'sample.txt'
+                    file: 'sdfafsafdsff8afdsafda'
+                    Title: 'sample'
+                    Comment: 'sample'
+        '404':
+          description: Failed to get user's all files
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/UserID'
+              example: # サンプルデータ
+                data: 'Require userID'
+
+
+  /app/single/text:
+    get:
+      operationId: GetSingleTextFiles
+      parameters:
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get single text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data:
+                  ID: 2
+                  CreatedAt: '2021-04-04T21:55:11.243+09:00'
+                  UpdatedAt: '2021-04-04T21:55:11.243+09:00'
+                  DeletedAt: '2021-04-04T21:55:11.243+09:00'
+                  userid: '1'
+                  FileName: 'sample.txt'
+                  file: 'sdfafsafdsff8afdsafda'
+                  Title: 'sample'
+                  Comment: 'sample'
+        '404':
+          description: Failed to get single text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Not receive fileID'
+
+  /app/single/image:
+    get:
+      operationId: GetSingleImageFiles
+      parameters:
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get single image file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data:
+                  ID: 2
+                  CreatedAt: '2021-04-04T21:55:11.243+09:00'
+                  UpdatedAt: '2021-04-04T21:55:11.243+09:00'
+                  DeletedAt: '2021-04-04T21:55:11.243+09:00'
+                  userid: '1'
+                  FileName: 'sample.png'
+                  file: 'sdfafsafdsff8afdsafda'
+                  Title: 'sample'
+                  Comment: 'sample'
+        '404':
+          description: Failed to get single image file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Not receive fileID'
+
+  /app/single/pdf:
+    get:
+      operationId: GetSinglePDFFiles
+      parameters:
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get single pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data:
+                  ID: 2
+                  CreatedAt: '2021-04-04T21:55:11.243+09:00'
+                  UpdatedAt: '2021-04-04T21:55:11.243+09:00'
+                  DeletedAt: '2021-04-04T21:55:11.243+09:00'
+                  userid: '1'
+                  FileName: 'sample.pdf'
+                  file: 'sdfafsafdsff8afdsafda'
+                  Title: 'sample'
+                  Comment: 'sample'
+        '404':
+          description: Failed to get single pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Not receive fileID'
+
+  /app/text":
+    post:
+      operationId: PostTextFile
+      parameters:
+        - name: userID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: comment
+          in: query
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: Post text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                status: 'Successfully Uploaded File'
+        '404':
+          description: Fatal upload text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Fatal upload file'
+  
+  /app/image":
+    post:
+      operationId: PostImageFile
+      parameters:
+        - name: userID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: comment
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Post text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                status: 'Successfully Uploaded File'
+        '404':
+          description: Fatal upload text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Fatal upload file'
+  /app/pdf":
+    post:
+      operationId: PostPDFFile
+      parameters:
+        - name: userID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: comment
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Post pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                status: 'Successfully Uploaded File'
+        '404':
+          description: Fatal upload pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Fatal upload file'
+
+  /app/delete/text:
+    delete:
+      operationId: DelteTextFile
+      parameters:
+        - name: userID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data: 'OK'
+        '404':
+          description: Fatal delete pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Fatal upload file'
+  /app/delete/image:
+    delete:
+      operationId: DelteImageFile
+      parameters:
+        - name: userID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete image file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data: 'OK'
+        '404':
+          description: Fatal delete image file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Fatal upload file'
+  /app/delete/pdf:
+    delete:
+      operationId: DeltePDFFile
+      parameters:
+        - name: userID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete PDF file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data: 'OK'
+        '404':
+          description: Fatal delete PDF file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Fatal upload file'
+
+  /app/update/text:
+    put:
+      operationId: DelteTextFile
+      parameters:
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: Comment
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data: 'Update Text table'
+        '404':
+          description: Fatal delete text file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Not receive fileID'
+  /app/update/image:
+    put:
+      operationId: DelteImageFile
+      parameters:
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: Comment
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete image file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data: 'Update Image table'
+        '404':
+          description: Fatal delete image file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Not receive fileID'
+  /app/update/pdf:
+    put:
+      operationId: DeltePDFFile
+      parameters:
+        - name: fileID
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: Comment
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: 
+                data: 'Update PDF table'
+        '404':
+          description: Fatal delete pdf file
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/FileID'
+              example: # サンプルデータ
+                data: 'Not receive fileID'
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - name
+        - pass
+      properties:
+        name:
+          type: string
+          format: string
+        pass:
+          type: string
+          format: string
+    UserID:
+      type: string
+      required:
+        - userID
+      properties:
+        userID:
+          type: string
+          format: string
+    FileID:
+      type: string
+      required:
+        - userID
+      properties:
+        userID:
+          type: string
+          format: string

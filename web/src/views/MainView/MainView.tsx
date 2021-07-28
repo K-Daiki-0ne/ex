@@ -15,7 +15,8 @@ import { fileStateSelector } from '@src/store/selectors/fileStateSelector';
 import useStyle from './style';
 
 const MainView: FC = (): JSX.Element => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [ , setFileListState ]    = useRecoilState(fileState);
   const [ , setUserIDState]       = useRecoilState(userInfoState)
   const fileList                  = useRecoilValue(fileStateSelector)
@@ -30,7 +31,18 @@ const MainView: FC = (): JSX.Element => {
       .then((data: FileType) => setFileListState(data))
       .then(() => setIsLoading(true))
     setUserIDState(userId)
-    }, [])
+  }, [])
+
+  // Get current news
+  const filePerPage: number = 5;
+  const indexOfLastFile:number = currentPage * filePerPage;
+  const indexOfFirstFile:number = indexOfLastFile - filePerPage;
+  const currentFile: any = fileList.slice(indexOfFirstFile, indexOfLastFile);
+
+  // Change page
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
   return isLoading ? (
     <div className={classes.root}>
@@ -41,7 +53,7 @@ const MainView: FC = (): JSX.Element => {
         <CheckFileType />
       </div>
       {
-        fileList.map((files: File, index: number) => {
+        currentFile.map((files: File, index: number) => {
           return (
             <div key={index}>
               <FileDataCard props={files}/>
@@ -50,7 +62,10 @@ const MainView: FC = (): JSX.Element => {
         })
       }
       <div className={classes.page}>
-        <Pagination count={10} classes={{ ul: classes.ul }} />
+        <Pagination
+          classes={{ ul: classes.ul }} 
+          onChange={handleChangePage}
+        />
       </div>
     </div>
   ) : (
