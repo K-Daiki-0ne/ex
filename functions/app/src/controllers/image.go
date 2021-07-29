@@ -59,3 +59,71 @@ func ImageController(c *gin.Context) {
 		"status": "Successfully Uploaded File",
 	})
 }
+
+// GetSingleImageController : get image's single file controller
+func GetSingleImageController(c *gin.Context) {
+	fileID := c.Query("fileID")
+
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"data": "Not receive fileID",
+		})
+		return
+	}
+
+	data := models.GetSingleImageModel(fileID)
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": data,
+	})
+}
+
+// DeleteImageController : delete image's file controller
+func DeleteImageController(c *gin.Context) {
+	userID := c.Query("userID")
+	fileID := c.Query("fileID")
+
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"data": "Require fileID",
+		})
+		return
+	}
+
+	suc := models.DeleteImageModel(userID, fileID)
+
+	if suc != "OK" {
+		c.JSON(http.StatusBadRequest, "Fatal upload file")
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": suc,
+	})
+}
+
+// UpdateImageController : update image's file controller
+func UpdateImageController(c *gin.Context) {
+	fileID := c.Query("fileID")
+	title := c.Query("title")
+	comment := c.Query("comment")
+
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"data": "Not receive fileID",
+		})
+		return
+	}
+
+	models.UpdateImageModel(fileID, title, comment)
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": "Update Image table",
+	})
+}
