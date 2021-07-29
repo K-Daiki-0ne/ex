@@ -18,7 +18,7 @@ import {
 import FileAPI from '@src/api/File';
 import useStyle from './style';
 
-export const EditView: FC = (): JSX.Element => {
+const EditView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [singleFile, setSingleFile] = useState<FileAPIType>();
   const [fileName, setFileName] = useState<string>('');
@@ -110,3 +110,5 @@ export const EditView: FC = (): JSX.Element => {
     </div>
   )
 }
+
+export default EditView;

@@ -28,7 +28,7 @@ import {
 } from '@src/components/organisms';
 import useStyle from './style';
 
-export const DetailView: FC = (): JSX.Element => {
+const DetailView: FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [singleFile, setSingleFile] = useState<FileAPIType>();
   const [base64String, setBase64String] = useState<string>('');
@@ -100,3 +100,5 @@ export const DetailView: FC = (): JSX.Element => {
     </div>
   )
 }
+
+export default DetailView;
