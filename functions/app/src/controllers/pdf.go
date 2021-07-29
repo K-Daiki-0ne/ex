@@ -48,3 +48,72 @@ func PdfController(c *gin.Context) {
 		"status": "Successfully Uploaded File",
 	})
 }
+
+// GetSinglePDFController : get PDF's single file controller
+func GetSinglePDFController(c *gin.Context) {
+	fileID := c.Query("fileID")
+
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"data": "Not receive fileID",
+		})
+		return
+	}
+
+	data := models.GetSinglePdfModel(fileID)
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": data,
+	})
+}
+
+// DeletePDFController : delete PDF's file controller
+func DeletePDFController(c *gin.Context) {
+	userID := c.Query("userID")
+	fileID := c.Query("fileID")
+
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"data": "Require fileID",
+		})
+		return
+	}
+
+	suc := models.DeletePDFModel(userID, fileID)
+
+	if suc != "OK" {
+		c.JSON(http.StatusBadRequest, "Fatal upload file")
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": suc,
+	})
+}
+
+// UpdatePDFController : update PDF's file controller
+func UpdatePDFController(c *gin.Context) {
+	fileID := c.Query("fileID")
+	title := c.Query("title")
+	comment := c.Query("comment")
+
+	err := libs.FileIDValidate(fileID)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"data": "Not receive fileID",
+		})
+		return
+	}
+
+	models.UpdatePDFModel(fileID, title, comment)
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": "Update PDF table",
+	})
+
+}
