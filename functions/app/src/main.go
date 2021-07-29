@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-
+	config.Connect()
 }
 
 func main() {
@@ -22,7 +22,6 @@ func main() {
 		AllowCredentials: true,
 	}))
 	router.Router(app)
-	config.Connect()
 	fmt.Println("APP server listening ...OK")
 	defer config.Close()
 	app.Run(":5050")
