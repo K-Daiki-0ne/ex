@@ -17,6 +17,7 @@ import {
   GuestLoginText,
 } from '@src/components/molecules';
 import { LoginUserType } from '@src/types';
+import { useForm } from '../../hook/useForm';
 import useStyle from './style';
 
 
@@ -44,27 +45,16 @@ const LoginView: FC = (): JSX.Element => {
           if (response.data) {
             router.push(`main/${response.data.ID}`)
           } else {
-            if (loginName == '' && loginPass == '') {
-              setNameLabel('ユーザーネームを入力してください!');
-              setPassLabel('パスワードを入力してください!')
-              setIsNameValid(true)
-              setIsPassValid(true)
-              return;
-            } else if (loginName == ''){
-              setNameLabel('ユーザーネームを入力してください');
-              setIsNameValid(true)
-              return;
-            } else if (loginPass == ''){
-              setPassLabel('パスワードを入力してください!')
-              setIsPassValid(true)
-              return;
-            } else {
-              setNameLabel('登録されていないユーザーネームです');
-              setPassLabel('登録されていないパスワードです')
-              setIsNameValid(true);
-              setIsPassValid(true);
-              return;
-            }      
+            const{
+              name,
+              pass,
+              isName,
+              isPass
+            } = useForm(loginName, loginPass, true);
+            setNameLabel(name);
+            setPassLabel(pass);
+            setIsNameValid(isName);
+            setIsPassValid(isPass);
           }
         })
         .catch((err) => console.error(err))

@@ -14,6 +14,7 @@ import {
 import { RegisterUser } from '@src/types';
 import User from '@src/api/User';
 import useStyle from './style';
+import { useForm } from '../../hook/useForm';
 
 const RegisterView: FC = (): JSX.Element => {
   const [registerName, setRegisterName] = useState<string>("");
@@ -23,13 +24,12 @@ const RegisterView: FC = (): JSX.Element => {
   const [isNameValid, setIsNameValid] = useState<boolean>(false);
   const [isPassValid, setIsPassValid] = useState<boolean>(false);
 
-
   const classes = useStyle();
   const router = useRouter();
 
   const registerUserInformation = () => {
     if (registerName == 'Guest') {
-      setNameLabel('This username can not be used');
+      setNameLabel('使用できないユーザーネームです！');
       setIsNameValid(true)
       return;
     }
@@ -38,31 +38,22 @@ const RegisterView: FC = (): JSX.Element => {
         .then((response: RegisterUser) => {
           if(response.data) {
             router.push(`/main/${response.data}`)
-            console.log(response);
           } else {
-            if (registerName == '' && registerPass == '') {
-              setNameLabel('ユーザーネームを入力してください!');
-              setPassLabel('パスワードを入力してください!');
-              setIsNameValid(true);
-              setIsPassValid(true);
-              return;
-            } else if (registerName == ''){
-              setNameLabel('ユーザーネームを入力してください!');
-              setIsNameValid(true);
-            } else if (registerPass == ''){
-              setPassLabel('パスワードを入力してください!');
-              setIsPassValid(true);
-            } else {
-              setNameLabel('登録できないユーザーネームです');
-              setPassLabel('登録できないパスワードです');
-              setIsNameValid(true);
-              setIsPassValid(true);
-            }      
+            const {
+              name,
+              pass,
+              isName,
+              isPass
+            } = useForm(registerName, registerPass, false)
+            setNameLabel(name);
+            setPassLabel(pass);
+            setIsNameValid(isName);
+            setIsPassValid(isPass);
           }
         })
         .catch((err: Error) => console.error(err))
-    } catch (error) {
-      console.log("error");
+    } catch (err) {
+      console.error("error:", err);
     }
   }
 
